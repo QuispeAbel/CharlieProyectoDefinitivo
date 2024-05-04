@@ -22,8 +22,8 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
     Thread t;
     // ImageIcon icono1 = new
     // ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
-    JButton boton2 = new JButton(new ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif")));
-    JButton boton3 = new JButton(new ImageIcon(getClass().getResource("imagenes/pong.gif")));
+    JButton boton2 = new JButton(new ImageIcon(getClass().getResource("imagenes/gif_circus_charlie.gif")));
+    JButton boton3 = new JButton(new ImageIcon(getClass().getResource("imagenes/1_moc7ZNP8dWxjOmwj1GJ1YA.gif")));
 
     public LanzadorJuegos() {
         int filas = 0;
@@ -34,11 +34,13 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         // boton2.setBorderPainted(false); // Elimina el borde del botón
         // boton2.setContentAreaFilled(false); // Hace que el área de contenido no se
         // pinte
+        boton2.setBackground(Color.BLACK);
         boton2.addActionListener(this);
 
         // boton3.setBorderPainted(false); // Elimina el borde del botón
         // boton3.setContentAreaFilled(false); // Hace que el área de contenido no se
         // pinte
+        boton3.setBackground(Color.BLACK);
         boton3.addActionListener(this);
         this.add(boton2);
         this.add(boton3);
