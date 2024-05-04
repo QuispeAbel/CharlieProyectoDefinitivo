@@ -20,32 +20,33 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
     JGame juego;
     Thread t;
+    // ImageIcon icono1 = new
+    // ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
+    JButton boton2 = new JButton(new ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif")));
+    JButton boton3 = new JButton(new ImageIcon(getClass().getResource("imagenes/pong.gif")));
 
     public LanzadorJuegos() {
         int filas = 0;
-        int columnas = 3;
+        int columnas = 2;
         int separacion = 10;
 
         this.setLayout(new GridLayout(filas, columnas, separacion, separacion));
+        // boton2.setBorderPainted(false); // Elimina el borde del botón
+        // boton2.setContentAreaFilled(false); // Hace que el área de contenido no se
+        // pinte
+        boton2.addActionListener(this);
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
-
-        String[] arrEtiquetas = { "DemoJuego02", "DemoJuego03" };
-        JButton boton;
-        JButton boton1 = new JButton(icono);
-        for (String etiqueta : arrEtiquetas) {
-
-            boton = new JButton(etiqueta);
-
-            boton.addActionListener(this);
-            this.add(boton);
-        }
-        this.add(boton1);
+        // boton3.setBorderPainted(false); // Elimina el borde del botón
+        // boton3.setContentAreaFilled(false); // Hace que el área de contenido no se
+        // pinte
+        boton3.addActionListener(this);
+        this.add(boton2);
+        this.add(boton3);
     }
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getActionCommand().equals("DemoJuego02")) {
+        if (e.getSource() == boton2) {
             juego = new DemoJuego02();
 
             t = new Thread() {
@@ -57,7 +58,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
             t.start();
         }
 
-        if (e.getActionCommand().equals("DemoJuego03")) {
+        if (e.getSource() == boton3) {
             juego = new DemoJuego03();
 
             t = new Thread() {
