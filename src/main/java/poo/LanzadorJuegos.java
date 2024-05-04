@@ -28,9 +28,11 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
         this.setLayout(new GridLayout(filas, columnas, separacion, separacion));
 
-        String[] arrEtiquetas = { "DemoJuego02", "DemoJuego03", "DemoJuego04" };
-        JButton boton;
+        ImageIcon icono = new ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
 
+        String[] arrEtiquetas = { "DemoJuego02", "DemoJuego03" };
+        JButton boton;
+        JButton boton1 = new JButton(icono);
         for (String etiqueta : arrEtiquetas) {
 
             boton = new JButton(etiqueta);
@@ -38,7 +40,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
             boton.addActionListener(this);
             this.add(boton);
         }
-
+        this.add(boton1);
     }
 
     public void actionPerformed(ActionEvent e) {
