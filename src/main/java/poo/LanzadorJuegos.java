@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
+//import javax.swing.event.*;
 
 import com.entropyinteractive.*; //las librerias JJGame,JGameLoop,KeyBoard,Mouse,etc...
 
@@ -23,12 +23,12 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
     public LanzadorJuegos() {
         int filas = 0;
-        int columnas = 1;
+        int columnas = 3;
         int separacion = 10;
 
         this.setLayout(new GridLayout(filas, columnas, separacion, separacion));
 
-        String[] arrEtiquetas = { "DemoJuego02", "DemoJuego03" };
+        String[] arrEtiquetas = { "DemoJuego02", "DemoJuego03", "DemoJuego04" };
         JButton boton;
 
         for (String etiqueta : arrEtiquetas) {
