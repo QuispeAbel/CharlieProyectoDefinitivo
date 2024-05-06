@@ -18,7 +18,6 @@ import javax.imageio.*; //imagenes
 
 import java.awt.Graphics2D;
 
-import java.awt.geom.*; //Point2d
 import java.util.LinkedList;
 
 import java.util.*;
