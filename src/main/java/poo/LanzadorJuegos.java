@@ -22,8 +22,8 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
     Thread t;
     // ImageIcon icono1 = new
     // ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
-    JButton boton2 = new JButton(new ImageIcon(getClass().getResource("imagenes/gif_circus_charlie.gif")));
-    JButton boton3 = new JButton(new ImageIcon(getClass().getResource("imagenes/1_moc7ZNP8dWxjOmwj1GJ1YA.gif")));
+    JButton boton2;
+    JButton boton3;
     JPanel PanelDelCentro;
     JPanel PanelTitulo;
 
@@ -31,6 +31,13 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         int filas = 0;
         int columnas = 2;
         int separacion = 10;
+
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        boton2 = new JButton(
+                new ImageIcon(getClass().getResource(
+                        "imagenes/gif_circus_charlie.gif")));
+        boton3 = new JButton(
+                new ImageIcon(getClass().getResource("imagenes/1_moc7ZNP8dWxjOmwj1GJ1YA.gif")));
 
         setLayout(new BorderLayout());
 
