@@ -32,7 +32,7 @@ public class Pong extends JGame {
     final double NAVE_DESPLAZAMIENTO2 = 150.0;
     BufferedImage img_fondo = null;
 
-    ObjetoGrafico ovni = new ObjetoGrafico();
+    Paleta ovni = new Paleta();
 
     ObjetoGrafico ovni2 = new ObjetoGrafico();
 
@@ -73,7 +73,7 @@ public class Pong extends JGame {
 
         Keyboard keyboard = this.getKeyboard();
 
-        pelota.moverPelota();
+        pelota.moverPelota(getWidth(), getHeight());
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
