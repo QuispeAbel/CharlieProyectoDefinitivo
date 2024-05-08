@@ -36,6 +36,8 @@ public class DemoJuego02 extends JGame {
     
     ObjetoGrafico ovni2 = new ObjetoGrafico();
 
+    Pelota pelota = new Pelota();
+
     public static void main(String[] args) {
 
         DemoJuego02 game = new DemoJuego02();
@@ -59,6 +61,8 @@ public class DemoJuego02 extends JGame {
             ovni.setPosicion(19, getHeight() / 2);
             ovni2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
             ovni2.setPosicion(getWidth() -19 ,getHeight() / 2);
+            pelota.setImagen(ImageIO.read(getClass().getResource("imagenes/pelota.jpg")));
+            pelota.setPosicion(getWidth()/2 ,getHeight() / 2);
         } catch (Exception e) {
 
         }
@@ -66,7 +70,10 @@ public class DemoJuego02 extends JGame {
     }
 
     public void gameUpdate(double delta) {
+
         Keyboard keyboard = this.getKeyboard();
+
+        pelota.moverPelota();
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
@@ -128,7 +135,7 @@ public class DemoJuego02 extends JGame {
         
         ovni2.draw(g);
 
-
+        pelota.draw(g);
     }
 
     public void gameShutdown() {
