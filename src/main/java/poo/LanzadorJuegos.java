@@ -32,25 +32,25 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         int filas = 0;
         int columnas = 2;
         int separacion = 10;
-        String[] arrComponentes={"circus charlie","pong"};
+        String[] arrComponentes = { "circus charlie", "pong" };
         JFrame f = new JFrame("Lanzador");
 
-         /* Creacion de la Barra de Menu y los items de menu */
-         MenuBar mBar = new MenuBar();
-         f.setMenuBar(mBar);    
-             
-         Menu menuArchivo = new Menu("Archivo");
-         Menu menuComponentes=new Menu("juegos");
- 
-         mBar.add(menuArchivo);
-         menuArchivo.add(new MenuItem("Salir"));
-         menuArchivo.addActionListener(this);
-         menuArchivo.add(new MenuItem("configuracion"));
+        /* Creacion de la Barra de Menu y los items de menu */
+        MenuBar mBar = new MenuBar();
+        f.setMenuBar(mBar);
 
-          //Menu Componentes
+        Menu menuArchivo = new Menu("Archivo");
+        Menu menuComponentes = new Menu("juegos");
+
+        mBar.add(menuArchivo);
+        menuArchivo.add(new MenuItem("Salir"));
+        menuArchivo.addActionListener(this);
+        menuArchivo.add(new MenuItem("configuracion"));
+
+        // Menu Componentes
         mBar.add(menuComponentes);
-        for (String compo : arrComponentes ) {
-            MenuItem menuItem =new MenuItem(compo);
+        for (String compo : arrComponentes) {
+            MenuItem menuItem = new MenuItem(compo);
             menuComponentes.add(menuItem);
         }
         menuComponentes.addActionListener(this);
@@ -98,71 +98,71 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        String cmd=e.getActionCommand();
+        String cmd = e.getActionCommand();
 
-        if (cmd=="Salir"){
-             System.exit(0); //Sale del programita
+        if (cmd == "Salir") {
+            System.exit(0); // Sale del programita
         }
 
-        switch(cmd){
+        switch (cmd) {
             case "circus charlie":
                 juego = new DemoJuego02();
                 t = new Thread() {
-                public void run() {
-                juego.run(1.0 / 60.0);}
-            };
+                    public void run() {
+                        juego.run(1.0 / 60.0);
+                    }
+                };
                 t.start();
-            break;                                     
+                break;
             case "pong":
                 juego = new DemoJuego03();
 
                 t = new Thread() {
-                public void run() {
-                juego.run(1.0 / 60.0);
-                }
-            };
+                    public void run() {
+                        juego.run(1.0 / 60.0);
+                    }
+                };
                 t.start();
-                break;  
-             case "configuracion":
-            System.out.println("configuracion");
-            Config=new Frame("configuracion");
-            Config.setSize(640, 480);
-            Config.setVisible(true);
-    
-            JPanel teclas=new JPanel();
-            teclas.setLayout(new GridLayout(0,2,10,10));
-            teclas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-    
-            Label avanzar = new Label("avanzar:");
-            Label retroceder = new Label("retroceder:");
-            Label arriba = new Label("arriba:");
-            Label abajo = new Label("abajo:");
-            Label saltar = new Label("saltar:");
-    
-        
-            teclas.add(avanzar);
-            teclas.add(new TextField("d"));
-            teclas.add(retroceder);
-            teclas.add(new TextField("a"));
-            teclas.add(arriba);
-            teclas.add(new TextField("w"));
-            teclas.add(abajo);
-            teclas.add(new TextField("s"));
-            teclas.add(saltar);
-            teclas.add(new TextField("space"));
-    
-            Config.add(teclas);
-            Config.pack();
-            Config.setLocationRelativeTo(null);
+                break;
+            case "configuracion":
+                System.out.println("configuracion");
+                Config = new Frame("configuracion");
+                Config.setSize(640, 480);
+                Config.setVisible(true);
 
-            Config.addWindowListener(new WindowAdapter(){
-                public void windowClosing(WindowEvent windowEvent){
+                JPanel teclas = new JPanel();
+                teclas.setLayout(new GridLayout(0, 2, 10, 10));
+                teclas.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+                Label avanzar = new Label("avanzar:");
+                Label retroceder = new Label("retroceder:");
+                Label arriba = new Label("arriba:");
+                Label abajo = new Label("abajo:");
+                Label saltar = new Label("saltar:");
+
+                teclas.add(avanzar);
+                teclas.add(new TextField("d"));
+                teclas.add(retroceder);
+                teclas.add(new TextField("a"));
+                teclas.add(arriba);
+                teclas.add(new TextField("w"));
+                teclas.add(abajo);
+                teclas.add(new TextField("s"));
+                teclas.add(saltar);
+                teclas.add(new TextField("space"));
+
+                Config.add(teclas);
+                Config.pack();
+                Config.setLocationRelativeTo(null);
+
+                Config.addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent windowEvent) {
                         Config.setVisible(false);
-                         }        
-             });
-        
-            break;     }
-        
+                    }
+                });
+
+                break;
+        }
 
         if (e.getSource() == boton2) {
             juego = new DemoJuego02();
@@ -190,19 +190,22 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
     }
 
     public static void main(String... z) {
-        LanzadorJuegos ventana=new LanzadorJuegos();
+        LanzadorJuegos ventana = new LanzadorJuegos();
 
-        //f.add(new LanzadorJuegos()); creo el frame en el constructor para agregar el menu
-        /*WindowListener l = new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            };
-        };*/
+        // f.add(new LanzadorJuegos()); creo el frame en el constructor para agregar el
+        // menu
+        /*
+         * WindowListener l = new WindowAdapter() {
+         * public void windowClosing(WindowEvent e) {
+         * System.exit(0);
+         * };
+         * };
+         */
 
-        //f.addWindowListener(l);
-        //f.pack();
-        //f.setVisible(true);
-        //f.setLocationRelativeTo(null);
+        // f.addWindowListener(l);
+        // f.pack();
+        // f.setVisible(true);
+        // f.setLocationRelativeTo(null);
     }
 
 }
