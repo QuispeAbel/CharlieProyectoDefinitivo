@@ -29,10 +29,12 @@ public class DemoJuego02 extends JGame {
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
     final double NAVE_DESPLAZAMIENTO = 150.0;
-
+    final double NAVE_DESPLAZAMIENTO2 = 150.0;
     BufferedImage img_fondo = null;
 
     ObjetoGrafico ovni = new ObjetoGrafico();
+    
+    ObjetoGrafico ovni2 = new ObjetoGrafico();
 
     public static void main(String[] args) {
 
@@ -53,8 +55,10 @@ public class DemoJuego02 extends JGame {
 
         try {
             img_fondo = ImageIO.read(getClass().getResource("imagenes/fondo.jpg"));
-            ovni.setImagen(ImageIO.read(getClass().getResource("imagenes/ufo.png")));
-            ovni.setPosicion(getWidth() / 2, getHeight() / 2);
+            ovni.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.png")));
+            ovni.setPosicion(19, getHeight() / 2);
+            ovni2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.png")));
+            ovni2.setPosicion(getWidth() -19 ,getHeight() / 2);
         } catch (Exception e) {
 
         }
@@ -74,16 +78,21 @@ public class DemoJuego02 extends JGame {
             // shipY += NAVE_DESPLAZAMIENTO * delta;
             ovni.setY(ovni.getY() + NAVE_DESPLAZAMIENTO * delta);
         }
-
-        if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-            /// shipX -= NAVE_DESPLAZAMIENTO * delta;
-            ovni.setX(ovni.getX() - NAVE_DESPLAZAMIENTO * delta);
+ 
+         // Procesar teclas de direccion
+         if (keyboard.isKeyPressed(KeyEvent.VK_W)) {
+            ovni2.setY(ovni2.getY() - NAVE_DESPLAZAMIENTO2 * delta);
+            // shipY -= NAVE_DESPLAZAMIENTO * delta;
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            // shipX += NAVE_DESPLAZAMIENTO * delta;
-            ovni.setX(ovni.getX() + NAVE_DESPLAZAMIENTO * delta);
+        if (keyboard.isKeyPressed(KeyEvent.VK_S)) {
+            // shipY += NAVE_DESPLAZAMIENTO * delta;
+            ovni2.setY(ovni2.getY() + NAVE_DESPLAZAMIENTO2 * delta);
         }
+
+
+
+       
 
         // Esc fin del juego
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
@@ -116,6 +125,9 @@ public class DemoJuego02 extends JGame {
         g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
 
         ovni.draw(g);
+        
+        ovni2.draw(g);
+
 
     }
 
