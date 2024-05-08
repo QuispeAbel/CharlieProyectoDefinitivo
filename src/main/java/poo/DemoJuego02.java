@@ -54,10 +54,10 @@ public class DemoJuego02 extends JGame {
     public void gameStartup() {
 
         try {
-            img_fondo = ImageIO.read(getClass().getResource("imagenes/fondo.jpg"));
-            ovni.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.png")));
+            img_fondo = ImageIO.read(getClass().getResource("imagenes/Pong-Fondo.jpg"));
+            ovni.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
             ovni.setPosicion(19, getHeight() / 2);
-            ovni2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.png")));
+            ovni2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
             ovni2.setPosicion(getWidth() -19 ,getHeight() / 2);
         } catch (Exception e) {
 
