@@ -2,10 +2,10 @@ package poo;
 
 import java.awt.image.*; //imagenes
 import java.awt.Graphics2D;
-
+import java.awt.Rectangle;
 import java.awt.geom.*; //Point2d
 
-class ObjetoGrafico {
+class ObjetoGrafico extends Rectangle {
 
     BufferedImage imagen = null;
     private Point2D.Double posicion = new Point2D.Double();
