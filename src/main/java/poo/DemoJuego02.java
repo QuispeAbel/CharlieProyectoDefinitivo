@@ -32,7 +32,7 @@ public class DemoJuego02 extends JGame {
 
     BufferedImage img_fondo = null;
 
-    Personaje ovni = new Personaje();
+    ObjetoGrafico ovni = new ObjetoGrafico();
 
     public static void main(String[] args) {
 

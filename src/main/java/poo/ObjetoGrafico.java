@@ -5,12 +5,12 @@ import java.awt.Graphics2D;
 
 import java.awt.geom.*; //Point2d
 
-class Personaje {
+class ObjetoGrafico {
 
     BufferedImage imagen = null;
     private Point2D.Double posicion = new Point2D.Double();
 
-    public Personaje() {
+    public ObjetoGrafico() {
 
     }
 
