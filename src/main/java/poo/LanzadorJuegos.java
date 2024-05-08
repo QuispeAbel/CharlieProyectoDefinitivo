@@ -106,7 +106,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
         switch (cmd) {
             case "circus charlie":
-                juego = new DemoJuego02();
+                juego = new Pong();
                 t = new Thread() {
                     public void run() {
                         juego.run(1.0 / 60.0);
@@ -165,7 +165,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == boton2) {
-            juego = new DemoJuego02();
+            juego = new Pong();
 
             t = new Thread() {
                 public void run() {
