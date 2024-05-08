@@ -190,7 +190,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
     }
 
     public static void main(String... z) {
-        LanzadorJuegos ventana = new LanzadorJuegos();
+        new LanzadorJuegos();
 
         // f.add(new LanzadorJuegos()); creo el frame en el constructor para agregar el
         // menu
