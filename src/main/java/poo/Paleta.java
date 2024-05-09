@@ -5,6 +5,7 @@ public class Paleta extends ObjetoGrafico {
 
 
     public Paleta() {
+        
     }
 
     public void moverPaleta(){

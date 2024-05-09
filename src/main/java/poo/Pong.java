@@ -28,12 +28,12 @@ public class Pong extends JGame {
     Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
-    final double velocidadPaleta = 500.0;
-    BufferedImage img_fondo = null;
+    final double velocidadPaleta = 500.0;  //Velocidad Pelota
+    BufferedImage img_fondo = null;  //Crear Imágen
 
-    Paleta paleta1 = new Paleta();
+    Paleta paleta1 = new Paleta(); 
 
-    ObjetoGrafico paleta2 = new ObjetoGrafico();
+    Paleta paleta2 = new Paleta();
 
     Pelota pelota = new Pelota();
 
@@ -72,13 +72,13 @@ public class Pong extends JGame {
 
         Keyboard keyboard = this.getKeyboard();
 
-        pelota.moverPelota(getWidth(), getHeight());
+        pelota.moverPelota(getWidth(), getHeight());  //Movimiento continuo de la pelota
 
-        if(pelota.getPelotaFueraDer()){
-            pelota.invertirVelX();
-            pelota.setPelotaFueraDer();
-            pelota.setPosicion(getWidth() / 2, getHeight() / 2);
-        } else if(pelota.getPelotaFueraIzq()) {
+        if(pelota.getPelotaFueraDer()){  //Pregunta si la pelota se salio a la derecha
+            pelota.invertirVelX();      //La pelota ahora sale para el otro lado de la cancha
+            pelota.setPelotaFueraDer();  //se vuelve a poner falso que la pelota salio a la derecha
+            pelota.setPosicion(getWidth() / 2, getHeight() / 2);  //setea la posición al medio
+        } else if(pelota.getPelotaFueraIzq()) {     //lo mismo que arriba con izquierda
             pelota.invertirVelX();
             pelota.setPelotaFueraIzq();
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
@@ -87,19 +87,19 @@ public class Pong extends JGame {
 
         //Movimiento de Paletas
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_W)) {
+        if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) { //agregué que no haya llegado a su límite superior
             paleta1.setY(paleta1.getY() - velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_S)) {
+        if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) { //agregué que no haya llegado a su límite inferior
             paleta1.setY(paleta1.getY() + velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
+        if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) { //agregué que no haya llegado a su límite superior
             paleta2.setY(paleta2.getY() - velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
+        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) {  //agregué que no haya llegado a su límite inferior
             paleta2.setY(paleta2.getY() + velocidadPaleta * delta);
         }
 
