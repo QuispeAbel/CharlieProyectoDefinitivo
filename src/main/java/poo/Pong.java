@@ -28,13 +28,12 @@ public class Pong extends JGame {
     Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
-    final double NAVE_DESPLAZAMIENTO = 150.0;
-    final double NAVE_DESPLAZAMIENTO2 = 150.0;
+    final double velocidadPaleta = 500.0;
     BufferedImage img_fondo = null;
 
-    Paleta ovni = new Paleta();
+    Paleta paleta1 = new Paleta();
 
-    ObjetoGrafico ovni2 = new ObjetoGrafico();
+    ObjetoGrafico paleta2 = new ObjetoGrafico();
 
     Pelota pelota = new Pelota();
 
@@ -57,10 +56,10 @@ public class Pong extends JGame {
 
         try {
             img_fondo = ImageIO.read(getClass().getResource("imagenes/Pong-Fondo.jpg"));
-            ovni.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
-            ovni.setPosicion(19, getHeight() / 2);
-            ovni2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
-            ovni2.setPosicion(getWidth() - 19, getHeight() / 2);
+            paleta1.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
+            paleta1.setPosicion(19, getHeight() / 2);
+            paleta2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
+            paleta2.setPosicion(getWidth() - 19, getHeight() / 2);
             pelota.setImagen(ImageIO.read(getClass().getResource("imagenes/pelota.jpg")));
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
         } catch (Exception e) {
@@ -75,27 +74,36 @@ public class Pong extends JGame {
 
         pelota.moverPelota(getWidth(), getHeight());
 
-        // Procesar teclas de direccion
-        if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
-            ovni.setY(ovni.getY() - NAVE_DESPLAZAMIENTO * delta);
-            // shipY -= NAVE_DESPLAZAMIENTO * delta;
+        if(pelota.getPelotaFueraDer()){
+            pelota.invertirVelX();
+            pelota.setPelotaFueraDer();
+            pelota.setPosicion(getWidth() / 2, getHeight() / 2);
+        } else if(pelota.getPelotaFueraIzq()) {
+            pelota.invertirVelX();
+            pelota.setPelotaFueraIzq();
+            pelota.setPosicion(getWidth() / 2, getHeight() / 2);
         }
+        
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
-            // shipY += NAVE_DESPLAZAMIENTO * delta;
-            ovni.setY(ovni.getY() + NAVE_DESPLAZAMIENTO * delta);
-        }
+        //Movimiento de Paletas
 
-        // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_W)) {
-            ovni2.setY(ovni2.getY() - NAVE_DESPLAZAMIENTO2 * delta);
-            // shipY -= NAVE_DESPLAZAMIENTO * delta;
+            paleta1.setY(paleta1.getY() - velocidadPaleta * delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_S)) {
-            // shipY += NAVE_DESPLAZAMIENTO * delta;
-            ovni2.setY(ovni2.getY() + NAVE_DESPLAZAMIENTO2 * delta);
+            paleta1.setY(paleta1.getY() + velocidadPaleta * delta);
         }
+
+        if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
+            paleta2.setY(paleta2.getY() - velocidadPaleta * delta);
+        }
+
+        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
+            paleta2.setY(paleta2.getY() + velocidadPaleta * delta);
+        }
+
+        
 
         // Esc fin del juego
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
@@ -106,7 +114,7 @@ public class Pong extends JGame {
             }
         }
 
-        ovni.update(delta);
+        paleta1.update(delta);
 
     }
 
@@ -127,9 +135,9 @@ public class Pong extends JGame {
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
         g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
 
-        ovni.draw(g);
+        paleta1.draw(g);
 
-        ovni2.draw(g);
+        paleta2.draw(g);
 
         pelota.draw(g);
     }
