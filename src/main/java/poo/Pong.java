@@ -74,6 +74,7 @@ public class Pong extends JGame {
 
         pelota.moverPelota(getWidth(), getHeight());  //Movimiento continuo de la pelota
 
+        //Reiniciar Pelota
         if(pelota.getPelotaFueraDer()){  //Pregunta si la pelota se salio a la derecha
             pelota.invertirVelX();      //La pelota ahora sale para el otro lado de la cancha
             pelota.setPelotaFueraDer();  //se vuelve a poner falso que la pelota salio a la derecha
@@ -115,7 +116,6 @@ public class Pong extends JGame {
         }
 
         paleta1.update(delta);
-
     }
 
     public void gameDraw(Graphics2D g) {
