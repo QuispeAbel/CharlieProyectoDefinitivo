@@ -142,10 +142,6 @@ public class Pong extends JGame {
 
         g.drawImage(img_fondo, 0, 0, null);// imagen de fondo
 
-        g.setColor(Color.black);
-        g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 12, 42);
-        g.drawString("Tecla ESC = Fin del Juego ", 592, 42);
-
         g.setColor(Color.white);
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
         g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
