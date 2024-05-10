@@ -28,14 +28,19 @@ public class Pong extends JGame {
     Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
-    final double velocidadPaleta = 500.0;  //Velocidad Pelota
-    BufferedImage img_fondo = null;  //Crear Imágen
 
-    Paleta paleta1 = new Paleta(); 
+    final double velocidadPaleta = 500.0; // Velocidad Pelota
+    BufferedImage img_fondo = null; // Crear Imágen
+
+    Paleta paleta1 = new Paleta();
 
     Paleta paleta2 = new Paleta();
 
     Pelota pelota = new Pelota();
+
+    Jugador jugadorIzq = new Jugador();
+
+    Jugador jugador2Der = new Jugador();
 
     public static void main(String[] args) {
 
@@ -72,41 +77,49 @@ public class Pong extends JGame {
 
         Keyboard keyboard = this.getKeyboard();
 
-        pelota.moverPelota(getWidth(), getHeight());  //Movimiento continuo de la pelota
+        pelota.moverPelota(getWidth(), getHeight()); // Movimiento continuo de la pelota
 
-        //Reiniciar Pelota
-        if(pelota.getPelotaFueraDer()){  //Pregunta si la pelota se salio a la derecha
-            pelota.invertirVelX();      //La pelota ahora sale para el otro lado de la cancha
-            pelota.setPelotaFueraDer();  //se vuelve a poner falso que la pelota salio a la derecha
-            pelota.setPosicion(getWidth() / 2, getHeight() / 2);  //setea la posición al medio
-        } else if(pelota.getPelotaFueraIzq()) {     //lo mismo que arriba con izquierda
+        // Reiniciar Pelota
+        if (pelota.getPelotaFueraDer()) { // Pregunta si la pelota se salio a la derecha
+            pelota.invertirVelX(); // La pelota ahora sale para el otro lado de la cancha
+            pelota.setPelotaFueraDer(); // se vuelve a poner falso que la pelota salio a la derecha
+            pelota.setPosicion(getWidth() / 2, getHeight() / 2); // setea la posición al medio
+        } else if (pelota.getPelotaFueraIzq()) { // lo mismo que arriba con izquierda
             pelota.invertirVelX();
             pelota.setPelotaFueraIzq();
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
         }
-        
-        if(pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()&& pelota.getX() >= getWidth() - 35)  //Golpe Paleta Derecha
+
+        if (pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()
+                && pelota.getX() >= getWidth() - 35) // Golpe Paleta Derecha
             pelota.invertirVelX();
 
-        //Movimiento de Paletas
+        if (pelota.getY() <= paleta1.getY() + 100 && pelota.getY() >= paleta1.getY()
+                && pelota.getX() <= getWidth() - 765) // Golpe Paleta Derecha
+            pelota.invertirVelX();
+        // Movimiento de Paletas
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) { //agregué que no haya llegado a su límite superior
+        if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) { // agregué que no haya llegado a su límite
+                                                                            // superior
             paleta1.setY(paleta1.getY() - velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) { //agregué que no haya llegado a su límite inferior
+        if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) { // agregué que no haya
+                                                                                           // llegado a su límite
+                                                                                           // inferior
             paleta1.setY(paleta1.getY() + velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) { //agregué que no haya llegado a su límite superior
+        if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) { // agregué que no haya llegado a su límite
+                                                                             // superior
             paleta2.setY(paleta2.getY() - velocidadPaleta * delta);
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) {  //agregué que no haya llegado a su límite inferior
+        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) { // agregué que no haya
+                                                                                              // llegado a su límite
+                                                                                              // inferior
             paleta2.setY(paleta2.getY() + velocidadPaleta * delta);
         }
-
-        
 
         // Esc fin del juego
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();

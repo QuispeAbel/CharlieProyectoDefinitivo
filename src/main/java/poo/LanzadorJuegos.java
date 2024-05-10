@@ -58,9 +58,9 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         boton2 = new JButton(
                 new ImageIcon(getClass().getResource(
-                        "imagenes/gif_circus_charlie.gif")));
+                        "imagenes/1_moc7ZNP8dWxjOmwj1GJ1YA.gif")));
         boton3 = new JButton(
-                new ImageIcon(getClass().getResource("imagenes/1_moc7ZNP8dWxjOmwj1GJ1YA.gif")));
+                new ImageIcon(getClass().getResource("imagenes/gif_circus_charlie.gif")));
 
         setLayout(new BorderLayout());
 

@@ -1,8 +1,8 @@
 package poo;
 
 public class Pelota extends ObjetoGrafico {
-    private int velocidadPelotaX = 10;
-    private int velocidadPelotaY = 10;
+    private int velocidadPelotaX = 5;
+    private int velocidadPelotaY = 5;
     private boolean pelotaFueraIzq = false;
     private boolean pelotaFueraDer = false;
 
@@ -24,26 +24,24 @@ public class Pelota extends ObjetoGrafico {
 
     }
 
-    public boolean getPelotaFueraIzq(){
+    public boolean getPelotaFueraIzq() {
         return pelotaFueraIzq;
     }
 
-    public boolean getPelotaFueraDer(){
+    public boolean getPelotaFueraDer() {
         return pelotaFueraDer;
     }
 
-    public void setPelotaFueraIzq(){
+    public void setPelotaFueraIzq() {
         pelotaFueraIzq = false;
     }
 
-    public void setPelotaFueraDer(){
+    public void setPelotaFueraDer() {
         pelotaFueraDer = false;
     }
 
-    public void invertirVelX(){
+    public void invertirVelX() {
         velocidadPelotaX = -velocidadPelotaX;
     }
 
-    
-    
 }
