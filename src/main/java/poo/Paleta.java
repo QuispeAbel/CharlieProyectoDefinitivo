@@ -1,15 +1,22 @@
 package poo;
 
 public class Paleta extends ObjetoGrafico {
-    private int paletaVel = 10;
-
+    final double paletaVel = 500.0;
 
     public Paleta() {
-        
+
     }
 
-    public void moverPaleta(){
-        
+    public void moverPaletaarriba(double delta) {
+        setY(getY() - paletaVel * delta);
+    }
+
+    public void moverPaletabajo(double delta) {
+        setY(getY() + paletaVel * delta);
+    }
+
+    public double getPaletaVel() {
+        return paletaVel;
     }
 
 }

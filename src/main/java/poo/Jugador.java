@@ -14,4 +14,7 @@ public class Jugador {
         Puntos = puntos;
     }
 
+    public void sumarPunto() {
+        this.Puntos++;
+    }
 }

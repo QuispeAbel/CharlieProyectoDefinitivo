@@ -16,10 +16,6 @@ import java.awt.event.*; //eventos
 import java.awt.image.*; //imagenes
 import javax.imageio.*; //imagenes
 
-import java.awt.Graphics2D;
-
-import java.util.LinkedList;
-
 import java.util.*;
 import java.text.*;
 
@@ -51,7 +47,7 @@ public class Pong extends JGame {
 
     public Pong() {
 
-        super("DemoJuego02", 800, 600);
+        super("Pong", 800, 600);
 
         System.out.println(appProperties.stringPropertyNames());
 
@@ -84,10 +80,12 @@ public class Pong extends JGame {
             pelota.invertirVelX(); // La pelota ahora sale para el otro lado de la cancha
             pelota.setPelotaFueraDer(); // se vuelve a poner falso que la pelota salio a la derecha
             pelota.setPosicion(getWidth() / 2, getHeight() / 2); // setea la posición al medio
+            jugadorIzq.sumarPunto();
         } else if (pelota.getPelotaFueraIzq()) { // lo mismo que arriba con izquierda
             pelota.invertirVelX();
             pelota.setPelotaFueraIzq();
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
+            jugador2Der.sumarPunto();
         }
 
         if (pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()
@@ -101,24 +99,24 @@ public class Pong extends JGame {
 
         if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) { // agregué que no haya llegado a su límite
                                                                             // superior
-            paleta1.setY(paleta1.getY() - velocidadPaleta * delta);
+            paleta1.moverPaletaarriba(delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) { // agregué que no haya
                                                                                            // llegado a su límite
                                                                                            // inferior
-            paleta1.setY(paleta1.getY() + velocidadPaleta * delta);
+            paleta1.moverPaletabajo(delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) { // agregué que no haya llegado a su límite
                                                                              // superior
-            paleta2.setY(paleta2.getY() - velocidadPaleta * delta);
+            paleta2.moverPaletaarriba(delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) { // agregué que no haya
                                                                                               // llegado a su límite
                                                                                               // inferior
-            paleta2.setY(paleta2.getY() + velocidadPaleta * delta);
+            paleta2.moverPaletabajo(delta);
         }
 
         // Esc fin del juego
@@ -145,6 +143,14 @@ public class Pong extends JGame {
         g.setColor(Color.white);
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
         g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
+
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.BOLD, 50));
+        g.drawString("" + jugadorIzq.getPuntos(), 300, 100);
+
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.BOLD, 50));
+        g.drawString("" + jugador2Der.getPuntos(), 470, 100);
 
         paleta1.draw(g);
 
