@@ -85,6 +85,8 @@ public class Pong extends JGame {
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
         }
         
+        if(pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()&& pelota.getX() >= getWidth() - 35)  //Golpe Paleta Derecha
+            pelota.invertirVelX();
 
         //Movimiento de Paletas
 
