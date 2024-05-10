@@ -56,7 +56,7 @@ public class Pong extends JGame {
     public void gameStartup() {
 
         try {
-            img_fondo = ImageIO.read(getClass().getResource("imagenes/Pong-Fondo.jpg"));
+            img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
             paleta1.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
             paleta1.setPosicion(19, getHeight() / 2);
             paleta2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
@@ -139,6 +139,13 @@ public class Pong extends JGame {
         long diffMinutes = dateDiff / (60 * 1000) % 60;
 
         g.drawImage(img_fondo, 0, 0, null);// imagen de fondo
+
+        // Dibujar una línea punteada en la mitad de la ventana
+        g.setColor(Color.WHITE);
+        Graphics2D g2d = (Graphics2D) g;
+        Stroke dashed = new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
+        g2d.setStroke(dashed);
+        g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
 
         g.setColor(Color.white);
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
