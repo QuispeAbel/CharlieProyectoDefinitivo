@@ -93,7 +93,7 @@ public class Pong extends JGame {
             pelota.invertirVelX();
 
         if (pelota.getY() <= paleta1.getY() + 100 && pelota.getY() >= paleta1.getY()
-                && pelota.getX() <= getWidth() - 765) // Golpe Paleta Derecha
+                && pelota.getX() <= 35) // Golpe Paleta Derecha
             pelota.invertirVelX();
         // Movimiento de Paletas
 
@@ -145,19 +145,19 @@ public class Pong extends JGame {
         Graphics2D g2d = (Graphics2D) g;
         Stroke dashed = new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
         g2d.setStroke(dashed);
-        g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+        g.drawLine(getWidth() / 2 - 5, 0, getWidth() / 2 - 5, getHeight());
 
         g.setColor(Color.white);
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
-        g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
+        g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
 
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.BOLD, 50));
-        g.drawString("" + jugadorIzq.getPuntos(), 300, 100);
+        g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 100, 100);
 
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.BOLD, 50));
-        g.drawString("" + jugador2Der.getPuntos(), 470, 100);
+        g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 50, 100);
 
         paleta1.draw(g);
 
