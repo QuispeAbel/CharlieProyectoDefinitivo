@@ -44,4 +44,9 @@ public class Pelota extends ObjetoGrafico {
         velocidadPelotaX = -velocidadPelotaX;
     }
 
+    public void detenerPelota(){
+        velocidadPelotaX = 0;
+        velocidadPelotaY = 0;
+    }
+
 }
