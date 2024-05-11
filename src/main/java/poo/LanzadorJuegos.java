@@ -41,10 +41,10 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         boton3 = new JButton(
                 new ImageIcon(getClass().getResource("imagenes/gif_circus_charlie.gif")));
 
-        setLayout(new BorderLayout());
+        f.setLayout(new BorderLayout());
 
         PanelTitulo = new JPanel();// Panel para el titulo de la Ventana
-        Color violeta = new Color(153, 113, 225);
+        Color violeta = new Color(7, 14, 17);
         PanelTitulo.setBackground(violeta);
         PanelTitulo.add(new JLabel(new ImageIcon(getClass().getResource("imagenes/OIG3.jpg"))));
 
