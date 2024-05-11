@@ -1,18 +1,9 @@
 package poo;
 
-/**
-Compilar
-javac -cp ".;bucleJuego.jar" LanzadorJuegos.java
-
-Ejecutar
-java -cp ".;bucleJuego.jar" LanzadorJuegos
-  */
-
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-//import javax.swing.event.*;
 
 import com.entropyinteractive.*; //las librerias JJGame,JGameLoop,KeyBoard,Mouse,etc...
 
@@ -20,8 +11,6 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
     JGame juego;
     Thread t;
-    // ImageIcon icono1 = new
-    // ImageIcon(getClass().getResource("imagenes/NES-gameplay.gif"));
     JButton boton2;
     JButton boton3;
     JPanel PanelDelCentro;
@@ -69,9 +58,6 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
                 System.exit(0);
             };
         };
-
-        // f.add(PanelDelCentro);
-
         f.addWindowListener(l);
         f.pack();
         f.setVisible(true);
@@ -107,21 +93,6 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
 
     public static void main(String... z) {
         new LanzadorJuegos();
-
-        // f.add(new LanzadorJuegos()); creo el frame en el constructor para agregar el
-        // menu
-        /*
-         * WindowListener l = new WindowAdapter() {
-         * public void windowClosing(WindowEvent e) {
-         * System.exit(0);
-         * };
-         * };
-         */
-
-        // f.addWindowListener(l);
-        // f.pack();
-        // f.setVisible(true);
-        // f.setLocationRelativeTo(null);
     }
 
 }
