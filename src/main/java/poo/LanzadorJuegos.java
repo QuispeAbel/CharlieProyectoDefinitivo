@@ -83,29 +83,30 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == boton3) {
-
-            juego = new DemoCamaraHeroe();
-
-            t = new Thread() {
-                public void run() {
-                    juego.run(1.0 / 60.0);
-                }
-            };
-
-            t.start();
             /*
-             * remove(PanelDelCentro);
-             * Confvid = new ConfiguracionPong();
-             * botonVolver = new JButton("volver");
-             * botonVolver.setBackground(ColorFondo);
-             * botonVolver.setForeground(Color.WHITE);
-             * botonVolver.addActionListener(this);
-             * add(Confvid, BorderLayout.CENTER);
-             * add(botonVolver, BorderLayout.SOUTH);
+             * juego = new CharlieNivel();
              * 
-             * validate();
-             * repaint();
+             * t = new Thread() {
+             * public void run() {
+             * juego.run(1.0 / 60.0);
+             * }
+             * };
+             * 
+             * t.start();
              */
+
+            remove(PanelDelCentro);
+            Confvid = new ConfiguracionPong();
+            botonVolver = new JButton("volver");
+            botonVolver.setBackground(ColorFondo);
+            botonVolver.setForeground(Color.WHITE);
+            botonVolver.addActionListener(this);
+            add(Confvid, BorderLayout.CENTER);
+            add(botonVolver, BorderLayout.SOUTH);
+
+            validate();
+            repaint();
+
         }
 
         if (e.getSource() == botonVolver) {

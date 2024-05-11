@@ -19,7 +19,7 @@ import javax.imageio.*; //imagenes
 import java.util.*;
 import java.text.*;
 
-public class DemoCamaraHeroe extends JGame {
+public class CharlieNivel extends JGame {
 
     Date dInit = new Date();
     Date dAhora;
@@ -27,17 +27,17 @@ public class DemoCamaraHeroe extends JGame {
 
     Camara cam;
     Fondo fondo;
-    Heroe heroe;
+    Personaje heroe;
     final double HEROE_DESPLAZAMIENTO = 150.0;
 
     public static void main(String[] args) {
 
-        DemoCamaraHeroe game = new DemoCamaraHeroe();
+        CharlieNivel game = new CharlieNivel();
         game.run(1.0 / 60.0);
         System.exit(0);
     }
 
-    public DemoCamaraHeroe() {
+    public CharlieNivel() {
         // call game constructor
         super("DemoCamaraHeroe ", 640, 480);
 
@@ -46,7 +46,7 @@ public class DemoCamaraHeroe extends JGame {
     public void gameStartup() {
         // Log.info(getClass().getSimpleName(), "Starting up game");
         Mundo m = Mundo.getInstance();
-        heroe = new Heroe("imagenes/geometry-01.png");
+        heroe = new Personaje("imagenes/geometry-01.png");
         heroe.setPosicion(320.0, 240.0);
 
         cam = new Camara(0, 0);
