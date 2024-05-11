@@ -117,10 +117,6 @@ public class Heroe extends ObjetoGrafico {
 
 	}
 
-	public void setX(double x) {
-		setX(x);
-	}
-
 	private void rotarImagenGrados(double ang) {
 
 		angulo = 0;

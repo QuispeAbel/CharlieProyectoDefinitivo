@@ -30,7 +30,7 @@ class ObjetoGrafico {
 
     public ObjetoGrafico(String filename) {
         try {
-            imagen = ImageIO.read(getClass().getResource(filename));
+            this.imagen = ImageIO.read(getClass().getResource(filename));
 
         } catch (IOException e) {
             System.out.println(e);
