@@ -44,12 +44,12 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         f.setLayout(new BorderLayout());
 
         PanelTitulo = new JPanel();// Panel para el titulo de la Ventana
-        Color violeta = new Color(7, 14, 17);
-        PanelTitulo.setBackground(violeta);
+        Color ColorFondo = new Color(7, 14, 17);
+        PanelTitulo.setBackground(ColorFondo);
         PanelTitulo.add(new JLabel(new ImageIcon(getClass().getResource("imagenes/OIG3.jpg"))));
 
         PanelDelCentro = new JPanel();// PAnel con los botones
-        PanelDelCentro.setBackground(violeta);
+        PanelDelCentro.setBackground(ColorFondo);
         PanelDelCentro.setLayout(new GridLayout(filas, columnas, separacion, separacion));
 
         boton2.setBackground(Color.BLACK);// hago el fondo del boton negro
