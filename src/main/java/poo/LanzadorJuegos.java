@@ -13,16 +13,18 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
     Thread t;
     JButton boton2;
     JButton boton3;
+    JButton botonVolver;
     JPanel PanelDelCentro;
     JPanel PanelTitulo;
     JPanel PanelMenuCircus;
     Frame Config;
+    ConfiguracionVideojuego Confvid;
+    Color ColorFondo = new Color(7, 14, 17);
 
     public LanzadorJuegos() {
         int filas = 0;
         int columnas = 2;
         int separacion = 10;
-        // JFrame f = new JFrame("Lanzador");
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         boton2 = new JButton(
@@ -34,7 +36,6 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
 
         PanelTitulo = new JPanel();// Panel para el titulo de la Ventana
-        Color ColorFondo = new Color(7, 14, 17);
         PanelTitulo.setBackground(ColorFondo);
         PanelTitulo.add(new JLabel(new ImageIcon(getClass().getResource("imagenes/OIG3.jpg"))));
 
@@ -67,6 +68,8 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
+        // String cmd = e.getActionCommand();
+
         if (e.getSource() == boton2) {
             juego = new Pong();
 
@@ -80,14 +83,27 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == boton3) {
-            // PanelDelCentro.removeAll();
 
-            PanelMenuCircus.add(new JLabel("Seleccione"));
-            PanelMenuCircus.add(new Checkbox());
-            PanelMenuCircus.add(new JButton("nose"));
+            remove(PanelDelCentro);
+            Confvid = new ConfiguracionVideojuego();
+            botonVolver = new JButton("volver");
+            botonVolver.setBackground(ColorFondo);
+            botonVolver.setForeground(Color.WHITE);
+            botonVolver.addActionListener(this);
+            add(Confvid, BorderLayout.CENTER);
+            add(botonVolver, BorderLayout.SOUTH);
 
-            // PanelDelCentro.validate();
-            // PanelDelCentro.repaint();
+            validate();
+            repaint();
+        }
+
+        if (e.getSource() == botonVolver) {
+            remove(Confvid);
+            remove(botonVolver);
+            add(PanelDelCentro, BorderLayout.CENTER);
+
+            validate();
+            repaint();
         }
     }
 
