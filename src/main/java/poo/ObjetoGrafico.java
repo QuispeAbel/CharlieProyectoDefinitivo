@@ -1,6 +1,12 @@
 package poo;
 
 import java.awt.image.*; //imagenes
+import java.io.File;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.*; //Point2d
@@ -9,6 +15,19 @@ class ObjetoGrafico extends Rectangle {
 
     BufferedImage imagen = null;
     private Point2D.Double posicion = new Point2D.Double();
+
+    public void playSound(String soundFilePath){
+        try {
+            File soundFile = new File(soundFilePath);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public ObjetoGrafico() {
 

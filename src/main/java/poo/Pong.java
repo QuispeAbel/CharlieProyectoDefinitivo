@@ -16,7 +16,6 @@ import java.awt.event.*; //eventos
 import java.awt.image.*; //imagenes
 
 import javax.imageio.*; //imagenes
-
 import java.util.*;
 import java.text.*;
 
@@ -30,6 +29,8 @@ public class Pong extends JGame {
     BufferedImage img_fondo = null; // Crear Imágen
 
     boolean gameover = false;
+
+    int sounds = 1;
 
     Paleta paleta1 = new Paleta();
 
@@ -50,7 +51,7 @@ public class Pong extends JGame {
 
     public Pong() {
 
-        super("Pong", 800, 600);
+        super("Pong", 1240, 720);
 
         System.out.println(appProperties.stringPropertyNames());
 
@@ -77,7 +78,7 @@ public class Pong extends JGame {
         Keyboard keyboard = this.getKeyboard();
 
         
-        pelota.moverPelota(getWidth(), getHeight()); // Movimiento continuo de la pelota
+        pelota.moverPelota(getWidth(), getHeight(), gameover); // Movimiento continuo de la pelota
 
         if(jugador2Der.getPuntos() == 10 || jugadorIzq.getPuntos() == 10){
             pelota.detenerPelota();
@@ -99,13 +100,18 @@ public class Pong extends JGame {
         }
 
         if(!gameover){
+
             if (pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()
-                && pelota.getX() >= getWidth() - 35) // Golpe Paleta Derecha
+                && pelota.getX() >= getWidth() - 35){ // Golpe Paleta Derecha
                     pelota.invertirVelX();
+                    pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+            }
 
             if (pelota.getY() <= paleta1.getY() + 100 && pelota.getY() >= paleta1.getY()
-                && pelota.getX() <= 35) // Golpe Paleta Derecha
+                && pelota.getX() <= 35){ // Golpe Paleta Derecha
                     pelota.invertirVelX();
+                    pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+            }
             // Movimiento de Paletas
 
             if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) // agregué que no haya llegado a su límite
@@ -122,6 +128,7 @@ public class Pong extends JGame {
             if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25)  // agregué que no haya llegado a su límite
                                                                              // superior
                 paleta2.moverPaletaarriba(delta);
+                
         
 
             if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) // agregué que no haya
@@ -139,6 +146,8 @@ public class Pong extends JGame {
                 stop();
             }
         }
+
+        
 
         paleta1.update(delta);
     }
