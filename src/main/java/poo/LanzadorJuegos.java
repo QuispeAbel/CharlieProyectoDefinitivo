@@ -83,6 +83,28 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == boton3) {
+            /*
+             * juego = new DemoCamaraHeroe();
+             * 
+             * t = new Thread() {
+             * public void run() {
+             * juego.run(1.0 / 60.0);
+             * }
+             * };
+             * 
+             * t.start();
+             */
+            // PanelDelCentro.removeAll();
+            /*
+             * DemoCamaraHeroe game = new DemoCamaraHeroe();
+             * game.run(1.0 / 60.0);
+             * System.exit(0);
+             */
+            /*
+             * PanelMenuCircus.add(new JLabel("Seleccione"));
+             * PanelMenuCircus.add(new Checkbox());
+             * PanelMenuCircus.add(new JButton("nose"));
+             */
 
             remove(PanelDelCentro);
             Confvid = new ConfiguracionPong();
