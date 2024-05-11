@@ -2,19 +2,20 @@ package poo;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.event.*;
+import java.awt.event.*;
+
 //import javafx.applicaton.Application;
 
-public class ConfiguracionVideojuego extends JPanel {
-    private JRadioButton ventanaRadioButton, pantallaCompletaRadioButton;
-    private JCheckBox sonidoCheckBox;
-    private JComboBox<String> pistaMusicalComboBox, personajeComboBox;
-    private JTextField teclaEfectosTextField, teclaMusicaTextField, teclaPausaTextField,
+public class ConfiguracionVideojuego extends JPanel implements ActionListener {
+    protected JRadioButton ventanaRadioButton, pantallaCompletaRadioButton;
+    protected JCheckBox sonidoCheckBox;
+    protected JComboBox<String> pistaMusicalComboBox, personajeComboBox;
+    protected JTextField teclaEfectosTextField, teclaMusicaTextField, teclaPausaTextField,
             teclaIzquierdaTextField, teclaDerechaTextField, teclaArribaTextField,
             teclaAbajoTextField, teclaSaltoTextField, teclaInicioTextField;
-    private JButton guardarButton, resetButton;
-    private Color ColorFondo = new Color(7, 14, 17);
-    private JLabel modojuego, sonidogeneral, SonidoFX, musicaFondo, PausarReanudar, MoverIzquierda, MoverDerecha,
+    protected JButton guardarButton, resetButton;
+    protected Color ColorFondo = new Color(7, 14, 17);
+    protected JLabel modojuego, sonidogeneral, SonidoFX, musicaFondo, PausarReanudar, MoverIzquierda, MoverDerecha,
             moverAbajo,
             moverArriba, TeclaSaltar, IniciarJuego, SelecPistaMusical, selecPersonaje;
 
@@ -139,10 +140,10 @@ public class ConfiguracionVideojuego extends JPanel {
         personajeComboBox.setBackground(Color.GRAY);
         add(personajeComboBox);
 
-        guardarButton = new JButton("Guardar");
+        guardarButton = new JButton("Jugar");
         guardarButton.setBackground(ColorFondo);
         guardarButton.setForeground(Color.WHITE);
-        guardarButton.addActionListener(e -> guardarConfiguracion());
+        guardarButton.addActionListener(this);
         add(guardarButton);
 
         resetButton = new JButton("Reset");
@@ -150,11 +151,6 @@ public class ConfiguracionVideojuego extends JPanel {
         resetButton.setForeground(Color.WHITE);
         resetButton.addActionListener(e -> resetConfiguracion());
         add(resetButton);
-    }
-
-    private void guardarConfiguracion() {
-        // Implementa aquí la lógica para guardar la configuración
-        JOptionPane.showMessageDialog(this, "Configuración guardada");
     }
 
     private void resetConfiguracion() {
@@ -176,6 +172,13 @@ public class ConfiguracionVideojuego extends JPanel {
     }
 
     public static void main(String[] args) {
-        new ConfiguracionVideojuego();
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == guardarButton){
+
+        }
     }
 }

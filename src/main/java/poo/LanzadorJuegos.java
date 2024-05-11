@@ -18,7 +18,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
     JPanel PanelTitulo;
     JPanel PanelMenuCircus;
     Frame Config;
-    ConfiguracionVideojuego Confvid;
+    ConfiguracionPong Confvid;
     Color ColorFondo = new Color(7, 14, 17);
 
     public LanzadorJuegos() {
@@ -85,7 +85,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         if (e.getSource() == boton3) {
 
             remove(PanelDelCentro);
-            Confvid = new ConfiguracionVideojuego();
+            Confvid = new ConfiguracionPong();
             botonVolver = new JButton("volver");
             botonVolver.setBackground(ColorFondo);
             botonVolver.setForeground(Color.WHITE);
