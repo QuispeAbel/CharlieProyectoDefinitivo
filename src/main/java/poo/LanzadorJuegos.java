@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import com.entropyinteractive.*; //las librerias JJGame,JGameLoop,KeyBoard,Mouse,etc...
 
-public class LanzadorJuegos extends JPanel implements ActionListener {
+public class LanzadorJuegos extends JFrame implements ActionListener {
 
     JGame juego;
     Thread t;
@@ -21,7 +21,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         int filas = 0;
         int columnas = 2;
         int separacion = 10;
-        JFrame f = new JFrame("Lanzador");
+        // JFrame f = new JFrame("Lanzador");
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         boton2 = new JButton(
@@ -30,7 +30,7 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         boton3 = new JButton(
                 new ImageIcon(getClass().getResource("imagenes/gif_circus_charlie.gif")));
 
-        f.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         PanelTitulo = new JPanel();// Panel para el titulo de la Ventana
         Color ColorFondo = new Color(7, 14, 17);
@@ -50,18 +50,18 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         PanelDelCentro.add(boton2);
         PanelDelCentro.add(boton3);
 
-        f.add(PanelDelCentro, BorderLayout.CENTER);
-        f.add(PanelTitulo, BorderLayout.NORTH);
+        add(PanelDelCentro, BorderLayout.CENTER);
+        add(PanelTitulo, BorderLayout.NORTH);
 
         WindowListener l = new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             };
         };
-        f.addWindowListener(l);
-        f.pack();
-        f.setVisible(true);
-        f.setLocationRelativeTo(null);
+        addWindowListener(l);
+        pack();
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -79,15 +79,17 @@ public class LanzadorJuegos extends JPanel implements ActionListener {
         }
 
         if (e.getSource() == boton3) {
-            juego = new DemoJuego03();
-
-            t = new Thread() {
-                public void run() {
-                    juego.run(1.0 / 60.0);
-                }
-            };
-
-            t.start();
+            /*
+             * juego = new DemoJuego03();
+             * 
+             * t = new Thread() {
+             * public void run() {
+             * juego.run(1.0 / 60.0);
+             * }
+             * };
+             * 
+             * t.start();
+             */
         }
     }
 
