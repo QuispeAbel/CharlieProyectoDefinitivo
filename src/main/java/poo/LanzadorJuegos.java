@@ -80,11 +80,22 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == boton3) {
-            // PanelDelCentro.removeAll();
+            juego = new DemoCamaraHeroe();
 
-            PanelMenuCircus.add(new JLabel("Seleccione"));
+            t = new Thread() {
+                public void run() {
+                    juego.run(1.0 / 60.0);
+                }
+            };
+
+            t.start();
+            // PanelDelCentro.removeAll();
+            /*DemoCamaraHeroe game = new DemoCamaraHeroe();
+            game.run(1.0 / 60.0);
+            System.exit(0);*/
+            /*PanelMenuCircus.add(new JLabel("Seleccione"));
             PanelMenuCircus.add(new Checkbox());
-            PanelMenuCircus.add(new JButton("nose"));
+            PanelMenuCircus.add(new JButton("nose"));*/
 
             // PanelDelCentro.validate();
             // PanelDelCentro.repaint();
