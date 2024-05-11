@@ -6,15 +6,20 @@ public class Pelota extends ObjetoGrafico {
     private boolean pelotaFueraIzq = false;
     private boolean pelotaFueraDer = false;
 
-    public void moverPelota(int maxX, int maxY) {
+    public void moverPelota(int maxX, int maxY, boolean gameover) {
         super.setX(getX() + velocidadPelotaX);
         super.setY(getY() + velocidadPelotaY);
 
-        if (getY() >= maxY - 20)
+        if (getY() >= maxY - 30){
             velocidadPelotaY = -velocidadPelotaY;
+            if(!gameover)
+            playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+        }
 
-        if (getY() <= 25)
+        if (getY() <= 25){
             velocidadPelotaY = -velocidadPelotaY;
+            playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+        }
 
         if (getX() <= 0)
             pelotaFueraIzq = true;
@@ -42,6 +47,11 @@ public class Pelota extends ObjetoGrafico {
 
     public void invertirVelX() {
         velocidadPelotaX = -velocidadPelotaX;
+    }
+
+    public void detenerPelota(){
+        velocidadPelotaX = 0;
+        velocidadPelotaY = 0;
     }
 
 }
