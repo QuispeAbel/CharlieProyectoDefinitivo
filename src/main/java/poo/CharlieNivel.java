@@ -18,6 +18,7 @@ import javax.imageio.*; //imagenes
 
 import java.util.*;
 import java.text.*;
+import java.util.List;
 
 public class CharlieNivel extends JGame {
 
@@ -28,6 +29,18 @@ public class CharlieNivel extends JGame {
     Camara cam;
     Fondo fondo;
     Personaje heroe;
+    ObjetoGrafico caldera;
+    //List<ObjetoGrafico> calderas= new ArrayList<>();
+    ObjetoGrafico calderass []= {new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png")};
+    int espacioEntreCalderas = 800;
+    int numCalderas = 10;
+
+    private long lastSpawnTime; // Guarda el tiempo del último spawn
+    private long spawnInterval = 10000; // Intervalo de tiempo entre spawns en milisegundos
+    ObjetoGrafico aros []= {new ObjetoGrafico("imagenes/ufo.png"),new ObjetoGrafico("imagenes/ufo.png")};
+    private double offsetSpawnX = 200; // Offset en X para asegurar que el objeto aparezca adelante del personaje
+
+
     final double HEROE_DESPLAZAMIENTO = 150.0;
 
     public static void main(String[] args) {
@@ -47,7 +60,7 @@ public class CharlieNivel extends JGame {
         // Log.info(getClass().getSimpleName(), "Starting up game");
         Mundo m = Mundo.getInstance();
         heroe = new Personaje("imagenes/geometry-01.png");
-        heroe.setPosicion(320.0, 240.0);
+        heroe.setPosicion(320.0, 380.0);
 
         cam = new Camara(0, 0);
 
@@ -57,6 +70,14 @@ public class CharlieNivel extends JGame {
         m.setLimitesMundo(fondo.getWidth(), fondo.getHeight());
         heroe.quieto();
 
+        
+            //caldera = new ObjetoGrafico("imagenes/caldera1.png");
+            //caldera.setPosicion(80+ 40, 300); // Añade 40 para centrarla mejor
+        
+            for (int i = 0; i < numCalderas; i++) {
+                double xPos = (i + 1) * espacioEntreCalderas; // i+1 para evitar que se superpongan con el borde
+                calderass[i].setPosicion(xPos, 300); // Ajusta la posición vertical según sea necesario
+            }
     }
 
     public void gameUpdate(double delta) {
@@ -107,9 +128,27 @@ public class CharlieNivel extends JGame {
 
         heroe.update(delta);
 
+         // Desplazar el objeto hacia la izquierda
+         double velocidadDesplazamiento = 100; // Velocidad de desplazamiento en píxeles por segundo
+         double desplazamientoX = velocidadDesplazamiento * delta;
+         aros[0].setX(aros[0].getX() - desplazamientoX);
+         aros[1].setX(aros[1].getX() - desplazamientoX);   
+
         // heroe.applyForce(gravedad);
 
         cam.seguirPersonaje(heroe); /// la camara sigue al Personaje
+
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastSpawnTime > spawnInterval) {
+            // Reinicia la posición del objeto al borde derecho de la pantalla
+            //objetoEnJuego.setPosicion(getWidth(), 250); // Define la posición adecuada (por ejemplo, en el borde derecho de la pantalla)
+                // Establece la posición de reinicio del objeto delante del personaje
+                double posX = heroe.getX() + offsetSpawnX;
+                double posY = 250; // Define la posición adecuada en Y según sea necesario
+                aros[0].setPosicion(posX, posY);
+                aros[1].setPosicion(posX+400, posY);
+            // Actualizar el tiempo del último spawn
+            lastSpawnTime = currentTime;}
 
     }
 
@@ -124,6 +163,15 @@ public class CharlieNivel extends JGame {
         fondo.display(g);
         m.display(g);
         heroe.display(g);
+        //caldera.display(g);
+        for (int i = 0; i < numCalderas; i++) {
+            calderass[i].display(g);
+        }
+
+        // Dibujar el objeto
+        for (int i = 0; i < 2; i++) {
+            aros[i].display(g);
+        }
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -136,3 +184,10 @@ public class CharlieNivel extends JGame {
         // Log.info(getClass().getSimpleName(), "Shutting down game");
     }
 }
+
+/*private void reiniciarObjeto() {
+    // Establece la posición de reinicio del objeto delante del personaje
+    double posX = heroe.getX() + offsetSpawnX;
+    double posY = y; // Define la posición adecuada en Y según sea necesario
+    objetoEnJuego.setPosicion(posX, posY);
+}*/
