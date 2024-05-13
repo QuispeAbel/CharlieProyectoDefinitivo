@@ -38,8 +38,8 @@ public class CharlieNivel extends JGame {
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
     private long spawnInterval = 10000; // Intervalo de tiempo entre spawns en milisegundos
-    ObjetoGrafico aros1 []= {new ObjetoGrafico("imagenes/aroMitad2.png"),new ObjetoGrafico("imagenes/aroMitad2.png")};
-    ObjetoGrafico aros2 []= {new ObjetoGrafico("imagenes/aroMitad1.png"),new ObjetoGrafico("imagenes/aroMitad1.png")};
+    aro aros1 = new aro("imagenes/aroMitad2.png"); //,new aro("imagenes/aroMitad2.png")};
+    aro aros2 = new aro("imagenes/aroMitad1.png"); //,new aro("imagenes/aroMitad1.png")};
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
 
@@ -133,12 +133,10 @@ public class CharlieNivel extends JGame {
         heroe.update(delta);
 
          // Desplazar el objeto hacia la izquierda
-         double velocidadDesplazamiento = 100; // Velocidad de desplazamiento en píxeles por segundo
-         double desplazamientoX = velocidadDesplazamiento * delta;
-         aros1[0].setX(aros1[0].getX() - desplazamientoX);
-         aros1[1].setX(aros1[1].getX() - desplazamientoX);
-         aros2[0].setX(aros2[0].getX() - desplazamientoX);
-         aros2[1].setX(aros2[1].getX() - desplazamientoX);      
+         //double velocidadDesplazamiento = 100; // Velocidad de desplazamiento en píxeles por segundo
+         //double desplazamientoX = velocidadDesplazamiento * delta;
+         aros1.desplazamientoX(delta); //setX(aros1[0].getX() - desplazamientoX);
+         aros2.desplazamientoX(delta); //setX(aros2[1].getX() - desplazamientoX);      
 
         // heroe.applyForce(gravedad);
 
@@ -149,12 +147,9 @@ public class CharlieNivel extends JGame {
             // Reinicia la posición del objeto al borde derecho de la pantalla
             //objetoEnJuego.setPosicion(getWidth(), 250); // Define la posición adecuada (por ejemplo, en el borde derecho de la pantalla)
                 // Establece la posición de reinicio del objeto delante del personaje
-                double posX = heroe.getX() + offsetSpawnX;
                 //double posY = 200; // Define la posición adecuada en Y según sea necesario
-                aros1[0].setPosicion(posX, 190);
-                aros1[1].setPosicion(posX+400, 190);
-                aros2[0].setPosicion(posX+20, 200);
-                aros2[1].setPosicion(posX+420, 200);
+                aros1.ubicaAropost(heroe.getX() + offsetSpawnX); //.setPosicion(posX, 190);
+                aros2.ubicaArosup(heroe.getX() + offsetSpawnX);//.setPosicion(posX+420, 200);
             // Actualizar el tiempo del último spawn
             lastSpawnTime = currentTime;}
 
@@ -175,17 +170,15 @@ public class CharlieNivel extends JGame {
         for (int i = 0; i < numCalderas; i++) {
             calderass[i].display(g);
         }
-        for (int i = 0; i < 2; i++) {
-            aros1[i].display(g);
-        }
+            aros1.display(g);
+        
 
         heroe.display(g);
         
 
         // Dibujar el objeto
-        for (int i = 0; i < 2; i++) {
-            aros2[i].display(g);
-        }
+            aros2.display(g);
+        
 
        
 

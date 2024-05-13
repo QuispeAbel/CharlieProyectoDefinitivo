@@ -1,6 +1,10 @@
 package poo;
 
-public class obstaculo extends ObjetoGrafico{
+abstract class obstaculo extends ObjetoGrafico{
+    protected double velocidadDesplazamientoX= 100 ;
+    
+    void desplazamientoX(){};
+
 
     /*private void reiniciarObjeto() {
     // Establece la posición de reinicio del objeto delante del personaje
