@@ -30,6 +30,7 @@ public class CharlieNivel extends JGame {
     Fondo fondo;
     Personaje heroe;
     ObjetoGrafico caldera;
+    ObjetoGrafico tarima;
     //List<ObjetoGrafico> calderas= new ArrayList<>();
     ObjetoGrafico calderass []= {new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png"),new ObjetoGrafico("imagenes/caldera1.png")};
     int espacioEntreCalderas = 800;
@@ -39,10 +40,10 @@ public class CharlieNivel extends JGame {
     private long spawnInterval = 10000; // Intervalo de tiempo entre spawns en milisegundos
     ObjetoGrafico aros1 []= {new ObjetoGrafico("imagenes/aroMitad2.png"),new ObjetoGrafico("imagenes/aroMitad2.png")};
     ObjetoGrafico aros2 []= {new ObjetoGrafico("imagenes/aroMitad1.png"),new ObjetoGrafico("imagenes/aroMitad1.png")};
-    private double offsetSpawnX = 200; // Offset en X para asegurar que el objeto aparezca adelante del personaje
+    private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
 
-    final double HEROE_DESPLAZAMIENTO = 150.0;
+    final double HEROE_DESPLAZAMIENTO = 300.0;
 
     public static void main(String[] args) {
 
@@ -72,11 +73,11 @@ public class CharlieNivel extends JGame {
         heroe.quieto();
 
         
-            //caldera = new ObjetoGrafico("imagenes/caldera1.png");
-            //caldera.setPosicion(80+ 40, 300); // Añade 40 para centrarla mejor
+            tarima = new ObjetoGrafico("imagenes/tarima.png");
+            tarima.setPosicion(8100, 327); 
         
             for (int i = 0; i < numCalderas; i++) {
-                calderass[i]= new ObjetoGrafico("imagenes/caldera1.png");
+                //calderass[i]= new ObjetoGrafico("imagenes/caldera1.png");
                 double xPos = (i + 1) * espacioEntreCalderas; // i+1 para evitar que se superpongan con el borde
                 calderass[i].setPosicion(xPos, 345); // Ajusta la posición vertical según sea necesario
             }
@@ -169,6 +170,7 @@ public class CharlieNivel extends JGame {
 
         fondo.display(g);
         m.display(g);
+        tarima.display(g);
         //caldera.display(g);
         for (int i = 0; i < numCalderas; i++) {
             calderass[i].display(g);
@@ -184,6 +186,8 @@ public class CharlieNivel extends JGame {
         for (int i = 0; i < 2; i++) {
             aros2[i].display(g);
         }
+
+       
 
         g.translate(-cam.getX(), -cam.getY());
 
