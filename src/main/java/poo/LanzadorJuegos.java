@@ -70,31 +70,20 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
 
         // String cmd = e.getActionCommand();
 
+        // if (e.getSource() == boton2) {
+        //     juego = new Pong();
+
+        //     t = new Thread() {
+        //         public void run() {
+        //             juego.run(1.0 / 60.0);
+        //         }
+        //     };
+
+        //     t.start();
+        // }
+
         if (e.getSource() == boton2) {
-            juego = new Pong();
-
-            t = new Thread() {
-                public void run() {
-                    juego.run(1.0 / 60.0);
-                }
-            };
-
-            t.start();
-        }
-
-        if (e.getSource() == boton3) {
-            /*
-             * juego = new CharlieNivel();
-             * 
-             * t = new Thread() {
-             * public void run() {
-             * juego.run(1.0 / 60.0);
-             * }
-             * };
-             * 
-             * t.start();
-             */
-
+            
             remove(PanelDelCentro);
             Confvid = new ConfiguracionPong();
             botonVolver = new JButton("volver");
@@ -103,11 +92,31 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
             botonVolver.addActionListener(this);
             add(Confvid, BorderLayout.CENTER);
             add(botonVolver, BorderLayout.SOUTH);
+            Confvid.juegoSeleccionado(1);
 
             validate();
             repaint();
 
         }
+
+        if (e.getSource() == boton3) {
+            
+            remove(PanelDelCentro);
+            Confvid = new ConfiguracionPong();
+            botonVolver = new JButton("volver");
+            botonVolver.setBackground(ColorFondo);
+            botonVolver.setForeground(Color.WHITE);
+            botonVolver.addActionListener(this);
+            add(Confvid, BorderLayout.CENTER);
+            add(botonVolver, BorderLayout.SOUTH);
+            Confvid.juegoSeleccionado(2);
+
+            validate();
+            repaint();
+
+        }
+
+        
 
         if (e.getSource() == botonVolver) {
             remove(Confvid);
