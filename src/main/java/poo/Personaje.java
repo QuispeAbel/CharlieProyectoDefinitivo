@@ -34,7 +34,7 @@ public class Personaje extends ObjetoGrafico {
 
 	protected int direccionAngulo = 1;
 
-	public final int POSICION_Y_PISO = 360;
+	public final int POSICION_Y_PISO = 300;
 
 	public Personaje(String filename) {
 		super(filename);
