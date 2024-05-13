@@ -1,6 +1,9 @@
 package poo;
 
 import javax.swing.*;
+
+import com.entropyinteractive.JGame;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -18,6 +21,9 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
     protected JLabel modojuego, sonidogeneral, SonidoFX, musicaFondo, PausarReanudar, MoverIzquierda, MoverDerecha,
             moverAbajo,
             moverArriba, TeclaSaltar, IniciarJuego, SelecPistaMusical, selecPersonaje;
+    protected int juegoSel = 0;
+    protected JGame juego;
+    protected Thread t;
 
     public ConfiguracionVideojuego() {
 
@@ -62,7 +68,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(SonidoFX);
 
         teclaEfectosTextField = new JTextField("q");
-        teclaEfectosTextField.setBackground(Color.gray);
+        teclaEfectosTextField.setBackground(Color.WHITE);
         add(teclaEfectosTextField);
 
         musicaFondo = new JLabel("Tecla para música de fondo (w):");
@@ -70,7 +76,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(musicaFondo);
 
         teclaMusicaTextField = new JTextField("w");
-        teclaMusicaTextField.setBackground(Color.GRAY);
+        teclaMusicaTextField.setBackground(Color.WHITE);
         add(teclaMusicaTextField);
 
         PausarReanudar = new JLabel("Tecla para pausar/reanudar el juego (Barra espaciadora):");
@@ -78,7 +84,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(PausarReanudar);
 
         teclaPausaTextField = new JTextField("Espacio");
-        teclaPausaTextField.setBackground(Color.GRAY);
+        teclaPausaTextField.setBackground(Color.WHITE);
         add(teclaPausaTextField);
 
         MoverIzquierda = new JLabel("Tecla para mover hacia la izquierda (←):");
@@ -86,42 +92,42 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(MoverIzquierda);
 
         teclaIzquierdaTextField = new JTextField("←");
-        teclaIzquierdaTextField.setBackground(Color.GRAY);
+        teclaIzquierdaTextField.setBackground(Color.WHITE);
         add(teclaIzquierdaTextField);
 
         MoverDerecha = new JLabel("Tecla para mover hacia la derecha (→):");
         MoverDerecha.setForeground(Color.WHITE);
         add(MoverDerecha);
         teclaDerechaTextField = new JTextField("→");
-        teclaDerechaTextField.setBackground(Color.GRAY);
+        teclaDerechaTextField.setBackground(Color.WHITE);
         add(teclaDerechaTextField);
 
         moverArriba = new JLabel("Tecla para mover hacia arriba (↑):");
         moverArriba.setForeground(Color.WHITE);
         add(moverArriba);
         teclaArribaTextField = new JTextField("↑");
-        teclaArribaTextField.setBackground(Color.GRAY);
+        teclaArribaTextField.setBackground(Color.WHITE);
         add(teclaArribaTextField);
 
         moverAbajo = new JLabel("Tecla para mover hacia abajo (↓):");
         add(moverAbajo);
         moverAbajo.setForeground(Color.WHITE);
         teclaAbajoTextField = new JTextField("↓");
-        teclaAbajoTextField.setBackground(Color.GRAY);
+        teclaAbajoTextField.setBackground(Color.WHITE);
         add(teclaAbajoTextField);
 
         TeclaSaltar = new JLabel("Tecla para saltar (X):");
         TeclaSaltar.setForeground(Color.WHITE);
         add(TeclaSaltar);
         teclaSaltoTextField = new JTextField("X");
-        teclaSaltoTextField.setBackground(Color.GRAY);
+        teclaSaltoTextField.setBackground(Color.WHITE);
         add(teclaSaltoTextField);
 
         IniciarJuego = new JLabel("Tecla para iniciar el juego (Enter):");
         IniciarJuego.setForeground(Color.WHITE);
         add(IniciarJuego);
         teclaInicioTextField = new JTextField("Enter");
-        teclaInicioTextField.setBackground(Color.GRAY);
+        teclaInicioTextField.setBackground(Color.WHITE);
         add(teclaInicioTextField);
 
         SelecPistaMusical = new JLabel("Pista Musical:");
@@ -129,7 +135,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(SelecPistaMusical);
         String[] pistasMusicales = { "Tema Original", "Pista 1", "Pista 2", "Pista 3" };
         pistaMusicalComboBox = new JComboBox<>(pistasMusicales);
-        pistaMusicalComboBox.setBackground(Color.GRAY);
+        pistaMusicalComboBox.setBackground(Color.WHITE);
         add(pistaMusicalComboBox);
 
         selecPersonaje = new JLabel("Personaje:");
@@ -137,7 +143,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         add(selecPersonaje);
         String[] personajes = { "Original", "Personaje 1", "Personaje 2", "Personaje 3" };
         personajeComboBox = new JComboBox<>(personajes);
-        personajeComboBox.setBackground(Color.GRAY);
+        personajeComboBox.setBackground(Color.WHITE);
         add(personajeComboBox);
 
         guardarButton = new JButton("Jugar");
@@ -151,6 +157,11 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         resetButton.setForeground(Color.WHITE);
         resetButton.addActionListener(e -> resetConfiguracion());
         add(resetButton);
+
+    }
+
+    public void juegoSeleccionado(int numJuego){
+            juegoSel = numJuego;
     }
 
     private void resetConfiguracion() {
@@ -177,8 +188,30 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == guardarButton){
 
+        if (e.getSource() == guardarButton && juegoSel == 1){
+            juego = new Pong();
+
+            t = new Thread() {
+                public void run() {
+                    juego.run(1.0 / 60.0);
+                }
+            };
+
+            t.start();
+        }
+
+
+        if (e.getSource() == guardarButton && juegoSel == 2){
+            juego = new CharlieNivel();
+
+            t = new Thread() {
+                public void run() {
+                    juego.run(1.0 / 60.0);
+                }
+             };
+             
+            t.start();
         }
     }
 }
