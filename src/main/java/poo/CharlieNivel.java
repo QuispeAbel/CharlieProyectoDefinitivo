@@ -147,6 +147,7 @@ public class CharlieNivel extends JGame {
             // Reinicia la posición del objeto al borde derecho de la pantalla
             //objetoEnJuego.setPosicion(getWidth(), 250); // Define la posición adecuada (por ejemplo, en el borde derecho de la pantalla)
                 // Establece la posición de reinicio del objeto delante del personaje
+                //double posX = heroe.getX() + offsetSpawnX;
                 //double posY = 200; // Define la posición adecuada en Y según sea necesario
                 aros1.ubicaAropost(heroe.getX() + offsetSpawnX); //.setPosicion(posX, 190);
                 aros2.ubicaArosup(heroe.getX() + offsetSpawnX);//.setPosicion(posX+420, 200);
