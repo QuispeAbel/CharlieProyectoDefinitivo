@@ -29,7 +29,6 @@ public class CharlieNivel extends JGame {
     Camara cam;
     Fondo fondo;
     Personaje heroe;
-    ObjetoGrafico caldera;
     ObjetoGrafico tarima;
     // List<ObjetoGrafico> calderas= new ArrayList<>();
     ObjetoGrafico calderass = new ObjetoGrafico("imagenes/caldera1.png");
