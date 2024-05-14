@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class aro extends obstaculo {
+public class MedioAro extends obstaculo {
     long currentTime = System.currentTimeMillis();
     double altura = 190, altura_solapa = 200;
 
-    aro(String filename) {
+    MedioAro(String filename) {
         try {
             this.imagen = ImageIO.read(getClass().getResource(filename));
 
