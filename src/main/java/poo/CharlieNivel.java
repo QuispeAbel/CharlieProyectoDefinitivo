@@ -37,10 +37,6 @@ public class CharlieNivel extends JGame {
     private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
     aro arito = new aro("imagenes/aroMitad2.png", "imagenes/aroMitad1.png");
 
-    // MedioAro aros1 = new MedioAro("imagenes/aroMitad2.png", 190); // ,new
-    // aro("imagenes/aroMitad2.png")};
-    // MedioAro aros2 = new MedioAro("imagenes/aroMitad1.png", 200); // ,new
-    // aro("imagenes/aroMitad1.png")};
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
     final double HEROE_DESPLAZAMIENTO = 300.0;
@@ -126,10 +122,7 @@ public class CharlieNivel extends JGame {
         heroe.update(delta);
 
         // Desplazar el aro hacia la izquierda
-
         arito.MovimientoAro(delta);
-        // aros1.desplazamientoX(delta);
-        // aros2.desplazamientoX(delta);
 
         // heroe.applyForce(gravedad);
 
@@ -165,13 +158,11 @@ public class CharlieNivel extends JGame {
 
         calderass.display(g);
 
-        // aros1.display(g);
-
-        arito.display(g);
+        arito.displayDelante(g);
 
         heroe.display(g);
 
-        // aros2.display(g);
+        arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 

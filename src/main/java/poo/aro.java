@@ -23,8 +23,12 @@ public class aro {
         AroDetras.desplazamientoX(delta);
     }
 
-    public void display(Graphics2D g2) {
+    public void displayDelante(Graphics2D g2) {
         g2.drawImage(AroDelante.imagen, (int) AroDelante.getX(), (int) AroDelante.getY(), null);
+    }
+
+    public void displayDetras(Graphics2D g2) {
         g2.drawImage(AroDetras.imagen, (int) AroDetras.getX(), (int) AroDetras.getY(), null);
     }
+
 }
