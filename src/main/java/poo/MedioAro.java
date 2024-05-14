@@ -6,12 +6,11 @@ import javax.imageio.ImageIO;
 
 public class MedioAro extends obstaculo {
     long currentTime = System.currentTimeMillis();
-    double altura = 190, altura_solapa = 200;
 
-    MedioAro(String filename) {
+    MedioAro(String filename, double alturaY) {
         try {
             this.imagen = ImageIO.read(getClass().getResource(filename));
-
+            this.alturaY = alturaY;
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -22,10 +21,10 @@ public class MedioAro extends obstaculo {
     }
 
     void ubicaAropost(double xheroe) {
-        this.setPosicion(xheroe, altura);
+        this.setPosicion(xheroe, alturaY);
     }
 
     void ubicaArosup(double xheroe) {
-        this.setPosicion((xheroe + 20), altura_solapa);
+        this.setPosicion((xheroe + 20), alturaY);
     }
 }

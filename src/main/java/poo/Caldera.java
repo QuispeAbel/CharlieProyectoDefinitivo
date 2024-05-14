@@ -14,4 +14,8 @@ public class Caldera extends obstaculo {
             System.out.println(e);
         }
     }
+
+    @Override
+    void desplazamientoX() {
+    }// anula
 }
