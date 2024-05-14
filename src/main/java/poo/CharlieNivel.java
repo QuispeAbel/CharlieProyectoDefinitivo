@@ -32,17 +32,12 @@ public class CharlieNivel extends JGame {
     ObjetoGrafico caldera;
     ObjetoGrafico tarima;
     // List<ObjetoGrafico> calderas= new ArrayList<>();
-    ObjetoGrafico calderass[] = { new ObjetoGrafico("imagenes/caldera1.png"),
-            new ObjetoGrafico("imagenes/caldera1.png"), new ObjetoGrafico("imagenes/caldera1.png"),
-            new ObjetoGrafico("imagenes/caldera1.png"), new ObjetoGrafico("imagenes/caldera1.png"),
-            new ObjetoGrafico("imagenes/caldera1.png"), new ObjetoGrafico("imagenes/caldera1.png"),
-            new ObjetoGrafico("imagenes/caldera1.png"), new ObjetoGrafico("imagenes/caldera1.png"),
-            new ObjetoGrafico("imagenes/caldera1.png") };
+    ObjetoGrafico calderass = new ObjetoGrafico("imagenes/caldera1.png");
     int espacioEntreCalderas = 800;
     int numCalderas = 10;
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
-    private long spawnInterval = 10000; // Intervalo de tiempo entre spawns en milisegundos
+    private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
     aro aros1 = new aro("imagenes/aroMitad2.png"); // ,new aro("imagenes/aroMitad2.png")};
     aro aros2 = new aro("imagenes/aroMitad1.png"); // ,new aro("imagenes/aroMitad1.png")};
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
@@ -78,12 +73,6 @@ public class CharlieNivel extends JGame {
 
         tarima = new ObjetoGrafico("imagenes/tarima.png");
         tarima.setPosicion(8100, 327);
-
-        for (int i = 0; i < numCalderas; i++) {
-            // calderass[i]= new ObjetoGrafico("imagenes/caldera1.png");
-            double xPos = (i + 1) * espacioEntreCalderas; // i+1 para evitar que se superpongan con el borde
-            calderass[i].setPosicion(xPos, 345); // Ajusta la posición vertical según sea necesario
-        }
 
     }
 
@@ -135,12 +124,9 @@ public class CharlieNivel extends JGame {
 
         heroe.update(delta);
 
-        // Desplazar el objeto hacia la izquierda
-        // double velocidadDesplazamiento = 100; // Velocidad de desplazamiento en
-        // píxeles por segundo
-        // double desplazamientoX = velocidadDesplazamiento * delta;
-        aros1.desplazamientoX(delta); // setX(aros1[0].getX() - desplazamientoX);
-        aros2.desplazamientoX(delta); // setX(aros2[1].getX() - desplazamientoX);
+        // Desplazar el aro hacia la izquierda
+        aros1.desplazamientoX(delta);
+        aros2.desplazamientoX(delta);
 
         // heroe.applyForce(gravedad);
 
@@ -151,11 +137,11 @@ public class CharlieNivel extends JGame {
             // Reinicia la posición del objeto al borde derecho de la pantalla
             // objetoEnJuego.setPosicion(getWidth(), 250); // Define la posición adecuada
             // (por ejemplo, en el borde derecho de la pantalla)
-            // Establece la posición de reinicio del objeto delante del personaje
-            // double posX = heroe.getX() + offsetSpawnX;
-            // double posY = 200; // Define la posición adecuada en Y según sea necesario
+
             aros1.ubicaAropost(heroe.getX() + offsetSpawnX); // .setPosicion(posX, 190);
             aros2.ubicaArosup(heroe.getX() + offsetSpawnX);// .setPosicion(posX+420, 200);
+
+            calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
             // Actualizar el tiempo del último spawn
             lastSpawnTime = currentTime;
         }
@@ -173,10 +159,9 @@ public class CharlieNivel extends JGame {
         fondo.display(g);
         m.display(g);
         tarima.display(g);
-        // caldera.display(g);
-        for (int i = 0; i < numCalderas; i++) {
-            calderass[i].display(g);
-        }
+
+        calderass.display(g);
+
         aros1.display(g);
 
         heroe.display(g);
