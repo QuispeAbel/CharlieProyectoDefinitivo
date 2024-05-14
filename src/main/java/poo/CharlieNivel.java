@@ -134,9 +134,6 @@ public class CharlieNivel extends JGame {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastSpawnTime > spawnInterval) {
             // Reinicia la posición del objeto al borde derecho de la pantalla
-            // objetoEnJuego.setPosicion(getWidth(), 250); // Define la posición adecuada
-            // (por ejemplo, en el borde derecho de la pantalla)
-
             aros1.ubicaAropost(heroe.getX() + offsetSpawnX); // .setPosicion(posX, 190);
             aros2.ubicaArosup(heroe.getX() + offsetSpawnX);// .setPosicion(posX+420, 200);
 
@@ -165,7 +162,6 @@ public class CharlieNivel extends JGame {
 
         heroe.display(g);
 
-        // Dibujar el objeto
         aros2.display(g);
 
         g.translate(-cam.getX(), -cam.getY());
