@@ -14,8 +14,4 @@ public class MedioAro extends obstaculo {
     void ubicaAropost(double xheroe) {
         this.setPosicion(xheroe, alturaY);
     }
-
-    void ubicaArosup(double xheroe) {
-        this.setPosicion((xheroe + 20), alturaY);
-    }
 }
