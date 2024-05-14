@@ -37,8 +37,8 @@ public class CharlieNivel extends JGame {
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
     private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
-    aro aros1 = new aro("imagenes/aroMitad2.png"); // ,new aro("imagenes/aroMitad2.png")};
-    aro aros2 = new aro("imagenes/aroMitad1.png"); // ,new aro("imagenes/aroMitad1.png")};
+    MedioAro aros1 = new MedioAro("imagenes/aroMitad2.png"); // ,new aro("imagenes/aroMitad2.png")};
+    MedioAro aros2 = new MedioAro("imagenes/aroMitad1.png"); // ,new aro("imagenes/aroMitad1.png")};
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
     final double HEROE_DESPLAZAMIENTO = 300.0;
