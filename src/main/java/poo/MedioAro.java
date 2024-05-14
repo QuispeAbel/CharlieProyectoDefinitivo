@@ -8,12 +8,15 @@ public class MedioAro extends obstaculo {
     long currentTime = System.currentTimeMillis();
 
     MedioAro(String filename, double alturaY) {
-        try {
-            this.imagen = ImageIO.read(getClass().getResource(filename));
-            this.alturaY = alturaY;
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        super(filename, alturaY);
+        /*
+         * try {
+         * this.imagen = ImageIO.read(getClass().getResource(filename));
+         * this.alturaY = alturaY;
+         * } catch (IOException e) {
+         * System.out.println(e);
+         * }
+         */
     }
 
     void desplazamientoX(double delta) {

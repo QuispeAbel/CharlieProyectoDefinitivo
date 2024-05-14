@@ -4,6 +4,11 @@ abstract class obstaculo extends ObjetoGrafico {
     protected double velocidadDesplazamientoX = 100;
     protected double alturaY;
 
+    obstaculo(String filename, double alturaY) {
+        super(filename);
+        this.alturaY = alturaY;
+    }
+
     void desplazamientoX() {
     };
 

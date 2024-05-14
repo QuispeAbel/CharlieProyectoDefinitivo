@@ -1,22 +1,31 @@
 package poo;
 
+import java.awt.Rectangle;
+
 public class Pelota extends ObjetoGrafico {
     private int velocidadPelotaX = 5;
     private int velocidadPelotaY = 5;
     private boolean pelotaFueraIzq = false;
     private boolean pelotaFueraDer = false;
+    private Rectangle rectangulo;
+
+    /*
+     * public Pelota(){
+     * super();
+     * }
+     */
 
     public void moverPelota(int maxX, int maxY, boolean gameover) {
         super.setX(getX() + velocidadPelotaX);
         super.setY(getY() + velocidadPelotaY);
 
-        if (getY() >= maxY - 30){
+        if (getY() >= maxY - 30) {
             velocidadPelotaY = -velocidadPelotaY;
-            if(!gameover)
-            playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+            if (!gameover)
+                playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
         }
 
-        if (getY() <= 25){
+        if (getY() <= 25) {
             velocidadPelotaY = -velocidadPelotaY;
             playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
         }
@@ -49,7 +58,7 @@ public class Pelota extends ObjetoGrafico {
         velocidadPelotaX = -velocidadPelotaX;
     }
 
-    public void detenerPelota(){
+    public void detenerPelota() {
         velocidadPelotaX = 0;
         velocidadPelotaY = 0;
     }
