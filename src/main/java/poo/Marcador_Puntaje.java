@@ -2,10 +2,6 @@ package poo;
 
 import java.awt.Graphics2D;
 
-
-
-import java.awt.Color; // Import java.awt.Color for use with Graphics2D
-
 public class Marcador_Puntaje extends ObjetoGrafico {
     int nro_jugador_actual = 0;
 
@@ -18,7 +14,6 @@ public class Marcador_Puntaje extends ObjetoGrafico {
     }
 
     public void draw(Graphics2D g){
-        g.setColor(Color.WHITE);
-        g.drawString("a"+Integer.toString(nro_jugador_actual), 20, 30);
+        g.drawString(Integer.toString(nro_jugador_actual)+" P -", 40, 70);
     }
 }
