@@ -4,12 +4,9 @@ import com.entropyinteractive.*;
 
 import java.awt.*;
 import java.awt.event.*; //eventos
-<<<<<<< HEAD
 import java.awt.Rectangle;
 //import java.awt.image.*; //imagenes
 //import javax.imageio.*; //imagenes
-=======
->>>>>>> 64f5a51f941b3c3c74ea93b216fd81657eeb4e4f
 
 import java.util.*;
 import java.text.*;
