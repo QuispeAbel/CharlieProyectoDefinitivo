@@ -181,6 +181,7 @@ public class CharlieNivel extends JGame {
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
         marcador.display(g);
+        marcador.draw(g);
     }
 
     public void gameShutdown() {

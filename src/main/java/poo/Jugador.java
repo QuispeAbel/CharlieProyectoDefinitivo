@@ -5,6 +5,11 @@ public class Jugador {
     int número = 0;
 
     Jugador() {
+        número++;
+    }
+
+    public int getNúmero(){
+        return número;
     }
 
     public int getPuntos() {
