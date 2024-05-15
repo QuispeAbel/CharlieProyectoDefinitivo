@@ -134,6 +134,11 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         if (e.getSource() == jugarButton) {
             lanzar(Juegoseleccionado);
         }
+
+        if (e.getSource() == resetButton) {
+            Confvid.resetConfiguracion();
+        }
+
     }
 
     public void lanzar(int JuegoSel) {
