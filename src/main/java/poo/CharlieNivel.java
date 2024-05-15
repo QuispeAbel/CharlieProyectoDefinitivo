@@ -162,6 +162,7 @@ public class CharlieNivel extends JGame {
 
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
+        g.setFont(new Font("Arial", Font.BOLD, 70));
         marcador.display(g);
         marcador.draw(g);
     }
