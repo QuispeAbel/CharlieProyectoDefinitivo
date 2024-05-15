@@ -30,7 +30,7 @@ public class CharlieNivel extends JGame {
     Fondo fondo;
     Personaje heroe;
     ObjetoGrafico tarima;
-    ObjetoGrafico calderass = new ObjetoGrafico("imagenes/caldera1.png");
+    ObjetoGrafico calderass;
     int espacioEntreCalderas = 800;
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
@@ -59,6 +59,8 @@ public class CharlieNivel extends JGame {
         Mundo m = Mundo.getInstance();
         heroe = new Personaje("imagenes/squareImage.png");
         heroe.setPosicion(320.0, 380.0);
+
+        calderass = new ObjetoGrafico("imagenes/caldera1.png");
 
         cam = new Camara(0, 0);
 
