@@ -2,8 +2,6 @@ package poo;
 
 import java.awt.Graphics2D;
 
-import javafx.scene.text.Font;
-
 import java.awt.font.*;
 
 import java.awt.Color; // Import java.awt.Color for use with Graphics2D
