@@ -117,32 +117,30 @@ public class Pong extends JGame {
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25 && !paleta1.intersects(pelota)) // agregué
-                                                                                                             // que no
-                                                                                                             // haya
-                                                                                                             // llegado
-                                                                                                             // a su
-                                                                                                             // límite
+            if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) // agregué
+                                                                              // que no
+                                                                              // haya
+                                                                              // llegado
+                                                                              // a su
+                                                                              // límite
                 // superior
                 paleta1.moverPaletaarriba(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100
-                    && !paleta1.intersects(pelota)) // agregué que no haya
+            if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) // agregué que no haya
                 // llegado a su límite
                 // inferior
                 paleta1.moverPaletabajo(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25 && !paleta2.intersects(pelota)) // agregué
-                                                                                                              // que no
-                                                                                                              // haya
-                                                                                                              // llegado
-                                                                                                              // a su
+            if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) // agregué
+                                                                               // que no
+                                                                               // haya
+                                                                               // llegado
+                                                                               // a su
                 // límite
                 // superior
                 paleta2.moverPaletaarriba(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100
-                    && !paleta2.intersects(pelota)) // agregué que no haya
+            if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) // agregué que no haya
                 // llegado a su límite
                 // inferior
                 paleta2.moverPaletabajo(delta);
