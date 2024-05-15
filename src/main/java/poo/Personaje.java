@@ -36,13 +36,13 @@ public class Personaje extends ObjetoGrafico {
 
 	public final int POSICION_Y_PISO = 310;
 
-	public Personaje(String filename) {
-		super(filename);
+	public Personaje(String filename, double x, double y) {
+		super(filename,(int) x, (int) y);
 	}
 
 	public void jump() {
 		if (onGround) {
-			velocityY = -330;
+			velocityY = -400;
 			onGround = false;
 		}
 	}
@@ -60,14 +60,12 @@ public class Personaje extends ObjetoGrafico {
 		direccionAngulo = -1;
 	}
 
-	public void right() {
+	public void left(double despazamiento) {
+		this.setX(this.getX() + despazamiento);
+	}
 
-		velocityX = 4.0;
-
-		direccionActual = DIRECCION_DERECHA;
-		estadoActual = ESTADO_CAMINANDO;
-
-		direccionAngulo = 1;
+	public void right(double despazamiento) {
+		this.setX(this.getX() - despazamiento);
 	}
 
 	public void update(double delta) {
@@ -114,6 +112,12 @@ public class Personaje extends ObjetoGrafico {
 		g2.drawImage(imagen, (int) this.getX(), (int) this.getY(), null);
 
 		g2.setTransform(old);
+
+		g2.fillRect(this.x, this.y, this.width, this.height);
 	}
+
+	public Rectangle getColiton() {
+        return this;
+    }
 
 }

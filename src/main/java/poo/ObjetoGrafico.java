@@ -39,6 +39,18 @@ class ObjetoGrafico extends Rectangle {
         }
     }
 
+    public ObjetoGrafico(String filename, int x, int y, int weight, int height) {
+        try {
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            this.x = x;
+            this.y = y;
+            this.width = weight;
+            this.height = height;
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public ObjetoGrafico(String filename) {
         try {
             this.imagen = ImageIO.read(getClass().getResource(filename));

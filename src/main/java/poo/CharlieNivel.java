@@ -4,6 +4,9 @@ import com.entropyinteractive.*;
 
 import java.awt.*;
 import java.awt.event.*; //eventos
+import java.awt.Rectangle;
+//import java.awt.image.*; //imagenes
+//import javax.imageio.*; //imagenes
 
 import java.util.*;
 import java.text.*;
@@ -19,10 +22,12 @@ public class CharlieNivel extends JGame {
     Marcador_Puntaje marcador;
     Personaje heroe;
     ObjetoGrafico tarima;
-    ObjetoGrafico calderass;
+    Caldera calderass;
     int espacioEntreCalderas = 800;
     Jugador j1;
     Jugador j2;
+    boolean gameover = false;
+    int cont = 0;
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
     private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
@@ -30,7 +35,7 @@ public class CharlieNivel extends JGame {
 
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
-    final double HEROE_DESPLAZAMIENTO = 300.0;
+    final double HEROE_DESPLAZAMIENTO = 250.0;
 
     public static void main(String[] args) {
 
@@ -45,18 +50,16 @@ public class CharlieNivel extends JGame {
 
     }
 
-
-
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/squareImage.png");
+        heroe = new Personaje("imagenes/squareImage.png", getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new ObjetoGrafico("imagenes/caldera1.png");
+        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 345);
 
         cam = new Camara(0, 0);
 
@@ -70,20 +73,23 @@ public class CharlieNivel extends JGame {
 
     }
 
-
-
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-
-            heroe.setX(heroe.getX() - HEROE_DESPLAZAMIENTO * delta);
+            /// shipX -= NAVE_DESPLAZAMIENTO * delta;
+            if (!gameover)
+                heroe.right(HEROE_DESPLAZAMIENTO * delta);
+            else
+                heroe.quieto();
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-
-            heroe.setX(heroe.getX() + HEROE_DESPLAZAMIENTO * delta);
+            // shipX += NAVE_DESPLAZAMIENTO * delta;
+            if (!gameover)
+                heroe.left(HEROE_DESPLAZAMIENTO * delta);
+            heroe.quieto();
         }
         /*
          * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
@@ -104,7 +110,10 @@ public class CharlieNivel extends JGame {
             }
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                heroe.jump();
+                if (!gameover)
+                    heroe.jump();
+                else
+                    heroe.quieto();
             }
 
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
@@ -123,18 +132,21 @@ public class CharlieNivel extends JGame {
         cam.seguirPersonaje(heroe); /// la camara sigue al Personaje
 
         long currentTime = System.currentTimeMillis();
-        if (currentTime - lastSpawnTime > spawnInterval) {
-            // Reinicia la posición del objeto al borde derecho de la pantalla
-            arito.spawn(heroe.getX() + offsetSpawnX);
+        if (!gameover) {
+            if (currentTime - lastSpawnTime > spawnInterval) {
+                // Reinicia la posición del objeto al borde derecho de la pantalla
+                arito.spawn(heroe.getX() + offsetSpawnX);
 
-            calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
-            // Actualizar el tiempo del último spawn
-            lastSpawnTime = currentTime;
+                calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
+                // Actualizar el tiempo del último spawn
+                lastSpawnTime = currentTime;
+                cont++;
+            }
+            if (heroe.intersects(calderass))
+                gameover = true;
         }
 
     }
-
-
 
     public void gameDraw(Graphics2D g) {
 
@@ -164,11 +176,11 @@ public class CharlieNivel extends JGame {
 
         marcador.display(g);
 
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.setColor(Color.WHITE);
-        marcador.draw(g);
-
-
+        if (gameover) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
+            g.drawString("GAME OVER!", 100, 250);
+        }
     }
 
     public void gameShutdown() {
