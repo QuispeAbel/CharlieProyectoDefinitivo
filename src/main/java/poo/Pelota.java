@@ -15,16 +15,11 @@ public class Pelota extends ObjetoGrafico {
 
     public Pelota(String filename, double x, double y) {
         super(filename, (int) x, (int) y);
-        // rectangulo = new Rectangle((int) x - getWidthIm() / 2, (int) y -
-        // getHeightIm(), getWidthIm(), getHeightIm());
-        // setPosicion(x, y);
-        // rectangulo.getBounds();
     }
 
     public void moverPelota(int maxX, int maxY, boolean gameover) {
         super.setX(getX() + velocidadPelotaX);
         super.setY(getY() + velocidadPelotaY);
-        // rectangulo.setLocation((int) getX(), (int) getY());
 
         if (getY() >= maxY - 30) {
             velocidadPelotaY = -velocidadPelotaY;
@@ -63,6 +58,10 @@ public class Pelota extends ObjetoGrafico {
 
     public void invertirVelX() {
         velocidadPelotaX = -velocidadPelotaX;
+    }
+
+    public void invertirVelY() {
+        velocidadPelotaY = -velocidadPelotaY;
     }
 
     public void detenerPelota() {
