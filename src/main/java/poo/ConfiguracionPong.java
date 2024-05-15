@@ -5,9 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//import javafx.applicaton.Application;
-
-public class ConfiguracionPong extends JPanel implements ActionListener {
+public class ConfiguracionPong extends ConfiguracionVideoJuegos {
     protected JCheckBox sonidoCheckBox;
     protected JComboBox<String> pistaMusicalComboBox, personajeComboBox, ModoDeJuegoComboBox, personaje2ComboBox,
             TeclasJ1ComboBoxBajar, TeclasJ1ComboBoxSubir, TeclasJ2ComboBoxSubir, TeclasJ2ComboBoxBajar;
@@ -147,6 +145,34 @@ public class ConfiguracionPong extends JPanel implements ActionListener {
         personaje2ComboBox.setSelectedIndex(0);
 
         JOptionPane.showMessageDialog(this, "Configuración reseteada");
+    }
+
+    public String SkinJ1() {
+        String direccion = "imagenes/paleta.jpg";
+
+        if (personajeComboBox.getSelectedItem() == "Brazil") {
+            direccion = "imagenes/Brasil.jpg";
+        }
+
+        if (personajeComboBox.getSelectedItem() == "Argentina") {
+            direccion = "imagenes/Argentina.jpg";
+        }
+
+        return direccion;
+    }
+
+    public String SkinJ2() {
+        String direccion = "imagenes/paleta.jpg";
+
+        if (personaje2ComboBox.getSelectedItem() == "Brazil") {
+            direccion = "imagenes/Brasil.jpg";
+        }
+
+        if (personaje2ComboBox.getSelectedItem() == "Argentina") {
+            direccion = "imagenes/Argentina.jpg";
+        }
+
+        return direccion;
     }
 
     public static void main(String[] args) {

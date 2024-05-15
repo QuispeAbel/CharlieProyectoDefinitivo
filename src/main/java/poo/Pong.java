@@ -28,7 +28,8 @@ public class Pong extends JGame {
     final double velocidadPaleta = 500.0; // Velocidad Pelota
     BufferedImage img_fondo = null; // Crear Imágen
     String img_pelota;
-    String img_paleta;
+    String img_paleta1;
+    String img_paleta2;
 
     boolean gameover = false;
 
@@ -48,12 +49,13 @@ public class Pong extends JGame {
 
     }
 
-    public Pong(String img_pelota, String img_paleta) {
+    public Pong(String img_pelota, String img_paleta1, String img_paleta2) {
 
         super("Pong", 1240, 720);
 
         this.img_pelota = img_pelota;
-        this.img_paleta = img_paleta;
+        this.img_paleta1 = img_paleta1;
+        this.img_paleta2 = img_paleta2;
 
         System.out.println(appProperties.stringPropertyNames());
 
@@ -65,8 +67,8 @@ public class Pong extends JGame {
 
             img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
 
-            paleta1 = new Paleta(img_paleta, 19, getHeight() / 2);
-            paleta2 = new Paleta(img_paleta, getWidth() - 19, getHeight() / 2);
+            paleta1 = new Paleta(img_paleta1, 19, getHeight() / 2);
+            paleta2 = new Paleta(img_paleta2, getWidth() - 19, getHeight() / 2);
 
             pelota = new Pelota(img_pelota, getWidth() / 2, getHeight() / 2);
 
