@@ -66,7 +66,9 @@ public class Pong extends JGame {
         try {
             img_pelota = "imagenes/pelota.jpg";
             img_paleta = "imagenes/paleta.jpg";
-            img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
+            img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));    
+
+
 
             paleta1 = new Paleta(img_paleta, 19, getHeight() / 2);
             paleta2 = new Paleta(img_paleta, getWidth() - 19, getHeight() / 2);
@@ -117,30 +119,32 @@ public class Pong extends JGame {
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) // agregué
-                                                                              // que no
-                                                                              // haya
-                                                                              // llegado
-                                                                              // a su
-                                                                              // límite
+            if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25 && !paleta1.intersects(pelota)) // agregué
+                                                                                                             // que no
+                                                                                                             // haya
+                                                                                                             // llegado
+                                                                                                             // a su
+                                                                                                             // límite
                 // superior
                 paleta1.moverPaletaarriba(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) // agregué que no haya
+            if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100
+                    && !paleta1.intersects(pelota)) // agregué que no haya
                 // llegado a su límite
                 // inferior
                 paleta1.moverPaletabajo(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) // agregué
-                                                                               // que no
-                                                                               // haya
-                                                                               // llegado
-                                                                               // a su
+            if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25 && !paleta2.intersects(pelota)) // agregué
+                                                                                                              // que no
+                                                                                                              // haya
+                                                                                                              // llegado
+                                                                                                              // a su
                 // límite
                 // superior
                 paleta2.moverPaletaarriba(delta);
 
-            if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) // agregué que no haya
+            if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100
+                    && !paleta2.intersects(pelota)) // agregué que no haya
                 // llegado a su límite
                 // inferior
                 paleta2.moverPaletabajo(delta);
@@ -179,7 +183,7 @@ public class Pong extends JGame {
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
         g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
 
-        g.setFont(new Font("Arial", Font.BOLD, 70));
+        g.setFont(new Font("PressStart2P-Regular.ttf", Font.PLAIN, 70));
         g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 100, 100);
         g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 50, 100);
 
