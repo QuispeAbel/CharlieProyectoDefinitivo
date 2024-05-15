@@ -46,16 +46,14 @@ public class Pong extends JGame {
 
     public static void main(String[] args) {
 
-        /*
-         * Pong game = new Pong();
-         * game.run(1.0 / 60.0);
-         * System.exit(0);
-         */
     }
 
-    public Pong() {
+    public Pong(String img_pelota, String img_paleta) {
 
         super("Pong", 1240, 720);
+
+        this.img_pelota = img_pelota;
+        this.img_paleta = img_paleta;
 
         System.out.println(appProperties.stringPropertyNames());
 
@@ -64,8 +62,7 @@ public class Pong extends JGame {
     public void gameStartup() {
 
         try {
-            img_pelota = "imagenes/pelota.jpg";
-            img_paleta = "imagenes/paleta.jpg";
+
             img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
 
             paleta1 = new Paleta(img_paleta, 19, getHeight() / 2);
