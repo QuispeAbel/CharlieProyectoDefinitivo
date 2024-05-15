@@ -34,7 +34,7 @@ public class Personaje extends ObjetoGrafico {
 
 	protected int direccionAngulo = 1;
 
-	public final int POSICION_Y_PISO = 310;
+	protected int POSICION_Y_PISO = 310;
 
 	public Personaje(String filename, double x, double y) {
 		super(filename,(int) x, (int) y);
@@ -47,18 +47,18 @@ public class Personaje extends ObjetoGrafico {
 		}
 	}
 
+	public void ganar(int y){
+		 //gravity = 10000.0;
+		 //this.setY(y);
+		 POSICION_Y_PISO= y ;
+	}
+	
 	public void quieto() {
 		estadoActual = ESTADO_QUIETO;
 		// acceleration.mult(0);
 	}
 
-	public void left() {
-		velocityX = -4.0;
-		direccionActual = DIRECCION_IZQUIERDA;
-
-		estadoActual = ESTADO_CAMINANDO;
-		direccionAngulo = -1;
-	}
+	
 
 	public void left(double despazamiento) {
 		this.setX(this.getX() + despazamiento);
