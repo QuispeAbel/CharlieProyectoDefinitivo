@@ -46,9 +46,11 @@ public class Pong extends JGame {
 
     public static void main(String[] args) {
 
-        Pong game = new Pong();
-        game.run(1.0 / 60.0);
-        System.exit(0);
+        /*
+         * Pong game = new Pong();
+         * game.run(1.0 / 60.0);
+         * System.exit(0);
+         */
     }
 
     public Pong() {
@@ -103,13 +105,15 @@ public class Pong extends JGame {
         }
 
         if (!gameover) {
-            if (paleta2.getColiton().intersects(pelota.getColiton())) { // Golpe Paleta Derecha
+            if (paleta2.intersects(pelota)) { // Golpe Paleta Derecha
                 pelota.invertirVelX();
+                pelota.invertirVelY();
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
-            if (paleta1.getColiton().intersects(pelota.getColiton())) { // Golpe Paleta Derecha
+            if (paleta1.intersects(pelota)) { // Golpe Paleta Derecha
                 pelota.invertirVelX();
+                pelota.invertirVelY();
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 

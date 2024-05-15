@@ -1,24 +1,12 @@
 package poo;
 
-/**
-Compilar
-javac -cp ".;bucleJuego.jar" DemoJuego03.java
-
-Ejecutar
-java -cp ".;bucleJuego.jar" DemoJuego03
-  */
-
 import com.entropyinteractive.*;
 
 import java.awt.*;
 import java.awt.event.*; //eventos
 
-//import java.awt.image.*; //imagenes
-//import javax.imageio.*; //imagenes
-
 import java.util.*;
 import java.text.*;
-//import java.util.List;
 
 public class CharlieNivel extends JGame {
 
@@ -60,7 +48,7 @@ public class CharlieNivel extends JGame {
 
 
     public void gameStartup() {
-        // Log.info(getClass().getSimpleName(), "Starting up game");
+
         Mundo m = Mundo.getInstance();
         heroe = new Personaje("imagenes/squareImage.png");
         heroe.setPosicion(320.0, 380.0);
@@ -79,7 +67,6 @@ public class CharlieNivel extends JGame {
         heroe.quieto();
 
         tarima = new ObjetoGrafico("imagenes/tarima.png", 8100, 327);
-        // tarima.setPosicion(8100, 327);
 
     }
 
@@ -90,12 +77,12 @@ public class CharlieNivel extends JGame {
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-            /// shipX -= NAVE_DESPLAZAMIENTO * delta;
+
             heroe.setX(heroe.getX() - HEROE_DESPLAZAMIENTO * delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            // shipX += NAVE_DESPLAZAMIENTO * delta;
+
             heroe.setX(heroe.getX() + HEROE_DESPLAZAMIENTO * delta);
         }
         /*
@@ -119,12 +106,7 @@ public class CharlieNivel extends JGame {
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
                 heroe.jump();
             }
-            /*
-             * if ((event.getID() == KeyEvent.KEY_RELEASED) &&
-             * (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-             * heroe.jumpEnd();
-             * }
-             */
+
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
                 stop();
