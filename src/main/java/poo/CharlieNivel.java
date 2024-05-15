@@ -1,24 +1,18 @@
 package poo;
 
-/**
-Compilar
-javac -cp ".;bucleJuego.jar" DemoJuego03.java
-
-Ejecutar
-java -cp ".;bucleJuego.jar" DemoJuego03
-  */
-
 import com.entropyinteractive.*;
 
 import java.awt.*;
 import java.awt.event.*; //eventos
+<<<<<<< HEAD
 import java.awt.Rectangle;
 //import java.awt.image.*; //imagenes
 //import javax.imageio.*; //imagenes
+=======
+>>>>>>> 64f5a51f941b3c3c74ea93b216fd81657eeb4e4f
 
 import java.util.*;
 import java.text.*;
-//import java.util.List;
 
 public class CharlieNivel extends JGame {
 
@@ -62,7 +56,7 @@ public class CharlieNivel extends JGame {
 
 
     public void gameStartup() {
-        // Log.info(getClass().getSimpleName(), "Starting up game");
+
         Mundo m = Mundo.getInstance();
         heroe = new Personaje("imagenes/squareImage.png",getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
@@ -81,7 +75,10 @@ public class CharlieNivel extends JGame {
         heroe.quieto();
 
         tarima = new ObjetoGrafico("imagenes/tarima.png", 8100, 327);
+<<<<<<< HEAD
         // tarima.setPosicion(8100, 327)
+=======
+>>>>>>> 64f5a51f941b3c3c74ea93b216fd81657eeb4e4f
 
     }
 
@@ -91,6 +88,7 @@ public class CharlieNivel extends JGame {
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
+<<<<<<< HEAD
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
             if(!gameover)
             heroe.right(HEROE_DESPLAZAMIENTO * delta);
@@ -103,6 +101,15 @@ public class CharlieNivel extends JGame {
             if(!gameover)
             heroe.left(HEROE_DESPLAZAMIENTO * delta);
             heroe.quieto();
+=======
+
+            heroe.setX(heroe.getX() - HEROE_DESPLAZAMIENTO * delta);
+        }
+
+        if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
+
+            heroe.setX(heroe.getX() + HEROE_DESPLAZAMIENTO * delta);
+>>>>>>> 64f5a51f941b3c3c74ea93b216fd81657eeb4e4f
         }
         /*
          * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
@@ -128,12 +135,7 @@ public class CharlieNivel extends JGame {
                 else
                 heroe.quieto();
             }
-            /*
-             * if ((event.getID() == KeyEvent.KEY_RELEASED) &&
-             * (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-             * heroe.jumpEnd();
-             * }
-             */
+
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
                 stop();
@@ -197,11 +199,19 @@ public class CharlieNivel extends JGame {
 
         marcador.display(g);
 
+<<<<<<< HEAD
         if(gameover) {
 			g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 70));
 			g.drawString("GAME OVER!", 100, 250);
 		}
+=======
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setColor(Color.WHITE);
+        marcador.draw(g);
+
+
+>>>>>>> 64f5a51f941b3c3c74ea93b216fd81657eeb4e4f
     }
 
     public void gameShutdown() {

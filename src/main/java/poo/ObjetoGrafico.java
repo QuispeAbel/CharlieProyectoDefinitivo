@@ -14,7 +14,6 @@ import java.awt.Graphics2D;
 class ObjetoGrafico extends Rectangle {
 
     protected BufferedImage imagen = null;
-    // protected Point2D.Double posicion = new Point2D.Double();
 
     public void playSound(String soundFilePath) {
         try {
@@ -103,7 +102,6 @@ class ObjetoGrafico extends Rectangle {
     }
 
     public void draw(Graphics2D g) {
-
         g.drawImage(imagen, (int) this.getX() - (imagen.getWidth() / 2), (int) this.getY(), null);
     }
 

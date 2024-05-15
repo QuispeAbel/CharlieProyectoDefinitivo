@@ -1,21 +1,24 @@
 package poo;
 
-public class Jugador {
-    int Puntos = 0;
+abstract public class Jugador {
+    int PuntosTotales = 0;
     int número = 0;
 
-    Jugador() {
+    Jugador(){
+        número++;
+    }
+
+    public int getNúmero(){
+        return número;
     }
 
     public int getPuntos() {
-        return Puntos;
+        return PuntosTotales;
     }
 
     public void setPuntos(int puntos) {
-        Puntos = puntos;
+        PuntosTotales = puntos;
     }
 
-    public void sumarPunto() {
-        this.Puntos++;
-    }
+    abstract void sumarPuntos();
 }
