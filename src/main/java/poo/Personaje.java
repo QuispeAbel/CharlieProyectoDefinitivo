@@ -3,15 +3,6 @@ package poo;
 import java.awt.*;
 import java.awt.geom.*;
 
-//import java.awt.image.*;
-//import javax.imageio.*;
-//import java.io.*;
-//import java.net.*; //nuevo para sonido
-
-//import processing.core.*;
-///   http://jsfiddle.net/LyM87/
-/// https://stackoverflow.com/questions/37758061/rotate-a-buffered-image-in-java/37758533
-
 public class Personaje extends ObjetoGrafico {
 	private boolean onGround = false;
 	// private boolean saltando = false;
@@ -34,10 +25,12 @@ public class Personaje extends ObjetoGrafico {
 
 	protected int direccionAngulo = 1;
 
+	protected Rectangle hitbox;
+
 	public final int POSICION_Y_PISO = 310;
 
 	public Personaje(String filename, double x, double y) {
-		super(filename,(int) x, (int) y);
+		super(filename, (int) x, (int) y);
 	}
 
 	public void jump() {
@@ -99,7 +92,6 @@ public class Personaje extends ObjetoGrafico {
 
 	}
 
-
 	public void draw(Graphics2D g2) {
 		/* Redefinicion de Display para poder hacer la rotacion cuando salta */
 
@@ -117,7 +109,7 @@ public class Personaje extends ObjetoGrafico {
 	}
 
 	public Rectangle getColiton() {
-        return this;
-    }
+		return this;
+	}
 
 }

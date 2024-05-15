@@ -53,7 +53,7 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/squareImage.png", getHeight(), getWidth());
+        heroe = new Personaje("imagenes/CharlieCorriendo.gif", getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
