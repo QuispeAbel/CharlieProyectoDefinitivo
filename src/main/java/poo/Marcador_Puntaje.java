@@ -14,6 +14,6 @@ public class Marcador_Puntaje extends ObjetoGrafico {
     }
 
     public void draw(Graphics2D g){
-        g.drawString(Integer.toString(nro_jugador_actual)+"P", 30, 70);
+        g.drawString(Integer.toString(nro_jugador_actual)+" P -", 40, 70);
     }
 }

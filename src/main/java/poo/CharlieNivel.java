@@ -164,9 +164,10 @@ public class CharlieNivel extends JGame {
 
         marcador.display(g);
 
-        g.setFont(new Font("PressStart2P-Regular.ttf", Font.BOLD, 20));
+        g.setFont(new Font("Arial", Font.BOLD, 20));
         g.setColor(Color.WHITE);
         marcador.draw(g);
+
 
     }
 

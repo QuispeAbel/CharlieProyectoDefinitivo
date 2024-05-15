@@ -40,9 +40,9 @@ public class Pong extends JGame {
 
     Pelota pelota;
 
-    Jugador jugadorIzq = new Jugador();
+    Jugador jugadorIzq = new JugadorPong();
 
-    Jugador jugador2Der = new Jugador();
+    Jugador jugador2Der = new JugadorPong();
 
     public static void main(String[] args) {
 
@@ -62,16 +62,8 @@ public class Pong extends JGame {
     public void gameStartup() {
 
         try {
-<<<<<<< HEAD
-            img_pelota = "imagenes/pelota.jpg";
-            img_paleta = "imagenes/paleta.jpg";
-            img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));    
-
-
-=======
 
             img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
->>>>>>> af1d875558e7c04125a8e9babf2e9cd9ed3a4dc8
 
             paleta1 = new Paleta(img_paleta, 19, getHeight() / 2);
             paleta2 = new Paleta(img_paleta, getWidth() - 19, getHeight() / 2);
@@ -101,12 +93,12 @@ public class Pong extends JGame {
             pelota.invertirVelX(); // La pelota ahora sale para el otro lado de la cancha
             pelota.setPelotaFueraDer(); // se vuelve a poner falso que la pelota salio a la derecha
             pelota.setPosicion(getWidth() / 2, getHeight() / 2); // setea la posición al medio
-            jugadorIzq.sumarPunto();
+            jugadorIzq.sumarPuntos();
         } else if (pelota.getPelotaFueraIzq()) { // lo mismo que arriba con izquierda
             pelota.invertirVelX();
             pelota.setPelotaFueraIzq();
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
-            jugador2Der.sumarPunto();
+            jugador2Der.sumarPuntos();
         }
 
         if (!gameover) {
@@ -186,7 +178,7 @@ public class Pong extends JGame {
         g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
         g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
 
-        g.setFont(new Font("PressStart2P-Regular.ttf", Font.PLAIN, 70));
+        g.setFont(new Font("Font/PressStart2P-Regular.ttf", Font.BOLD, 70));
         g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 100, 100);
         g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 50, 100);
 
