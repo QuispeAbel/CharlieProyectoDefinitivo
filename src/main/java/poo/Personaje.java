@@ -40,17 +40,15 @@ public class Personaje extends ObjetoGrafico {
 		}
 	}
 
+	public void ganar(int y) {
+		// gravity = 10000.0;
+		// this.setY(y);
+		POSICION_Y_PISO = y;
+	}
+
 	public void quieto() {
 		estadoActual = ESTADO_QUIETO;
 		// acceleration.mult(0);
-	}
-
-	public void left() {
-		velocityX = -4.0;
-		direccionActual = DIRECCION_IZQUIERDA;
-
-		estadoActual = ESTADO_CAMINANDO;
-		direccionAngulo = -1;
 	}
 
 	public void left(double despazamiento) {
