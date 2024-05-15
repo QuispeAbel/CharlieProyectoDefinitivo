@@ -7,23 +7,24 @@ public class Pelota extends ObjetoGrafico {
     private int velocidadPelotaY = 5;
     private boolean pelotaFueraIzq = false;
     private boolean pelotaFueraDer = false;
-    private Rectangle rectangulo;
+    // private Rectangle rectangulo;
 
     public Pelota() {
         super();
     }
 
     public Pelota(String filename, double x, double y) {
-        super(filename);
-        rectangulo = new Rectangle((int) x - getWidth() / 2, (int) y - getHeight(), getWidth(), getHeight());
-        setPosicion(x, y);
+        super(filename, (int) x, (int) y);
+        // rectangulo = new Rectangle((int) x - getWidthIm() / 2, (int) y -
+        // getHeightIm(), getWidthIm(), getHeightIm());
+        // setPosicion(x, y);
         // rectangulo.getBounds();
     }
 
     public void moverPelota(int maxX, int maxY, boolean gameover) {
         super.setX(getX() + velocidadPelotaX);
         super.setY(getY() + velocidadPelotaY);
-        rectangulo.setLocation((int) getX(), (int) getY());
+        // rectangulo.setLocation((int) getX(), (int) getY());
 
         if (getY() >= maxY - 30) {
             velocidadPelotaY = -velocidadPelotaY;
@@ -70,7 +71,7 @@ public class Pelota extends ObjetoGrafico {
     }
 
     public Rectangle getColiton() {
-        return rectangulo;
+        return this;
     }
 
 }

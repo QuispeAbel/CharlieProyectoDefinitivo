@@ -1,5 +1,6 @@
 package poo;
 
+import java.awt.*;
 import java.awt.image.*; //imagenes
 import java.io.*;
 import javax.imageio.*;
@@ -9,12 +10,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import java.awt.Graphics2D;
-import java.awt.geom.*; //Point2d
 
-class ObjetoGrafico {
+class ObjetoGrafico extends Rectangle {
 
     protected BufferedImage imagen = null;
-    protected Point2D.Double posicion = new Point2D.Double();
+    // protected Point2D.Double posicion = new Point2D.Double();
 
     public void playSound(String soundFilePath) {
         try {
@@ -28,10 +28,21 @@ class ObjetoGrafico {
         }
     }
 
+    public ObjetoGrafico(String filename, int x, int y) {
+        try {
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            this.x = x;
+            this.y = y;
+            this.width = getWidthIm();
+            this.height = getHeightIm();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public ObjetoGrafico(String filename) {
         try {
             this.imagen = ImageIO.read(getClass().getResource(filename));
-
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -41,11 +52,11 @@ class ObjetoGrafico {
 
     }
 
-    public int getHeight() {
+    public int getHeightIm() {
         return imagen.getHeight();
     }
 
-    public int getWidth() {
+    public int getWidthIm() {
         return imagen.getWidth();
     }
 
@@ -55,23 +66,24 @@ class ObjetoGrafico {
     }
 
     public void setPosicion(double x, double y) {
-        posicion.setLocation(x, y);
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
     public void setX(double x) {
-        posicion.x = x;
+        this.x = (int) x;
     }
 
     public void setY(double y) {
-        posicion.y = y;
+        this.y = (int) y;
     }
 
     public double getX() {
-        return posicion.getX();
+        return this.x;
     }
 
     public double getY() {
-        return posicion.getY();
+        return this.y;
     }
 
     public void update(double delta) {
@@ -80,7 +92,7 @@ class ObjetoGrafico {
 
     public void draw(Graphics2D g) {
 
-        g.drawImage(imagen, (int) posicion.getX() - (imagen.getWidth() / 2), (int) posicion.getY(), null);
+        g.drawImage(imagen, (int) this.getX() - (imagen.getWidth() / 2), (int) this.getY(), null);
     }
 
     public void display(Graphics2D g2) {

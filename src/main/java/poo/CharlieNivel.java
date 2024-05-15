@@ -67,11 +67,11 @@ public class CharlieNivel extends JGame {
         cam.setRegionVisible(640, 480);
 
         fondo = new Fondo("imagenes/fondox84.png");
-        m.setLimitesMundo(fondo.getWidth(), fondo.getHeight());
+        m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
         heroe.quieto();
 
-        tarima = new ObjetoGrafico("imagenes/tarima.png");
-        tarima.setPosicion(8100, 327);
+        tarima = new ObjetoGrafico("imagenes/tarima.png", 8100, 327);
+        // tarima.setPosicion(8100, 327);
 
     }
 
