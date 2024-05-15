@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 public class aro {
     private MedioAro AroDelante;
     private MedioAro AroDetras;
-    private double altura_AroDelante = 190;
-    private double altura_AroDetras = 200;
+    private double altura_AroDelante = 183;
+    private double altura_AroDetras = 202;
 
     aro(String filename, String filename2) {
         AroDelante = new MedioAro(filename, altura_AroDelante);
@@ -15,7 +15,7 @@ public class aro {
 
     public void spawn(double xheroe) {
         AroDelante.ubicaAropost(xheroe);
-        AroDetras.ubicaAropost(xheroe + 20);
+        AroDetras.ubicaAropost(xheroe + 30);
     }
 
     public void MovimientoAro(double delta) {

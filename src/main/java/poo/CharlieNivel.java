@@ -84,7 +84,7 @@ public class CharlieNivel extends JGame {
     }
 
 
-    
+
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
 
