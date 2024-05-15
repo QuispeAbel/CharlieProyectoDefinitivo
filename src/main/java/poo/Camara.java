@@ -53,6 +53,14 @@ public class Camara {
 
 	}
 
+	public double getResY() {
+		return resY;
+	}
+
+	public void setResY(double resY) {
+		this.resY = resY;
+	}
+
 	/////
 	/*
 	 * init

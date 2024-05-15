@@ -3,10 +3,10 @@ package poo;
 import java.awt.*;
 import java.awt.geom.*;
 
-import java.awt.image.*;
-import javax.imageio.*;
-import java.io.*;
-import java.net.*; //nuevo para sonido
+//import java.awt.image.*;
+//import javax.imageio.*;
+//import java.io.*;
+//import java.net.*; //nuevo para sonido
 
 //import processing.core.*;
 ///   http://jsfiddle.net/LyM87/
@@ -14,7 +14,7 @@ import java.net.*; //nuevo para sonido
 
 public class Personaje extends ObjetoGrafico {
 	private boolean onGround = false;
-	private boolean saltando = false;
+	// private boolean saltando = false;
 
 	final int DIRECCION_DERECHA = 0;
 	final int DIRECCION_IZQUIERDA = 1;
@@ -34,7 +34,7 @@ public class Personaje extends ObjetoGrafico {
 
 	protected int direccionAngulo = 1;
 
-	public final int POSICION_Y_PISO = 360;
+	public final int POSICION_Y_PISO = 300;
 
 	public Personaje(String filename) {
 		super(filename);

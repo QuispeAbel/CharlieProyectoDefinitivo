@@ -13,11 +13,12 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 
-import java.awt.image.*; //imagenes
-import javax.imageio.*; //imagenes
+//import java.awt.image.*; //imagenes
+//import javax.imageio.*; //imagenes
 
 import java.util.*;
 import java.text.*;
+//import java.util.List;
 
 public class CharlieNivel extends JGame {
 
@@ -28,7 +29,17 @@ public class CharlieNivel extends JGame {
     Camara cam;
     Fondo fondo;
     Personaje heroe;
-    final double HEROE_DESPLAZAMIENTO = 150.0;
+    ObjetoGrafico tarima;
+    ObjetoGrafico calderass;
+    int espacioEntreCalderas = 800;
+
+    private long lastSpawnTime; // Guarda el tiempo del último spawn
+    private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
+    aro arito = new aro("imagenes/aroMitad2.png", "imagenes/aroMitad1.png");
+
+    private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
+
+    final double HEROE_DESPLAZAMIENTO = 300.0;
 
     public static void main(String[] args) {
 
@@ -46,8 +57,10 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
         // Log.info(getClass().getSimpleName(), "Starting up game");
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/geometry-01.png");
-        heroe.setPosicion(320.0, 240.0);
+        heroe = new Personaje("imagenes/squareImage.png");
+        heroe.setPosicion(320.0, 380.0);
+
+        calderass = new ObjetoGrafico("imagenes/caldera1.png");
 
         cam = new Camara(0, 0);
 
@@ -56,6 +69,9 @@ public class CharlieNivel extends JGame {
         fondo = new Fondo("imagenes/fondox84.png");
         m.setLimitesMundo(fondo.getWidth(), fondo.getHeight());
         heroe.quieto();
+
+        tarima = new ObjetoGrafico("imagenes/tarima.png");
+        tarima.setPosicion(8100, 327);
 
     }
 
@@ -107,9 +123,22 @@ public class CharlieNivel extends JGame {
 
         heroe.update(delta);
 
+        // Desplazar el aro hacia la izquierda
+        arito.MovimientoAro(delta);
+
         // heroe.applyForce(gravedad);
 
         cam.seguirPersonaje(heroe); /// la camara sigue al Personaje
+
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastSpawnTime > spawnInterval) {
+            // Reinicia la posición del objeto al borde derecho de la pantalla
+            arito.spawn(heroe.getX() + offsetSpawnX);
+
+            calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
+            // Actualizar el tiempo del último spawn
+            lastSpawnTime = currentTime;
+        }
 
     }
 
@@ -123,7 +152,15 @@ public class CharlieNivel extends JGame {
 
         fondo.display(g);
         m.display(g);
+        tarima.display(g);
+
+        calderass.display(g);
+
+        arito.displayDelante(g);
+
         heroe.display(g);
+
+        arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -136,3 +173,12 @@ public class CharlieNivel extends JGame {
         // Log.info(getClass().getSimpleName(), "Shutting down game");
     }
 }
+
+/*
+ * private void reiniciarObjeto() {
+ * // Establece la posición de reinicio del objeto delante del personaje
+ * double posX = heroe.getX() + offsetSpawnX;
+ * double posY = y; // Define la posición adecuada en Y según sea necesario
+ * objetoEnJuego.setPosicion(posX, posY);
+ * }
+ */
