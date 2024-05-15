@@ -46,9 +46,11 @@ public class Pong extends JGame {
 
     public static void main(String[] args) {
 
-        Pong game = new Pong();
-        game.run(1.0 / 60.0);
-        System.exit(0);
+        /*
+         * Pong game = new Pong();
+         * game.run(1.0 / 60.0);
+         * System.exit(0);
+         */
     }
 
     public Pong() {

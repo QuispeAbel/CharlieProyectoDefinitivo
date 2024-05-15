@@ -145,23 +145,10 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
         personajeComboBox = new JComboBox<>(personajes);
         personajeComboBox.setBackground(Color.WHITE);
         add(personajeComboBox);
-
-        guardarButton = new JButton("Jugar");
-        guardarButton.setBackground(ColorFondo);
-        guardarButton.setForeground(Color.WHITE);
-        guardarButton.addActionListener(this);
-        add(guardarButton);
-
-        resetButton = new JButton("Reset");
-        resetButton.setBackground(ColorFondo);
-        resetButton.setForeground(Color.WHITE);
-        resetButton.addActionListener(e -> resetConfiguracion());
-        add(resetButton);
-
     }
 
-    public void juegoSeleccionado(int numJuego){
-            juegoSel = numJuego;
+    public void juegoSeleccionado(int numJuego) {
+        juegoSel = numJuego;
     }
 
     private void resetConfiguracion() {
@@ -189,7 +176,7 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == guardarButton && juegoSel == 1){
+        if (e.getSource() == guardarButton && juegoSel == 1) {
             juego = new Pong();
 
             t = new Thread() {
@@ -201,16 +188,15 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
             t.start();
         }
 
-
-        if (e.getSource() == guardarButton && juegoSel == 2){
+        if (e.getSource() == guardarButton && juegoSel == 2) {
             juego = new CharlieNivel();
 
             t = new Thread() {
                 public void run() {
                     juego.run(1.0 / 60.0);
                 }
-             };
-             
+            };
+
             t.start();
         }
     }
