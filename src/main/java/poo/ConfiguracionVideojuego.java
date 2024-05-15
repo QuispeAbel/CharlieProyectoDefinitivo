@@ -175,29 +175,5 @@ public class ConfiguracionVideojuego extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == guardarButton && juegoSel == 1) {
-            juego = new Pong();
-
-            t = new Thread() {
-                public void run() {
-                    juego.run(1.0 / 60.0);
-                }
-            };
-
-            t.start();
-        }
-
-        if (e.getSource() == guardarButton && juegoSel == 2) {
-            juego = new CharlieNivel();
-
-            t = new Thread() {
-                public void run() {
-                    juego.run(1.0 / 60.0);
-                }
-            };
-
-            t.start();
-        }
     }
 }

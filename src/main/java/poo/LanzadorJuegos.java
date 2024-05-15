@@ -138,7 +138,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
 
     public void lanzar(int JuegoSel) {
         if (JuegoSel == 1) {
-            Pong juego = new Pong();
+            Pong juego = new Pong("imagenes/pelota.jpg", "imagenes/paleta.jpg");
 
             t = new Thread() {
                 public void run() {
