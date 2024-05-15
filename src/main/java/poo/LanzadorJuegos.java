@@ -132,7 +132,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == jugarButton) {
-            Confvid.juegoSeleccionado(Juegoseleccionado);
+            lanzar(Juegoseleccionado);
         }
     }
 
