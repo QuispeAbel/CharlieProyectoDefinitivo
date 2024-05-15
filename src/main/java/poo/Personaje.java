@@ -38,17 +38,13 @@ public class Personaje extends ObjetoGrafico {
 
 	public Personaje(String filename) {
 		super(filename);
-
 	}
 
 	public void jump() {
-
 		if (onGround) {
 			velocityY = -350;
 			onGround = false;
-
 		}
-
 	}
 
 	public void quieto() {
