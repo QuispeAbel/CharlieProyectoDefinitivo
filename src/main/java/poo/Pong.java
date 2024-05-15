@@ -108,7 +108,7 @@ public class Pong extends JGame {
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
-            if (paleta1.getColiton().intersects(pelota.getColiton())) { // Golpe Paleta Derecha
+            if (paleta1.intersects(pelota)) { // Golpe Paleta Derecha
                 pelota.invertirVelX();
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
