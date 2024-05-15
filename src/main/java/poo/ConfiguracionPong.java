@@ -7,7 +7,8 @@ import java.awt.event.*;
 
 public class ConfiguracionPong extends ConfiguracionVideoJuegos {
     protected JCheckBox sonidoCheckBox;
-    protected JComboBox<String> pistaMusicalComboBox, personajeComboBox, ModoDeJuegoComboBox, personaje2ComboBox,
+    protected JComboBox<String> PelotaComboBox, pistaMusicalComboBox, personajeComboBox, ModoDeJuegoComboBox,
+            personaje2ComboBox,
             TeclasJ1ComboBoxBajar, TeclasJ1ComboBoxSubir, TeclasJ2ComboBoxSubir, TeclasJ2ComboBoxBajar;
     protected JTextField teclaEfectosTextField, teclaMusicaTextField, teclaPausaTextField,
             teclaIzquierdaTextField, teclaDerechaTextField, teclaArribaTextField,
@@ -126,6 +127,15 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         personaje2ComboBox = new JComboBox<>(personajes);
         personaje2ComboBox.setBackground(Color.WHITE);
         add(personaje2ComboBox);
+
+        String[] pelota = { "Original", "Ovni", "Mario" };
+        JLabel selecPelota = new JLabel("Skin Plota");
+        selecPelota.setForeground(Color.WHITE);
+        add(selecPelota);
+        PelotaComboBox = new JComboBox<>(pelota);
+        PelotaComboBox.setBackground(Color.WHITE);
+        add(PelotaComboBox);
+
     }
 
     public void resetConfiguracion() {
@@ -144,6 +154,8 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         personajeComboBox.setSelectedIndex(0);
         personaje2ComboBox.setSelectedIndex(0);
 
+        PelotaComboBox.setSelectedIndex(0);
+
         JOptionPane.showMessageDialog(this, "Configuración reseteada");
     }
 
@@ -156,6 +168,20 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
 
         if (personajeComboBox.getSelectedItem() == "Argentina") {
             direccion = "imagenes/Argentina.jpg";
+        }
+
+        return direccion;
+    }
+
+    public String SkinPelota() {
+        String direccion = "imagenes/pelota.jpg";
+
+        if (PelotaComboBox.getSelectedItem() == "Ovni") {
+            direccion = "imagenes/ufo.png";
+        }
+
+        if (PelotaComboBox.getSelectedItem() == "Mario") {
+            direccion = "imagenes/icons8-super-mario-48.png";
         }
 
         return direccion;
