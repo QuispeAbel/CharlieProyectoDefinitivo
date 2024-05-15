@@ -2,8 +2,14 @@ package poo;
 
 public class Jugador {
     int Puntos = 0;
+    int número = 0;
 
     Jugador() {
+        número++;
+    }
+
+    public int getNúmero(){
+        return número;
     }
 
     public int getPuntos() {

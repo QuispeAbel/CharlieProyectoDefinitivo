@@ -34,21 +34,17 @@ public class Personaje extends ObjetoGrafico {
 
 	protected int direccionAngulo = 1;
 
-	public final int POSICION_Y_PISO = 300;
+	public final int POSICION_Y_PISO = 310;
 
 	public Personaje(String filename) {
 		super(filename);
-
 	}
 
 	public void jump() {
-
 		if (onGround) {
-			velocityY = -350;
+			velocityY = -330;
 			onGround = false;
-
 		}
-
 	}
 
 	public void quieto() {
@@ -102,19 +98,9 @@ public class Personaje extends ObjetoGrafico {
 			angulo = 0;
 			/* ya toco el piso */
 		}
-		if (velocityY != 0.0) {
-			// mientras este saltando
-			this.rotarImagenGrados(10 * direccionAngulo);
-		}
 
 	}
 
-	private void rotarImagenGrados(double ang) {
-
-		angulo = 0;
-		// double rads = Math.toRadians(angulo);
-
-	}
 
 	public void draw(Graphics2D g2) {
 		/* Redefinicion de Display para poder hacer la rotacion cuando salta */

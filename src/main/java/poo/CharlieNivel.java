@@ -16,10 +16,13 @@ public class CharlieNivel extends JGame {
 
     Camara cam;
     Fondo fondo;
+    Marcador_Puntaje marcador;
     Personaje heroe;
     ObjetoGrafico tarima;
     ObjetoGrafico calderass;
     int espacioEntreCalderas = 800;
+    Jugador j1;
+    Jugador j2;
 
     private long lastSpawnTime; // Guarda el tiempo del último spawn
     private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
@@ -42,11 +45,16 @@ public class CharlieNivel extends JGame {
 
     }
 
+
+
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
         heroe = new Personaje("imagenes/squareImage.png");
         heroe.setPosicion(320.0, 380.0);
+
+        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
+        marcador.setPosicion(4, 30);
 
         calderass = new ObjetoGrafico("imagenes/caldera1.png");
 
@@ -61,6 +69,8 @@ public class CharlieNivel extends JGame {
         tarima = new ObjetoGrafico("imagenes/tarima.png", 8100, 327);
 
     }
+
+
 
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
@@ -124,6 +134,8 @@ public class CharlieNivel extends JGame {
 
     }
 
+
+
     public void gameDraw(Graphics2D g) {
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -149,6 +161,9 @@ public class CharlieNivel extends JGame {
         g.setColor(Color.red);
 
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
+
+        marcador.display(g);
+        marcador.draw(g);
     }
 
     public void gameShutdown() {
