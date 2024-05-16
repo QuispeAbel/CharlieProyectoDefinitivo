@@ -2,12 +2,10 @@ package poo;
 
 import com.entropyinteractive.*;
 
-import java.awt.*;
-import java.awt.event.*; //eventos
-import java.awt.Rectangle;
 //import java.awt.image.*; //imagenes
 //import javax.imageio.*; //imagenes
-
+import java.awt.*;
+import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 
@@ -21,21 +19,20 @@ public class CharlieNivel extends JGame {
     Fondo fondo;
     Marcador_Puntaje marcador;
     Personaje heroe;
-    ObjetoGrafico tarima;
+    tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
-    int cont = 0;
-
+    boolean ganaste = false;
     private long lastSpawnTime; // Guarda el tiempo del último spawn
     private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
     aro arito = new aro("imagenes/aroMitad2.png", "imagenes/aroMitad1.png");
 
     private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
 
-    final double HEROE_DESPLAZAMIENTO = 250.0;
+    final double HEROE_DESPLAZAMIENTO = 350.0;
 
     public static void main(String[] args) {
 
@@ -53,7 +50,7 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/squareImage.png", getHeight(), getWidth());
+        heroe = new Personaje("imagenes/Charlie/CharlieCaminando4.gif", getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
@@ -69,27 +66,34 @@ public class CharlieNivel extends JGame {
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
         heroe.quieto();
 
-        tarima = new ObjetoGrafico("imagenes/tarima.png", 8100, 327);
+        tarima = new tarima("imagenes/tarima.png", 8100, 327);
 
     }
 
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
 
+        if (ganaste) {
+            heroe.ganar(230);
+            heroe.setPosicion(8100, 230.0);
+        }
+
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
-            if (!gameover)
-                heroe.right(HEROE_DESPLAZAMIENTO * delta);
-            else
+            if (gameover || ganaste)
                 heroe.quieto();
+            else
+                heroe.right(HEROE_DESPLAZAMIENTO * delta);
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // shipX += NAVE_DESPLAZAMIENTO * delta;
-            if (!gameover)
+            if (gameover || ganaste)
+                heroe.quieto();
+            else
                 heroe.left(HEROE_DESPLAZAMIENTO * delta);
-            heroe.quieto();
+
         }
         /*
          * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
@@ -110,10 +114,11 @@ public class CharlieNivel extends JGame {
             }
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                if (!gameover)
-                    heroe.jump();
-                else
+                if (gameover || ganaste)
                     heroe.quieto();
+                else
+                    heroe.jump();
+
             }
 
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
@@ -140,10 +145,12 @@ public class CharlieNivel extends JGame {
                 calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
                 // Actualizar el tiempo del último spawn
                 lastSpawnTime = currentTime;
-                cont++;
+
             }
             if (heroe.intersects(calderass))
                 gameover = true;
+            if (heroe.intersects(tarima))
+                ganaste = true;
         }
 
     }
@@ -180,6 +187,12 @@ public class CharlieNivel extends JGame {
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GAME OVER!", 100, 250);
+        }
+
+        if (ganaste) {
+            g.setColor(Color.GREEN);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
+            g.drawString("GANASTE!", 100, 250);
         }
     }
 
