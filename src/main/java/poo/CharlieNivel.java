@@ -50,7 +50,7 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/CharlieCorriendo.gif", getHeight(), getWidth());
+        heroe = new Personaje("imagenes/Charlie/CharlieCaminando4.gif", getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
@@ -81,7 +81,7 @@ public class CharlieNivel extends JGame {
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
-            if (gameover || ganaste )
+            if (gameover || ganaste)
                 heroe.quieto();
             else
                 heroe.right(HEROE_DESPLAZAMIENTO * delta);
@@ -89,11 +89,11 @@ public class CharlieNivel extends JGame {
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // shipX += NAVE_DESPLAZAMIENTO * delta;
-            if (gameover || ganaste )
-            heroe.quieto();
+            if (gameover || ganaste)
+                heroe.quieto();
             else
-            heroe.left(HEROE_DESPLAZAMIENTO * delta);
-           
+                heroe.left(HEROE_DESPLAZAMIENTO * delta);
+
         }
         /*
          * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
@@ -114,11 +114,11 @@ public class CharlieNivel extends JGame {
             }
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                if (gameover || ganaste )
+                if (gameover || ganaste)
                     heroe.quieto();
                 else
                     heroe.jump();
-                   
+
             }
 
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
@@ -145,7 +145,7 @@ public class CharlieNivel extends JGame {
                 calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
                 // Actualizar el tiempo del último spawn
                 lastSpawnTime = currentTime;
-        
+
             }
             if (heroe.intersects(calderass))
                 gameover = true;
