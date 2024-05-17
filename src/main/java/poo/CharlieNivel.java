@@ -135,9 +135,10 @@ public class CharlieNivel extends JGame {
             }
         }
 
-        if (!gameover)
+        if (!gameover) {
             leoncito.update(delta);
-        Charlie.update(delta);
+            Charlie.update(delta);
+        }
 
         // Desplazar el aro hacia la izquierda
         arito.MovimientoAro(delta);
