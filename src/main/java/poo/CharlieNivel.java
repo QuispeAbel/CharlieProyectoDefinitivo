@@ -43,7 +43,7 @@ public class CharlieNivel extends JGame {
 
     public CharlieNivel() {
         // call game constructor
-        super("DemoCamaraHeroe ", 640, 480);
+        super("DemoCamaraHeroe ", 1024, 720);
 
     }
 
@@ -62,7 +62,7 @@ public class CharlieNivel extends JGame {
 
         cam.setRegionVisible(640, 480);
 
-        fondo = new Fondo("imagenes/fondox84.png");
+        fondo = new Fondo("imagenes/FondoCharliLevel1.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
         heroe.quieto();
 
