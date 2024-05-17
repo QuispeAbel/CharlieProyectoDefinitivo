@@ -95,9 +95,10 @@ public class CharlieNivel extends JGame {
             if (gameover || ganaste) {
                 leoncito.quieto();
                 Charlie.quieto();
-            } else
+            } else {
                 leoncito.left(HEROE_DESPLAZAMIENTO * delta);
-            Charlie.left(HEROE_DESPLAZAMIENTO * delta);
+                Charlie.left(HEROE_DESPLAZAMIENTO * delta);
+            }
 
         }
         /*

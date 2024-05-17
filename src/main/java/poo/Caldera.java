@@ -1,7 +1,5 @@
 package poo;
 
-import java.awt.*;
-import java.awt.geom.*;
 import java.awt.Rectangle;
 
 public class Caldera extends obstaculo {
