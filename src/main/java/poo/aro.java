@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 public class aro {
     private MedioAro AroDelante;
     private MedioAro AroDetras;
-    private double altura_AroDelante = 183;
-    private double altura_AroDetras = 202;
+    private double altura_AroDelante = 253;
+    private double altura_AroDetras = 272;
 
     aro(String filename, String filename2) {
         AroDelante = new MedioAro(filename, altura_AroDelante);

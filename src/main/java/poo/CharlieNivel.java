@@ -18,7 +18,7 @@ public class CharlieNivel extends JGame {
     Camara cam;
     Fondo fondo;
     Marcador_Puntaje marcador;
-    Personaje heroe;
+    Leon heroe;
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
@@ -50,13 +50,13 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/squareImage.png", getHeight(), getWidth());
-        heroe.setPosicion(320.0, 380.0);
+        heroe = new Leon("imagenes/leoncito.png", 320, 575);
+        heroe.setPosicion(320.0, 575.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 345,10,10);
+        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 575,84,75);
 
         cam = new Camara(0, 0);
 
@@ -143,7 +143,7 @@ public class CharlieNivel extends JGame {
                 // Reinicia la posición del objeto al borde derecho de la pantalla
                 arito.spawn(heroe.getX() + offsetSpawnX);
 
-                calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
+                calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 553);
                 // Actualizar el tiempo del último spawn
                 lastSpawnTime = currentTime;
             }

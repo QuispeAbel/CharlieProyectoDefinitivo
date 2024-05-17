@@ -26,9 +26,8 @@ public class Personaje extends ObjetoGrafico {
 	protected int direccionAngulo = 1;
 
 	protected Rectangle hitbox;
-	
 
-	public final int POSICION_Y_PISO = 310;
+	public final int POSICION_Y_PISO = 575;
 
 	public Personaje(String filename, double x, double y) {
 		super(filename, (int) x, (int) y);
@@ -63,8 +62,8 @@ public class Personaje extends ObjetoGrafico {
 	public void update(double delta) {
 
 		velocityY += gravity;
-		setY(getY() + velocityY * delta);
-		setX(getX() + velocityX * delta);
+		this.setY(getY() + velocityY * delta);
+		this.setX(getX() + velocityX * delta);
 
 		angulo = (angulo % 360);
 
@@ -78,11 +77,11 @@ public class Personaje extends ObjetoGrafico {
 		/* Rebota contra la X=0 del mundo */
 		if ((getX()) < 0) {
 			velocityX *= -1;
-			setX(0);
+			this.setX(0);
 		}
 
 		if (getY() > POSICION_Y_PISO) {
-			setY(POSICION_Y_PISO);
+			this.setY(POSICION_Y_PISO);
 			velocityY = 0.0;
 			onGround = true;
 			angulo = 0;
@@ -110,5 +109,28 @@ public class Personaje extends ObjetoGrafico {
 	public Rectangle getColiton(){
 		return this;
 	}
+
+	public void setHitbox(int x, int y,int width, int height) {
+		hitbox=new Rectangle(x, y, width, height);
+	}
+
+	public Rectangle getHitbox(){
+		return hitbox;
+	}
+
+	public void setX(double x, int posXhitbox){
+		super.setX(x);
+		hitbox.x= (int) x + posXhitbox;
+	}
+
+	public void setY(double y, int posYhitbox){
+		super.setY(y);
+		hitbox.y= (int) y - posYhitbox;
+	}
+
+	// public void setPosicion(double x, double y){
+	// 	super.setPosicion(x, y);
+	// }
+
 
 }

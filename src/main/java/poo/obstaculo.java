@@ -12,7 +12,6 @@ abstract class obstaculo extends ObjetoGrafico {
         this.alturaY = alturaY;
     }
 
-    
     obstaculo(String filename,double x, double alturaY) {
         super(filename,(int) x,(int) alturaY);
     }
