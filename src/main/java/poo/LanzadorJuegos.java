@@ -38,7 +38,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
 
         CabeceraCharile = new JPanel();
         CabeceraCharile.setBackground(ColorFondo);
-        CabeceraCharile.add(new JLabel(new ImageIcon(getClass().getResource("imagenes/FondoCharlie1.jpg"))));
+        CabeceraCharile.add(new JLabel(new ImageIcon(getClass().getResource("imagenes/TituloCharlie.jpg"))));
 
         PanelDelCentro = new JPanel();// PAnel con los botones
         PanelDelCentro.setBackground(ColorFondo);

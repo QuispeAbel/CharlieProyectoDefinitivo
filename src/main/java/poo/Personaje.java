@@ -20,7 +20,7 @@ public class Personaje extends ObjetoGrafico {
 
 	protected double velocityX = 0.0;
 	protected double velocityY = 0.0;
-	protected double gravity = 10.0;
+	protected double gravity = 15.0;
 	protected double angulo = 0.0;
 
 	protected int direccionAngulo = 1;
@@ -35,7 +35,7 @@ public class Personaje extends ObjetoGrafico {
 
 	public void jump() {
 		if (onGround) {
-			velocityY = -330;
+			velocityY = -600;
 			onGround = false;
 		}
 	}
