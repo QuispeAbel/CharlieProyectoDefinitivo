@@ -18,6 +18,11 @@ public class aro {
         AroDetras.ubicaAropost(xheroe + 30);
     }
 
+    // PROVISORIO
+    public double getX() {
+        return AroDelante.getX();
+    }
+
     public void MovimientoAro(double delta) {
         AroDelante.desplazamientoX(delta);
         AroDetras.desplazamientoX(delta);

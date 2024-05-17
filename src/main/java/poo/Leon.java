@@ -2,9 +2,9 @@ package poo;
 
 public class Leon extends Personaje {
 
-  private int posXhitbox = 10;
+  private int posXhitbox = 30;
   private int posYhitbox = 10;
-  private int widthHitbox = 100;
+  private int widthHitbox = 60;
   private int heigthHitbox = 40;
 
   public Leon(String filename, double x, double y) {
