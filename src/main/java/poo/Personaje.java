@@ -1,7 +1,6 @@
 package poo;
 
 import java.awt.*;
-import java.awt.geom.*;
 
 public class Personaje extends ObjetoGrafico {
 	private boolean onGround = false;
