@@ -24,11 +24,13 @@ public class CharlieNivel extends JGame {
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
-    private long lastSpawnTime; // Guarda el tiempo del último spawn
-    private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en milisegundos
+    // private long lastSpawnTime; // Guarda el tiempo del último spawn
+    // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
+    // milisegundos
     aro arito = new aro("imagenes/aroMitad2.png", "imagenes/aroMitad1.png");
 
-    private double offsetSpawnX = 350; // Offset en X para asegurar que el objeto aparezca adelante del personaje
+    private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
+                                               // personaje
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -130,15 +132,18 @@ public class CharlieNivel extends JGame {
 
         cam.seguirPersonaje(heroe); /// la camara sigue al Personaje
 
-        long currentTime = System.currentTimeMillis();
+        // long currentTime = System.currentTimeMillis();
         if (!gameover) {
-            if (currentTime - lastSpawnTime > spawnInterval) {
-                // Reinicia la posición del objeto al borde derecho de la pantalla
-                arito.spawn(heroe.getX() + offsetSpawnX);
+            if (heroe.getX() > calderass.getX() + 250) {
 
                 calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 553);
-                // Actualizar el tiempo del último spawn
-                lastSpawnTime = currentTime;
+            }
+            // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
+            // los medios aros
+            if (heroe.getX() > arito.getX() + 350) {
+
+                arito.spawn(heroe.getX() + DistanciaNuevoSpawnX);
+
             }
 
             if (heroe.getHitbox().intersects(calderass.getHitbox()))

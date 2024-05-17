@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 
 public class Caldera extends obstaculo {
 
-    private int posXhitbox = 5;
-    private int posYhitbox = 40;
-    private int widthHitbox = 44;
-    private int heigthHitbox = 80;
+    private int posXhitbox = 15;
+    private int posYhitbox = 39;
+    private int widthHitbox = 45;
+    private int heigthHitbox = 45;
 
     Caldera(String filename) {
         super(filename, 575);
