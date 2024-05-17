@@ -2,8 +2,6 @@ package poo;
 
 import com.entropyinteractive.*;
 
-//import java.awt.image.*; //imagenes
-//import javax.imageio.*; //imagenes
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
@@ -50,13 +48,13 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Leon("imagenes/leoncito.png", 320, 575);
-        heroe.setPosicion(320.0, 575.0);
+        heroe = new Leon("imagenes/leoncito.png", 320, 576);
+        // heroe.setPosicion(320.0, 575.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 575,84,75);
+        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 575, 84, 75);
 
         cam = new Camara(0, 0);
 
@@ -72,11 +70,6 @@ public class CharlieNivel extends JGame {
 
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
-
-        if (ganaste) {
-            heroe.ganar(230);
-            heroe.setPosicion(8100, 230.0);
-        }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -127,7 +120,7 @@ public class CharlieNivel extends JGame {
             }
         }
 
-        if(!gameover)
+        if (!gameover)
             heroe.update(delta);
 
         // Desplazar el aro hacia la izquierda
@@ -148,9 +141,9 @@ public class CharlieNivel extends JGame {
                 lastSpawnTime = currentTime;
             }
 
-            if (heroe.intersects(calderass))
+            if (heroe.getHitbox().intersects(calderass))
                 gameover = true;
-            if (heroe.intersects(tarima))
+            if (heroe.getHitbox().intersects(tarima))
                 ganaste = true;
         }
 
