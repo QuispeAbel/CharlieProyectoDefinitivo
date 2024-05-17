@@ -27,7 +27,7 @@ public class Personaje extends ObjetoGrafico {
 
 	protected Rectangle hitbox;
 
-	public final int POSICION_Y_PISO = 575;
+	public int POSICION_Y_PISO = 575;
 
 	public Personaje(String filename, double x, double y) {
 		super(filename, (int) x, (int) y);
@@ -129,6 +129,9 @@ public class Personaje extends ObjetoGrafico {
 		hitbox.y = (int) y + posYhitbox;
 	}
 
+	public void setPiso(int PosNueva) {
+		POSICION_Y_PISO = PosNueva;
+	}
 	// public void setPosicion(double x, double y){
 	// super.setPosicion(x, y);
 	// }

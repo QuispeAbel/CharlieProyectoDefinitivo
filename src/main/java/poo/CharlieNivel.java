@@ -16,7 +16,8 @@ public class CharlieNivel extends JGame {
     Camara cam;
     Fondo fondo;
     Marcador_Puntaje marcador;
-    Leon heroe;
+    Leon leoncito;
+    Personaje Charlie;
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
@@ -50,8 +51,10 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Leon("imagenes/leoncito.png", 320, 576);
-        // heroe.setPosicion(320.0, 575.0);
+
+        leoncito = new Leon("imagenes/leoncito.png", 320, 575);
+        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
+        Charlie.setPiso(515);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
@@ -64,7 +67,9 @@ public class CharlieNivel extends JGame {
 
         fondo = new Fondo("imagenes/FondoCharliLevel1.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
-        heroe.quieto();
+
+        Charlie.quieto();
+        leoncito.quieto();
 
         tarima = new tarima("imagenes/tarima.png", 8100, 327);
 
@@ -76,28 +81,33 @@ public class CharlieNivel extends JGame {
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
-            if (gameover || ganaste)
-                heroe.quieto();
-            else
-                heroe.right(HEROE_DESPLAZAMIENTO * delta);
+            if (gameover || ganaste) {
+                leoncito.quieto();
+                Charlie.quieto();
+            } else {
+                leoncito.right(HEROE_DESPLAZAMIENTO * delta);
+                Charlie.right(HEROE_DESPLAZAMIENTO * delta);
+            }
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // shipX += NAVE_DESPLAZAMIENTO * delta;
-            if (gameover || ganaste)
-                heroe.quieto();
-            else
-                heroe.left(HEROE_DESPLAZAMIENTO * delta);
+            if (gameover || ganaste) {
+                leoncito.quieto();
+                Charlie.quieto();
+            } else
+                leoncito.left(HEROE_DESPLAZAMIENTO * delta);
+            Charlie.left(HEROE_DESPLAZAMIENTO * delta);
 
         }
         /*
          * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
          * 
-         * heroe.left();
+         * leoncito.left();
          * }
          * if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)){
          * 
-         * heroe.right();
+         * leoncito.right();
          * }
          */
 
@@ -105,15 +115,18 @@ public class CharlieNivel extends JGame {
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
         for (KeyEvent event : keyEvents) {
             if ((event.getID() == KeyEvent.KEY_RELEASED)) {
-                heroe.quieto();
+                leoncito.quieto();
+                Charlie.quieto();
             }
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                if (gameover || ganaste)
-                    heroe.quieto();
-                else
-                    heroe.jump();
-
+                if (gameover || ganaste) {
+                    leoncito.quieto();
+                    Charlie.quieto();
+                } else {
+                    leoncito.jump();
+                    Charlie.jump();
+                }
             }
 
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
@@ -123,32 +136,33 @@ public class CharlieNivel extends JGame {
         }
 
         if (!gameover)
-            heroe.update(delta);
+            leoncito.update(delta);
+        Charlie.update(delta);
 
         // Desplazar el aro hacia la izquierda
         arito.MovimientoAro(delta);
 
-        // heroe.applyForce(gravedad);
+        // leoncito.applyForce(gravedad);
 
-        cam.seguirPersonaje(heroe); /// la camara sigue al Personaje
+        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
         if (!gameover) {
-            if (heroe.getX() > calderass.getX() + 250) {
+            if (leoncito.getX() > calderass.getX() + 250) {
 
-                calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 553);
+                calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (heroe.getX() > arito.getX() + 350) {
+            if (leoncito.getX() > arito.getX() + 350) {
 
-                arito.spawn(heroe.getX() + DistanciaNuevoSpawnX);
+                arito.spawn(leoncito.getX() + DistanciaNuevoSpawnX);
 
             }
 
-            if (heroe.getHitbox().intersects(calderass.getHitbox()))
+            if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
-            if (heroe.getHitbox().intersects(tarima))
+            if (leoncito.getHitbox().intersects(tarima))
                 ganaste = true;
         }
 
@@ -170,7 +184,9 @@ public class CharlieNivel extends JGame {
 
         arito.displayDelante(g);
 
-        heroe.display(g);
+        leoncito.display(g);
+
+        Charlie.display(g);
 
         arito.displayDetras(g);
 
@@ -203,7 +219,7 @@ public class CharlieNivel extends JGame {
 /*
  * private void reiniciarObjeto() {
  * // Establece la posición de reinicio del objeto delante del personaje
- * double posX = heroe.getX() + offsetSpawnX;
+ * double posX = leoncito.getX() + offsetSpawnX;
  * double posY = y; // Define la posición adecuada en Y según sea necesario
  * objetoEnJuego.setPosicion(posX, posY);
  * }
