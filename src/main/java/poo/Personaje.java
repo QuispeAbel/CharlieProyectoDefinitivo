@@ -26,6 +26,7 @@ public class Personaje extends ObjetoGrafico {
 	protected int direccionAngulo = 1;
 
 	protected Rectangle hitbox;
+	
 
 	public final int POSICION_Y_PISO = 310;
 
@@ -35,7 +36,7 @@ public class Personaje extends ObjetoGrafico {
 
 	public void jump() {
 		if (onGround) {
-			velocityY = -400;
+			velocityY = -330;
 			onGround = false;
 		}
 	}
@@ -93,20 +94,20 @@ public class Personaje extends ObjetoGrafico {
 	public void draw(Graphics2D g2) {
 		/* Redefinicion de Display para poder hacer la rotacion cuando salta */
 
-		AffineTransform transform = new AffineTransform();
-		transform.rotate(Math.toRadians(angulo), this.getX() + getWidth() / 2, this.getY() + getHeight() / 2);
+		// AffineTransform transform = new AffineTransform();
+		// transform.rotate(Math.toRadians(angulo), this.getX() + getWidth() / 2, this.getY() + getHeight() / 2);
 
-		AffineTransform old = g2.getTransform();
-		g2.transform(transform);
+		// AffineTransform old = g2.getTransform();
+		// g2.transform(transform);
 
-		g2.drawImage(imagen, (int) this.getX(), (int) this.getY(), null);
+		// g2.drawImage(imagen, (int) this.getX(), (int) this.getY(), null);
 
-		g2.setTransform(old);
+		// g2.setTransform(old);
 
-		g2.fillRect(this.x, this.y, this.width, this.height);
+		// g2.fillRect(this.x, this.y, this.width, this.height);
 	}
 
-	public Rectangle getColiton() {
+	public Rectangle getColiton(){
 		return this;
 	}
 

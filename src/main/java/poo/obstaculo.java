@@ -24,8 +24,6 @@ abstract class obstaculo extends ObjetoGrafico {
 
     obstaculo() {}
 
-
-
     void desplazamientoX() {
     };
 

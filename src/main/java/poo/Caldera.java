@@ -10,13 +10,13 @@ public class Caldera extends obstaculo {
         super(filename,190);
     }
 
-    public Caldera(String filename, double x, double y) {
-        super(filename, (int) x, (int) y,10,10);
+    public Caldera(String filename,double x, double alturaY,int width, int height) {
+        super(filename,(int) x,(int) alturaY,width,height);
     }
 
     public Rectangle getColiton() {
-            return this;
-    }    
+        return this;
+    }
 
     @Override
     void desplazamientoX() {

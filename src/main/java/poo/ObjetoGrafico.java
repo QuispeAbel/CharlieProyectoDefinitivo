@@ -9,8 +9,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import java.awt.Graphics2D;
-
 class ObjetoGrafico extends Rectangle {
 
     protected BufferedImage imagen = null;
@@ -29,11 +27,14 @@ class ObjetoGrafico extends Rectangle {
 
     public ObjetoGrafico(String filename, int x, int y) {
         try {
+            
             this.imagen = ImageIO.read(getClass().getResource(filename));
             this.x = x;
             this.y = y;
             this.width = getWidthIm();
             this.height = getHeightIm();
+            
+            
         } catch (IOException e) {
             System.out.println(e);
         }

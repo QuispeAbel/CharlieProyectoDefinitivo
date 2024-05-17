@@ -50,13 +50,13 @@ public class CharlieNivel extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-        heroe = new Personaje("imagenes/Charlie/CharlieCaminando4.gif", getHeight(), getWidth());
+        heroe = new Personaje("imagenes/squareImage.png", getHeight(), getWidth());
         heroe.setPosicion(320.0, 380.0);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 345);
+        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 345,10,10);
 
         cam = new Camara(0, 0);
 
@@ -127,7 +127,8 @@ public class CharlieNivel extends JGame {
             }
         }
 
-        heroe.update(delta);
+        if(!gameover)
+            heroe.update(delta);
 
         // Desplazar el aro hacia la izquierda
         arito.MovimientoAro(delta);
@@ -145,8 +146,8 @@ public class CharlieNivel extends JGame {
                 calderass.setPosicion(heroe.getX() + espacioEntreCalderas, 345);
                 // Actualizar el tiempo del último spawn
                 lastSpawnTime = currentTime;
-
             }
+
             if (heroe.intersects(calderass))
                 gameover = true;
             if (heroe.intersects(tarima))
