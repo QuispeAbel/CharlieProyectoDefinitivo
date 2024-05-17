@@ -1,6 +1,7 @@
 package poo;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class aro {
     private MedioAro AroDelante;
@@ -26,6 +27,10 @@ public class aro {
     public void MovimientoAro(double delta) {
         AroDelante.desplazamientoX(delta);
         AroDetras.desplazamientoX(delta);
+    }
+
+    public Rectangle getHitbox() {
+        return AroDelante.getHitbox();
     }
 
     public void displayDelante(Graphics2D g2) {

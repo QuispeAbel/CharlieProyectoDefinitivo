@@ -160,6 +160,8 @@ public class CharlieNivel extends JGame {
 
             }
 
+            if (leoncito.getHitbox().intersects(arito.getHitbox()))
+                gameover = true;
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima))
