@@ -2,7 +2,7 @@ package poo;
 
 import javax.swing.*;
 
-import com.entropyinteractive.JGame;
+//import com.entropyinteractive.JGame;
 
 import java.awt.*;
 import java.awt.event.*;

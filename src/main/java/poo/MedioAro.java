@@ -8,7 +8,7 @@ public class MedioAro extends obstaculo {
     }
 
     public MedioAro(String filename, double x, double y) {
-        super(filename, (int) x, (int) y,20,20);
+        super(filename, (int) x, (int) y);
     }
 
     void desplazamientoX(double delta) {

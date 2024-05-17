@@ -27,14 +27,13 @@ class ObjetoGrafico extends Rectangle {
 
     public ObjetoGrafico(String filename, int x, int y) {
         try {
-            
+
             this.imagen = ImageIO.read(getClass().getResource(filename));
             this.x = x;
             this.y = y;
             this.width = getWidthIm();
             this.height = getHeightIm();
-            
-            
+
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -55,6 +54,9 @@ class ObjetoGrafico extends Rectangle {
     public ObjetoGrafico(String filename) {
         try {
             this.imagen = ImageIO.read(getClass().getResource(filename));
+            // posiblemente se saque
+            this.width = getWidthIm();
+            this.height = getHeightIm();
         } catch (IOException e) {
             System.out.println(e);
         }

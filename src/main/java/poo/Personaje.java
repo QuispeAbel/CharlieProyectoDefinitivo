@@ -94,7 +94,8 @@ public class Personaje extends ObjetoGrafico {
 		/* Redefinicion de Display para poder hacer la rotacion cuando salta */
 
 		// AffineTransform transform = new AffineTransform();
-		// transform.rotate(Math.toRadians(angulo), this.getX() + getWidth() / 2, this.getY() + getHeight() / 2);
+		// transform.rotate(Math.toRadians(angulo), this.getX() + getWidth() / 2,
+		// this.getY() + getHeight() / 2);
 
 		// AffineTransform old = g2.getTransform();
 		// g2.transform(transform);
@@ -106,31 +107,30 @@ public class Personaje extends ObjetoGrafico {
 		// g2.fillRect(this.x, this.y, this.width, this.height);
 	}
 
-	public Rectangle getColiton(){
+	public Rectangle getColiton() {
 		return this;
 	}
 
-	public void setHitbox(int x, int y,int width, int height) {
-		hitbox=new Rectangle(x, y, width, height);
+	public void setHitbox(int x, int y, int width, int height) {
+		hitbox = new Rectangle(x, y, width, height);
 	}
 
-	public Rectangle getHitbox(){
+	public Rectangle getHitbox() {
 		return hitbox;
 	}
 
-	public void setX(double x, int posXhitbox){
+	public void setX(double x, int posXhitbox) {
 		super.setX(x);
-		hitbox.x= (int) x + posXhitbox;
+		hitbox.x = (int) x + posXhitbox;
 	}
 
-	public void setY(double y, int posYhitbox){
+	public void setY(double y, int posYhitbox) {
 		super.setY(y);
-		hitbox.y= (int) y - posYhitbox;
+		hitbox.y = (int) y + posYhitbox;
 	}
 
 	// public void setPosicion(double x, double y){
-	// 	super.setPosicion(x, y);
+	// super.setPosicion(x, y);
 	// }
-
 
 }

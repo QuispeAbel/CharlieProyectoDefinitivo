@@ -54,7 +54,7 @@ public class CharlieNivel extends JGame {
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new Caldera("imagenes/caldera1.png", getHeight(), 575, 84, 75);
+        calderass = new Caldera("imagenes/caldera1.png");
 
         cam = new Camara(0, 0);
 
@@ -141,7 +141,7 @@ public class CharlieNivel extends JGame {
                 lastSpawnTime = currentTime;
             }
 
-            if (heroe.getHitbox().intersects(calderass))
+            if (heroe.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
             if (heroe.getHitbox().intersects(tarima))
                 ganaste = true;
