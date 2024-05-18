@@ -101,18 +101,6 @@ public class CharlieNivel extends JGame {
             }
 
         }
-        /*
-         * if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)){
-         * 
-         * leoncito.left();
-         * }
-         * if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)){
-         * 
-         * leoncito.right();
-         * }
-         */
-
-        // check the list of key events for a pressed escape key
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
         for (KeyEvent event : keyEvents) {
             if ((event.getID() == KeyEvent.KEY_RELEASED)) {
