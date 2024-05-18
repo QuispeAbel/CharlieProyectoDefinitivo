@@ -2,7 +2,7 @@ package poo;
 
 import java.awt.*;
 
-public class Personaje extends ObjetoGrafico {
+public class Personaje extends ObjetoGrafico implements Hiteable {
 	private boolean onGround = false;
 	// private boolean saltando = false;
 
@@ -42,7 +42,7 @@ public class Personaje extends ObjetoGrafico {
 	public void ganar(int y) {
 		// gravity = 10000.0;
 		// this.setY(y);
-		 POSICION_Y_PISO = y;
+		POSICION_Y_PISO = y;
 	}
 
 	public void quieto() {
@@ -134,5 +134,11 @@ public class Personaje extends ObjetoGrafico {
 	// public void setPosicion(double x, double y){
 	// super.setPosicion(x, y);
 	// }
+
+	@Override
+	public void setHitbox(int width, int height) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setHitbox'");
+	}
 
 }
