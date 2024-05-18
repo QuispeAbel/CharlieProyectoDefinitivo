@@ -60,21 +60,19 @@ public class CharlieNivel2 extends JGame {
 
         mono = new Monito("imagenes/mono.png");
 
-        // mono.setY(340);
-
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
         cam = new Camara(0, 0);
 
-        cam.setRegionVisible(640, 480);
+        cam.setRegionVisible(1024, 720);
 
         fondo = new Fondo("imagenes/FondoCharliLevel2.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
 
         Charlie.quieto();
 
-        tarima = new tarima("imagenes/tarima.png", 10000, 520);
+        tarima = new tarima("imagenes/tarima.png", 10000, 320);
 
     }
 
