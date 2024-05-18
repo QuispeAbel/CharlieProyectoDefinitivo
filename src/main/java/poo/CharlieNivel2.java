@@ -52,7 +52,7 @@ public class CharlieNivel2 extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-    
+
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
@@ -72,7 +72,7 @@ public class CharlieNivel2 extends JGame {
 
         Charlie.quieto();
 
-        tarima = new tarima("imagenes/segunda_tarima.png", 10000, 320);
+        tarima = new tarima("imagenes/tarima_columna.gif", 10000, 320);
 
     }
 
@@ -128,7 +128,6 @@ public class CharlieNivel2 extends JGame {
         // Desplazar el aro hacia la izquierda
         // arito.MovimientoAro(delta);
 
-
         cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
@@ -148,7 +147,8 @@ public class CharlieNivel2 extends JGame {
                 gameover = true;    
             if (Charlie.getHitbox().intersects(tarima)){
                 ganaste = true;
-                Charlie.ganar(10050,270);}
+                Charlie.ganar(10050, 270);
+            }
         }
 
     }
