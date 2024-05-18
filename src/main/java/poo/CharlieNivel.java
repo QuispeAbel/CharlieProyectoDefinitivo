@@ -29,9 +29,11 @@ public class CharlieNivel extends JGame {
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
     aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+    aro aro = new aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
 
-    private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
+    private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
+    private double DistanciaNuevoSpawnXaro = 700;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -60,6 +62,7 @@ public class CharlieNivel extends JGame {
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
+        aro.aroGrande();
 
         cam = new Camara(0, 0);
 
@@ -126,6 +129,7 @@ public class CharlieNivel extends JGame {
 
         if (!gameover) {
             arito.MovimientoAro(delta);
+            aro.MovimientoAro(delta);
             leoncito.update(delta);
             Charlie.update(delta);
         }
@@ -145,12 +149,16 @@ public class CharlieNivel extends JGame {
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
+            if (leoncito.getX() > aro.getX() + 350) {
+                aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
+            }
+            
             if (leoncito.getX() > arito.getX() + 350) {
-
-                arito.spawn(leoncito.getX() + DistanciaNuevoSpawnX);
-
+                arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
             }
 
+            if (leoncito.getHitbox().intersects(aro.getHitbox()))
+                gameover = true;
             if (leoncito.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
@@ -175,11 +183,15 @@ public class CharlieNivel extends JGame {
 
         calderass.display(g);
 
+        aro.displayDelante(g);
+
         arito.displayDelante(g);
 
         leoncito.display(g);
 
         Charlie.display(g);
+
+        aro.displayDetras(g);
 
         arito.displayDetras(g);
 

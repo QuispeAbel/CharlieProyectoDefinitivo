@@ -12,6 +12,22 @@ public class MedioAro extends obstaculo {
         super.setHitbox(widthHitbox, heigthHitbox);
     }
 
+    public void setPosXhitbox(int posXhitbox) {
+        this.posXhitbox = posXhitbox;
+    }
+
+    public void setPosYhitbox(int posYhitbox) {
+        this.posYhitbox = posYhitbox;
+    }
+
+    public void setWidthHitbox(int widthHitbox) {
+        this.widthHitbox = widthHitbox;
+    }
+
+    public void setHeigthHitbox(int heigthHitbox) {
+        this.heigthHitbox = heigthHitbox;
+    }
+
     // public MedioAro(String filename, double x, double y) {
     // super(filename, (int) x, (int) y);
     // }
