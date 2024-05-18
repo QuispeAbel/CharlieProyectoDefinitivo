@@ -20,7 +20,8 @@ public class Leon extends Personaje {
     super.setY(y, posYhitbox);
   }
 
-  public void ganar(int y) {
+  public void ganar(int x, int y) {
+    this.setX(x);
 		POSICION_Y_PISO = y;
 	}
 }

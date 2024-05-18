@@ -17,7 +17,6 @@ public class CharlieNivel2 extends JGame {
     Camara cam;
     Fondo fondo;
     Marcador_Puntaje marcador;
-    Leon leoncito;
     Charlie Charlie;
     tarima tarima;
 
@@ -53,8 +52,7 @@ public class CharlieNivel2 extends JGame {
     public void gameStartup() {
 
         Mundo m = Mundo.getInstance();
-
-        leoncito = new Leon("imagenes/leoncito.png", 320, 700);
+    
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
@@ -72,7 +70,7 @@ public class CharlieNivel2 extends JGame {
 
         Charlie.quieto();
 
-        tarima = new tarima("imagenes/tarima.png", 10000, 320);
+        tarima = new tarima("imagenes/segunda_tarima.png", 10000, 320);
 
     }
 
@@ -121,14 +119,12 @@ public class CharlieNivel2 extends JGame {
         if (!gameover) {
             // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
-            // leoncito.update(delta);
             Charlie.update(delta);
         }
 
         // Desplazar el aro hacia la izquierda
         // arito.MovimientoAro(delta);
 
-        // leoncito.applyForce(gravedad);
 
         cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
 
@@ -145,8 +141,9 @@ public class CharlieNivel2 extends JGame {
 
             if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
-            if (Charlie.getHitbox().intersects(tarima))
+            if (Charlie.getHitbox().intersects(tarima)){
                 ganaste = true;
+                Charlie.ganar(10050,270);}
         }
 
     }
@@ -166,7 +163,6 @@ public class CharlieNivel2 extends JGame {
         // arito.displayDelante(g);
 
         // arito.displayDelante(g);
-        // leoncito.display(g);
 
         Charlie.display(g);
 

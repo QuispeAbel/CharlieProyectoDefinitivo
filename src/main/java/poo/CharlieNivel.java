@@ -165,8 +165,8 @@ public class CharlieNivel extends JGame {
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima))
                 {ganaste = true;
-                Charlie.ganar(440);
-                leoncito.ganar(490);}
+                Charlie.ganar(10050,440);
+                leoncito.ganar(10020,490);}
         }
 
     }

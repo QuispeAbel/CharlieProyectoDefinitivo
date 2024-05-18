@@ -19,4 +19,9 @@ public class Charlie extends Personaje {
     super.setY(y, posYhitbox);
   }
 
+  public void ganar(int x, int y) {
+		this.setX(x);
+    POSICION_Y_PISO = y;
+	}
+
 }

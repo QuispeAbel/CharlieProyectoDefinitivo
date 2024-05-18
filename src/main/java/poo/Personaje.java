@@ -39,9 +39,8 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 		}
 	}
 
-	public void ganar(int y) {
-		// gravity = 10000.0;
-		// this.setY(y);
+	public void ganar(int x, int y) {
+		this.setX(x);
 		POSICION_Y_PISO = y;
 	}
 
