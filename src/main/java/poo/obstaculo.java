@@ -11,7 +11,7 @@ abstract class obstaculo extends ObjetoGrafico implements Hiteable {
 
     obstaculo(String filename, double alturaY) {
         super(filename);
-        setY(alturaY);
+        this.alturaY = alturaY;
     }
 
     obstaculo(String filename, double x, double alturaY) {

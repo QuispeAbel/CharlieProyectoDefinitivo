@@ -10,11 +10,10 @@ public class aro {
     private double altura_AroDetras = 272;
 
     aro(String filename, String filename2) {
-        setAltura_AroDetras(272);
+        // setAltura_AroDetras(272);
         AroDelante = new MedioAro(filename, altura_AroDelante);
         AroDetras = new MedioAro(filename2, altura_AroDetras);
     }
-
 
     public void setAltura_AroDetras(double altura_AroDetras) {
         this.altura_AroDetras = altura_AroDetras;
@@ -52,11 +51,11 @@ public class aro {
         g2.drawImage(AroDetras.imagen, (int) AroDetras.getX(), (int) AroDetras.getY(), null);
     }
 
-    public void aroGrande(){
-        setAltura_AroDetras(282);
-        //super.setPosXhitbox();
-
-
+    public void aroGrande() {
+        AroDelante.setPosXhitbox(10);
+        AroDelante.setPosYhitbox(252);
+        AroDelante.setWidthHitbox(25);
+        AroDelante.setHeigthHitbox(20);
     }
 
 }

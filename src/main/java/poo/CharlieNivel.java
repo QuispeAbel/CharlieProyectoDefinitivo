@@ -32,7 +32,7 @@ public class CharlieNivel extends JGame {
     aro aro = new aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
 
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
-                                               // personaje
+    // personaje
     private double DistanciaNuevoSpawnXaro = 700;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
@@ -66,7 +66,7 @@ public class CharlieNivel extends JGame {
 
         cam = new Camara(0, 0);
 
-        cam.setRegionVisible(640, 480);
+        cam.setRegionVisible(1024, 720);
 
         fondo = new Fondo("imagenes/FondoCharliLevel1.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
@@ -152,7 +152,7 @@ public class CharlieNivel extends JGame {
             if (leoncito.getX() > aro.getX() + 350) {
                 aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
             }
-            
+
             if (leoncito.getX() > arito.getX() + 350) {
                 arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
             }
