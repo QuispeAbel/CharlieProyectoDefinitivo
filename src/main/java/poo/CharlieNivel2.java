@@ -57,7 +57,7 @@ public class CharlieNivel2 extends JGame {
         Charlie.setPiso(322);
 
         mono = new Monito("imagenes/mono.png");
-
+        
         monoazul= new Monito("imagenes/mono_azul.png");
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
@@ -123,6 +123,10 @@ public class CharlieNivel2 extends JGame {
             mono.MovimientoMono(delta);
             monoazul.MovimientoMono(delta*2);
             Charlie.update(delta);
+           
+            if(!mono.getHitbox().intersects(monoazul.getHitbox())){
+            mono.update(delta);
+            monoazul.update(delta);}
         }
 
         // Desplazar el aro hacia la izquierda
@@ -140,6 +144,12 @@ public class CharlieNivel2 extends JGame {
                 mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
                 monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX*1.5);
             }
+
+            if (mono.getHitbox().intersects(monoazul.getHitbox())) //&& mono.getY()==monoazul.getY() )
+            monoazul.SaltoMono(delta);
+
+            //if (!mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY() != monoazul.getY() )
+            //monoazul.update(delta);
 
             if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
