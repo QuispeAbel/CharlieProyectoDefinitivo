@@ -18,7 +18,7 @@ public class CharlieNivel2 extends JGame {
     Fondo fondo;
     Marcador_Puntaje marcador;
     Leon leoncito;
-    Personaje Charlie;
+    Charlie Charlie;
     tarima tarima;
 
     Jugador j1;
@@ -55,7 +55,7 @@ public class CharlieNivel2 extends JGame {
         Mundo m = Mundo.getInstance();
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 700);
-        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
+        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
         mono = new Monito("imagenes/mono.png");
@@ -73,7 +73,6 @@ public class CharlieNivel2 extends JGame {
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
 
         Charlie.quieto();
-        leoncito.quieto();
 
         tarima = new tarima("imagenes/tarima.png", 10000, 520);
 
@@ -86,10 +85,8 @@ public class CharlieNivel2 extends JGame {
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
-                leoncito.quieto();
                 Charlie.quieto();
             } else {
-                leoncito.right(HEROE_DESPLAZAMIENTO * delta);
                 Charlie.right(HEROE_DESPLAZAMIENTO * delta);
             }
         }
@@ -97,10 +94,8 @@ public class CharlieNivel2 extends JGame {
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // shipX += NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
-                leoncito.quieto();
                 Charlie.quieto();
             } else {
-                leoncito.left(HEROE_DESPLAZAMIENTO * delta);
                 Charlie.left(HEROE_DESPLAZAMIENTO * delta);
             }
 
@@ -108,16 +103,13 @@ public class CharlieNivel2 extends JGame {
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
         for (KeyEvent event : keyEvents) {
             if ((event.getID() == KeyEvent.KEY_RELEASED)) {
-                leoncito.quieto();
                 Charlie.quieto();
             }
             if ((event.getID() == KeyEvent.KEY_PRESSED) &&
                     (event.getKeyCode() == KeyEvent.VK_SPACE)) {
                 if (gameover || ganaste) {
-                    leoncito.quieto();
                     Charlie.quieto();
                 } else {
-                    leoncito.jump();
                     Charlie.jump();
                 }
             }
@@ -131,7 +123,7 @@ public class CharlieNivel2 extends JGame {
         if (!gameover) {
             // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
-            leoncito.update(delta);
+            //leoncito.update(delta);
             Charlie.update(delta);
         }
 
@@ -147,15 +139,15 @@ public class CharlieNivel2 extends JGame {
 
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (leoncito.getX() > mono.getX() + 350) {
+            if (Charlie.getX() > mono.getX() + 350) {
 
-                mono.spawn(leoncito.getX() + DistanciaNuevoSpawnX);
+                mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
 
             }
 
-            if (leoncito.getHitbox().intersects(mono.getHitbox()))
+            if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
-            if (leoncito.getHitbox().intersects(tarima))
+            if (Charlie.getHitbox().intersects(tarima))
                 ganaste = true;
         }
 
@@ -175,7 +167,11 @@ public class CharlieNivel2 extends JGame {
 
         // arito.displayDelante(g);
 
+<<<<<<< HEAD
+        //arito.displayDelante(g);
+=======
         // leoncito.display(g);
+>>>>>>> d28d8ca27977cf86c91f04b84d4dfdd2261a1921
 
         Charlie.display(g);
 
