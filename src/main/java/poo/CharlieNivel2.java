@@ -29,7 +29,7 @@ public class CharlieNivel2 extends JGame {
     // milisegundos
     // aro arito = new aro("imagenes/aroMitad2Peque.png",
     // "imagenes/aroMitad1Peque.png");
-    Monito mono;
+    Monito mono, monoazul;
 
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
@@ -57,6 +57,8 @@ public class CharlieNivel2 extends JGame {
         Charlie.setPiso(322);
 
         mono = new Monito("imagenes/mono.png");
+
+        monoazul= new Monito("imagenes/mono_azul.png");
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
@@ -119,6 +121,7 @@ public class CharlieNivel2 extends JGame {
         if (!gameover) {
             // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
+            monoazul.MovimientoMono(delta*2);
             Charlie.update(delta);
         }
 
@@ -136,11 +139,13 @@ public class CharlieNivel2 extends JGame {
             if (Charlie.getX() > mono.getX() + 350) {
 
                 mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
-
+                monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX*1.5);
             }
 
             if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
+            if (Charlie.getHitbox().intersects(monoazul.getHitbox()))
+                gameover = true;    
             if (Charlie.getHitbox().intersects(tarima)){
                 ganaste = true;
                 Charlie.ganar(10050,270);}
@@ -167,6 +172,7 @@ public class CharlieNivel2 extends JGame {
         Charlie.display(g);
 
         mono.display(g);
+        monoazul.display(g);
 
         // arito.displayDetras(g);
 
