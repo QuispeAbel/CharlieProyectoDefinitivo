@@ -7,8 +7,8 @@ public class MedioAro extends obstaculo {
     private int widthHitbox = 20;
     private int heigthHitbox = 19;
 
-    MedioAro(String filename, double alturaY) {
-        super(filename, alturaY);
+    MedioAro(String filename, double altura) {
+        super(filename, altura);
         super.setHitbox(widthHitbox, heigthHitbox);
     }
 
@@ -38,7 +38,7 @@ public class MedioAro extends obstaculo {
 
     void ubicaAropost(double xheroe) {
         this.setX(xheroe, posXhitbox);
-        this.setY(alturaY, posYhitbox);
+        this.setY(getY(), posYhitbox);
         // this.setPosicion(xheroe, alturaY);
     }
 }
