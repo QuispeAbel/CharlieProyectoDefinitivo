@@ -123,7 +123,7 @@ public class CharlieNivel2 extends JGame {
         if (!gameover) {
             // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
-            //leoncito.update(delta);
+            // leoncito.update(delta);
             Charlie.update(delta);
         }
 
@@ -167,11 +167,8 @@ public class CharlieNivel2 extends JGame {
 
         // arito.displayDelante(g);
 
-<<<<<<< HEAD
-        //arito.displayDelante(g);
-=======
+        // arito.displayDelante(g);
         // leoncito.display(g);
->>>>>>> d28d8ca27977cf86c91f04b84d4dfdd2261a1921
 
         Charlie.display(g);
 
