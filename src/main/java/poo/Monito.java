@@ -8,15 +8,13 @@ public class Monito extends obstaculo {
     private int widthHitbox = 50;
     private int heigthHitbox = 45;
 
-    private int alturaY = 340;
-
     Monito(String filename) {
         super(filename, 340);
         super.setHitbox(heigthHitbox, widthHitbox);
     }
 
-    Monito(String filename, double alturaY) {
-        super(filename, alturaY);
+    Monito(String filename, double altura) {
+        super(filename, altura);
         super.setHitbox(widthHitbox, heigthHitbox);
     }
 
@@ -31,7 +29,7 @@ public class Monito extends obstaculo {
 
     void ubicaMono(double xheroe) {
         this.setX(xheroe, posXhitbox);
-        this.setY(alturaY, posYhitbox);
+        this.setY(getY(), posYhitbox);
         // this.setPosicion(xheroe, alturaY);
     }
 
