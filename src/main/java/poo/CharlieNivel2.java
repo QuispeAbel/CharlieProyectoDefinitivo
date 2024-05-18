@@ -138,7 +138,7 @@ public class CharlieNivel2 extends JGame {
 
         // leoncito.applyForce(gravedad);
 
-        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
+        cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
         if (!gameover) {
@@ -174,7 +174,7 @@ public class CharlieNivel2 extends JGame {
 
         //arito.displayDelante(g);
 
-        leoncito.display(g);
+        //leoncito.display(g);
 
         Charlie.display(g);
 
