@@ -17,7 +17,8 @@ public class CharlieNivel2 extends JGame {
     Camara cam;
     Fondo fondo;
     Marcador_Puntaje marcador;
-    Personaje Charlie;
+    Leon leoncito;
+    Charlie Charlie;
     tarima tarima;
 
     Jugador j1;
@@ -53,7 +54,7 @@ public class CharlieNivel2 extends JGame {
         Mundo m = Mundo.getInstance();
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 700);
-        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
+        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
         mono.setY(340);
@@ -142,9 +143,9 @@ public class CharlieNivel2 extends JGame {
 
             }
 
-            if (leoncito.getHitbox().intersects(mono.getHitbox()))
+            if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
-            if (leoncito.getHitbox().intersects(tarima))
+            if (Charlie.getHitbox().intersects(tarima))
                 ganaste = true;
         }
 
