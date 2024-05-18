@@ -74,7 +74,7 @@ public class CharlieNivel extends JGame {
         Charlie.quieto();
         leoncito.quieto();
 
-        tarima = new tarima("imagenes/tarima.png", 10000, 520);
+        tarima = new tarima("imagenes/tarima.png", 10000, 530);
 
     }
 
@@ -164,7 +164,9 @@ public class CharlieNivel extends JGame {
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima))
-                ganaste = true;
+                {ganaste = true;
+                Charlie.ganar(440);
+                leoncito.ganar(490);}
         }
 
     }
