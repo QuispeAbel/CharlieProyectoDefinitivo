@@ -10,7 +10,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 public class CharlieNivel2 extends JGame {
-        Date dInit = new Date();
+    Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
 
@@ -28,8 +28,9 @@ public class CharlieNivel2 extends JGame {
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    //aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-    Monito mono = new Monito("imagenes/mono.png",320);
+    // aro arito = new aro("imagenes/aroMitad2Peque.png",
+    // "imagenes/aroMitad1Peque.png");
+    Monito mono;
 
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
@@ -57,11 +58,12 @@ public class CharlieNivel2 extends JGame {
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
-        mono.setY(340);
+        mono = new Monito("imagenes/mono.png");
+
+        // mono.setY(340);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
-
 
         cam = new Camara(0, 0);
 
@@ -119,7 +121,7 @@ public class CharlieNivel2 extends JGame {
         }
 
         if (!gameover) {
-            //arito.MovimientoAro(delta);
+            // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
             //leoncito.update(delta);
             Charlie.update(delta);
@@ -134,7 +136,7 @@ public class CharlieNivel2 extends JGame {
 
         // long currentTime = System.currentTimeMillis();
         if (!gameover) {
-           
+
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
             if (Charlie.getX() > mono.getX() + 350) {
@@ -163,14 +165,19 @@ public class CharlieNivel2 extends JGame {
         m.display(g);
         tarima.display(g);
 
+        // arito.displayDelante(g);
 
+<<<<<<< HEAD
         //arito.displayDelante(g);
+=======
+        // leoncito.display(g);
+>>>>>>> d28d8ca27977cf86c91f04b84d4dfdd2261a1921
 
         Charlie.display(g);
 
         mono.display(g);
 
-        //arito.displayDetras(g);
+        // arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -197,4 +204,3 @@ public class CharlieNivel2 extends JGame {
         // Log.info(getClass().getSimpleName(), "Shutting down game");
     }
 }
-

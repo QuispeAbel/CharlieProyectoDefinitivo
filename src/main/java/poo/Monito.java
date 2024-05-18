@@ -2,16 +2,24 @@ package poo;
 
 import java.awt.Rectangle;
 
-public class Monito  extends obstaculo {
-    private int posXhitbox = 19;
-    private int posYhitbox = 190;
-    private int widthHitbox = 20;
-    private int heigthHitbox = 19;
+public class Monito extends obstaculo {
+    private int posXhitbox = 0;
+    private int posYhitbox = 0;
+    private int widthHitbox = 50;
+    private int heigthHitbox = 45;
+
+    private int alturaY = 340;
+
+    Monito(String filename) {
+        super(filename, 340);
+        super.setHitbox(heigthHitbox, widthHitbox);
+    }
 
     Monito(String filename, double alturaY) {
         super(filename, alturaY);
         super.setHitbox(widthHitbox, heigthHitbox);
     }
+
     public Monito(String filename, double x, double alturaY) {
         super(filename, (int) x, (int) alturaY);
 
@@ -31,7 +39,6 @@ public class Monito  extends obstaculo {
         this.setX(xheroe, posXhitbox);
     }
 
-
     public Rectangle getColiton() {
         return this;
     }
@@ -48,6 +55,5 @@ public class Monito  extends obstaculo {
         this.setX(x, posXhitbox);
         this.setY(y, posYhitbox);
     }
-
 
 }
