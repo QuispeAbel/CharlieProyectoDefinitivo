@@ -2,9 +2,9 @@ package poo;
 
 public class Charlie extends Personaje {
   private int posXhitbox = 5;
-  private int posYhitbox = 10;
+  private int posYhitbox = 0;
   private int widthHitbox = 30;
-  private int heigthHitbox = 40;
+  private int heigthHitbox = 60;
 
   public Charlie(String filename, double x, double y) {
     super(filename, x, y);
@@ -20,8 +20,8 @@ public class Charlie extends Personaje {
   }
 
   public void ganar(int x, int y) {
-		this.setX(x);
+    this.setX(x);
     POSICION_Y_PISO = y;
-	}
+  }
 
 }

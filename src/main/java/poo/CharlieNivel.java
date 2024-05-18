@@ -17,7 +17,7 @@ public class CharlieNivel extends JGame {
     Fondo fondo;
     Marcador_Puntaje marcador;
     Leon leoncito;
-    Personaje Charlie;
+    Charlie Charlie;
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
@@ -55,7 +55,7 @@ public class CharlieNivel extends JGame {
         Mundo m = Mundo.getInstance();
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
-        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
+        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
@@ -157,16 +157,17 @@ public class CharlieNivel extends JGame {
                 arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
             }
 
-            if (leoncito.getHitbox().intersects(aro.getHitbox()))
+            if (leoncito.getHitbox().intersects(aro.getHitbox()) || leoncito.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
-            if (leoncito.getHitbox().intersects(arito.getHitbox()))
+            if (Charlie.getHitbox().intersects(aro.getHitbox()) || Charlie.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
-            if (leoncito.getHitbox().intersects(tarima))
-                {ganaste = true;
-                Charlie.ganar(10050,440);
-                leoncito.ganar(10020,490);}
+            if (leoncito.getHitbox().intersects(tarima)) {
+                ganaste = true;
+                Charlie.ganar(10050, 440);
+                leoncito.ganar(10020, 490);
+            }
         }
 
     }

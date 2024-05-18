@@ -7,11 +7,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CircusCharlie extends JPanel implements ActionListener {
+public class CircusCharlie extends JFrame implements ActionListener {
 
     public CircusCharlie() {
         setBackground(Color.ORANGE);
+        WindowListener l = new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            };
+        };
+        addWindowListener(l);
+        pack();
+        setVisible(true);
+        setLocationRelativeTo(null);
 
+    }
+
+    public static void main(String... z) {
+        new CircusCharlie();
     }
 
     @Override
