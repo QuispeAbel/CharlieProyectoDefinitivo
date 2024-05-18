@@ -42,7 +42,7 @@ public class Personaje extends ObjetoGrafico {
 	public void ganar(int y) {
 		// gravity = 10000.0;
 		// this.setY(y);
-		// POSICION_Y_PISO = y;
+		 POSICION_Y_PISO = y;
 	}
 
 	public void quieto() {

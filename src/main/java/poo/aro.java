@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 public class aro {
     private MedioAro AroDelante;
     private MedioAro AroDetras;
-    private double altura_AroDelante = 253;
-    private double altura_AroDetras = 272;
+    private double altura_AroDelante = 273;
+    private double altura_AroDetras = 292;
 
     aro(String filename, String filename2) {
         AroDelante = new MedioAro(filename, altura_AroDelante);

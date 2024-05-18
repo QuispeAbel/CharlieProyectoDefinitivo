@@ -5,11 +5,12 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import java.text.*;
+//import java.text.*;
 
-public class CharlieNivel extends JGame {
+import java.text.SimpleDateFormat;
 
-    Date dInit = new Date();
+public class CharlieNivel2 extends JGame {
+        Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
 
@@ -19,8 +20,7 @@ public class CharlieNivel extends JGame {
     Leon leoncito;
     Personaje Charlie;
     tarima tarima;
-    Caldera calderass;
-    int espacioEntreCalderas = 800;
+
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
@@ -28,7 +28,8 @@ public class CharlieNivel extends JGame {
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+    //aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+    Monito mono = new Monito("imagenes/mono.png",320);
 
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
@@ -37,14 +38,14 @@ public class CharlieNivel extends JGame {
 
     public static void main(String[] args) {
 
-        CharlieNivel game = new CharlieNivel();
+        CharlieNivel2 game = new CharlieNivel2();
         game.run(1.0 / 60.0);
         System.exit(0);
     }
 
-    public CharlieNivel() {
+    public CharlieNivel2() {
         // call game constructor
-        super("DemoCamaraHeroe ", 1024, 720);
+        super("DemoCamaraHeroe", 1024, 720);
 
     }
 
@@ -52,20 +53,21 @@ public class CharlieNivel extends JGame {
 
         Mundo m = Mundo.getInstance();
 
-        leoncito = new Leon("imagenes/leoncito.png", 320, 575);
-        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
-        Charlie.setPiso(515);
+        leoncito = new Leon("imagenes/leoncito.png", 320, 700);
+        Charlie = new Personaje("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
+        Charlie.setPiso(322);
+
+        mono.setY(340);
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
-        calderass = new Caldera("imagenes/caldera1.png");
 
         cam = new Camara(0, 0);
 
         cam.setRegionVisible(640, 480);
 
-        fondo = new Fondo("imagenes/FondoCharliLevel1.png");
+        fondo = new Fondo("imagenes/FondoCharliLevel2.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
 
         Charlie.quieto();
@@ -125,7 +127,8 @@ public class CharlieNivel extends JGame {
         }
 
         if (!gameover) {
-            arito.MovimientoAro(delta);
+            //arito.MovimientoAro(delta);
+            mono.MovimientoMono(delta);
             leoncito.update(delta);
             Charlie.update(delta);
         }
@@ -135,25 +138,20 @@ public class CharlieNivel extends JGame {
 
         // leoncito.applyForce(gravedad);
 
-        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
+        cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
         if (!gameover) {
-            if (leoncito.getX() > calderass.getX() + 250) {
-
-                calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
-            }
+           
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (leoncito.getX() > arito.getX() + 350) {
+            if (leoncito.getX() > mono.getX() + 350) {
 
-                arito.spawn(leoncito.getX() + DistanciaNuevoSpawnX);
+                mono.spawn(leoncito.getX() + DistanciaNuevoSpawnX);
 
             }
 
-            if (leoncito.getHitbox().intersects(arito.getHitbox()))
-                gameover = true;
-            if (leoncito.getHitbox().intersects(calderass.getHitbox()))
+            if (leoncito.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima))
                 ganaste = true;
@@ -173,15 +171,16 @@ public class CharlieNivel extends JGame {
         m.display(g);
         tarima.display(g);
 
-        calderass.display(g);
 
-        arito.displayDelante(g);
+        //arito.displayDelante(g);
 
-        leoncito.display(g);
+        //leoncito.display(g);
 
         Charlie.display(g);
 
-        arito.displayDetras(g);
+        mono.display(g);
+
+        //arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -209,11 +208,3 @@ public class CharlieNivel extends JGame {
     }
 }
 
-/*
- * private void reiniciarObjeto() {
- * // Establece la posición de reinicio del objeto delante del personaje
- * double posX = leoncito.getX() + offsetSpawnX;
- * double posY = y; // Define la posición adecuada en Y según sea necesario
- * objetoEnJuego.setPosicion(posX, posY);
- * }
- */
