@@ -137,7 +137,6 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 	@Override
 	public void setHitbox(int width, int height) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setHitbox'");
 	}
 
 }
