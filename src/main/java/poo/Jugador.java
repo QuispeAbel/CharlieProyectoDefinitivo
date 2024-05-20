@@ -1,6 +1,6 @@
 package poo;
 
-abstract public class Jugador {
+public class Jugador {
     int PuntosTotales = 0;
     int número = 0;
 
@@ -20,5 +20,11 @@ abstract public class Jugador {
         PuntosTotales = puntos;
     }
 
-    abstract void sumarPuntos();
+    public void sumarPuntos(){
+        PuntosTotales++;
+    }
+
+    public void sumarPuntos(int puntos){
+        PuntosTotales = PuntosTotales + puntos;
+    }
 }

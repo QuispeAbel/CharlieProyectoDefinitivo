@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 public class Marcador_Puntaje extends ObjetoGrafico {
     int nro_jugador_actual = 0;
+    int PuntajeTotal = 0;
 
     public Marcador_Puntaje(String filename) {
         super(filename);
@@ -14,10 +15,11 @@ public class Marcador_Puntaje extends ObjetoGrafico {
     }
 
     public void getPuntajeTotal(Jugador j) {
-        nro_jugador_actual = j.getNúmero();
+        PuntajeTotal = j.getPuntos();
     }
 
     public void draw(Graphics2D g){
-        g.drawString(Integer.toString(nro_jugador_actual)+" P -", 40, 70);
+        g.drawString(Integer.toString(nro_jugador_actual)+" P -", 50, 70);
+        g.drawString(Integer.toString(PuntajeTotal), 100, 70);
     }
 }

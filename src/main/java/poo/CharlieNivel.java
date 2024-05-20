@@ -21,10 +21,13 @@ public class CharlieNivel extends JGame {
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
+    int posicion_aro;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
+    //boolean j1_jugando = true;
+    
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -54,14 +57,17 @@ public class CharlieNivel extends JGame {
 
         Mundo m = Mundo.getInstance();
 
+        j1 = new Jugador();
+
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
-        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
+        
         aro.aroGrande();
 
         cam = new Camara(0, 0);
@@ -80,6 +86,14 @@ public class CharlieNivel extends JGame {
 
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
+
+        //Puntos
+        if(leoncito.getX() > aro.getX()){
+//          if(j1_jugando)
+                j1.sumarPuntos(100);
+//          else   
+//              j2.sumarPuntosPasados(100);
+        }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -206,15 +220,21 @@ public class CharlieNivel extends JGame {
 
         marcador.display(g);
 
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        j1.sumarPuntos(100);
+        marcador.draw(g);
+        
+
+        g.setFont(new Font("Arial", Font.BOLD, 70));
+
         if (gameover) {
             g.setColor(Color.RED);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GAME OVER!", 100, 250);
         }
 
         if (ganaste) {
             g.setColor(Color.GREEN);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GANASTE!", 100, 250);
         }
     }
