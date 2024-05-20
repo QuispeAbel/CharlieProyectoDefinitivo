@@ -7,11 +7,11 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 
-public class CharlieNivel extends JGame {
+public class CharlieNivel {
 
-    Date dInit = new Date();
+    Date dInit;
     Date dAhora;
-    SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
+    SimpleDateFormat ft;
 
     Camara cam;
     Fondo fondo;
@@ -20,20 +20,20 @@ public class CharlieNivel extends JGame {
     Charlie Charlie;
     tarima tarima;
     Caldera calderass;
-    Bonus bolsa = new Bonus("imagenes/ufo.png");
+    Bonus bolsa;
     int espacioEntreCalderas = 800;
     int posicion_aro;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
-    int cont=0;
-    int contbon=0;
+    int cont = 0;
+    int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    Aro arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-    Aro aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
+    Aro arito;
+    Aro aro;
 
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
@@ -42,24 +42,23 @@ public class CharlieNivel extends JGame {
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
-    public static void main(String[] args) {
-
-        CharlieNivel game = new CharlieNivel();
-        game.run(1.0 / 60.0);
-        System.exit(0);
+    CharlieNivel() {
     }
 
-    public CharlieNivel() {
-        // call game constructor
-        super("DemoCamaraHeroe ", 800, 600);
+    public void Start() {
 
-    }
+        ft = new SimpleDateFormat("mm:ss");
 
-    public void gameStartup() {
+        dInit = new Date();
 
         Mundo m = Mundo.getInstance();
 
         j1 = new Jugador();
+
+        bolsa = new Bonus("imagenes/ufo.png");
+
+        arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+        aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
@@ -69,7 +68,7 @@ public class CharlieNivel extends JGame {
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
-        
+
         aro.aroGrande();
 
         cam = new Camara(0, 0);
@@ -86,15 +85,14 @@ public class CharlieNivel extends JGame {
 
     }
 
-    public void gameUpdate(double delta) {
-        Keyboard keyboard = getKeyboard();
+    public void Update(double delta, Keyboard keyboard) {
 
-        //Puntos
-        if(leoncito.getX() > aro.getX()){
-//          if(j1_jugando)
-                j1.sumarPuntos(100);
-//          else   
-//              j2.sumarPuntosPasados(100);
+        // Puntos
+        if (leoncito.getX() > aro.getX()) {
+            // if(j1_jugando)
+            j1.sumarPuntos(100);
+            // else
+            // j2.sumarPuntosPasados(100);
         }
 
         // Procesar teclas de direccion
@@ -120,28 +118,26 @@ public class CharlieNivel extends JGame {
             }
 
         }
-        LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
-        for (KeyEvent event : keyEvents) {
-            if ((event.getID() == KeyEvent.KEY_RELEASED)) {
+
+        if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
+            leoncito.quieto();
+            Charlie.quieto();
+        }
+
+        if ((keyboard.isKeyPressed(KeyEvent.VK_SPACE))) {
+            if (gameover || ganaste) {
                 leoncito.quieto();
                 Charlie.quieto();
-            }
-            if ((event.getID() == KeyEvent.KEY_PRESSED) &&
-                    (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                if (gameover || ganaste) {
-                    leoncito.quieto();
-                    Charlie.quieto();
-                } else {
-                    leoncito.jump();
-                    Charlie.jump();
-                }
-            }
-
-            if ((event.getID() == KeyEvent.KEY_PRESSED) &&
-                    (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
-                stop();
+            } else {
+                leoncito.jump();
+                Charlie.jump();
             }
         }
+
+        // if ((event.getID() == KeyEvent.KEY_PRESSED) &&
+        // (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
+        // stop();
+        // }
 
         if (!gameover) {
             arito.MovimientoAro(delta);
@@ -159,7 +155,7 @@ public class CharlieNivel extends JGame {
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
-        if (!gameover ) {
+        if (!gameover) {
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
 
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
@@ -169,12 +165,11 @@ public class CharlieNivel extends JGame {
             if (leoncito.getX() > aro.getX() + 350 && !ganaste) {
                 aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
                 cont++;
-                if (cont%5 == 0) {
+                if (cont % 5 == 0) {
                     arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
                     bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
                 }
             }
-            
 
             if (leoncito.getHitbox().intersects(aro.getHitbox()) || leoncito.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
@@ -189,12 +184,12 @@ public class CharlieNivel extends JGame {
             }
             if (Charlie.getHitbox().intersects(bolsa)) {
                 contbon++;
-            }    
+            }
         }
 
     }
 
-    public void gameDraw(Graphics2D g) {
+    public void Draw(Graphics2D g) {
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -210,7 +205,7 @@ public class CharlieNivel extends JGame {
 
         aro.displayDelante(g);
 
-        arito.displayDelante(g);        
+        arito.displayDelante(g);
 
         if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) {
             bolsa.display(g);
@@ -236,7 +231,6 @@ public class CharlieNivel extends JGame {
         g.setFont(new Font("Arial", Font.BOLD, 20));
         j1.sumarPuntos(100);
         marcador.draw(g);
-        
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
 
@@ -251,7 +245,7 @@ public class CharlieNivel extends JGame {
         }
     }
 
-    public void gameShutdown() {
+    public void Sdown() {
         // Log.info(getClass().getSimpleName(), "Shutting down game");
     }
 }

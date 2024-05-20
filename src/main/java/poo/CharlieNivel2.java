@@ -10,9 +10,9 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 public class CharlieNivel2 extends JGame {
-    Date dInit = new Date();
+    Date dInit;
     Date dAhora;
-    SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
+    SimpleDateFormat ft;
 
     Camara cam;
     Fondo fondo;
@@ -30,7 +30,7 @@ public class CharlieNivel2 extends JGame {
     // aro arito = new aro("imagenes/aroMitad2Peque.png",
     // "imagenes/aroMitad1Peque.png");
     Monito mono, monoazul;
-    int cont=0;
+    int cont = 0;
 
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
@@ -46,11 +46,14 @@ public class CharlieNivel2 extends JGame {
 
     public CharlieNivel2() {
         // call game constructor
-        super("DemoCamaraHeroe", 1024, 720);
-
+        super("Nivel2", 1024, 720);
     }
 
     public void gameStartup() {
+
+        ft = new SimpleDateFormat("mm:ss");
+
+        dInit = new Date();
 
         Mundo m = Mundo.getInstance();
 
@@ -58,8 +61,8 @@ public class CharlieNivel2 extends JGame {
         Charlie.setPiso(322);
 
         mono = new Monito("imagenes/mono.png");
-        
-        monoazul= new Monito("imagenes/mono_azul.png");
+
+        monoazul = new Monito("imagenes/mono_azul.png");
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
@@ -122,12 +125,13 @@ public class CharlieNivel2 extends JGame {
         if (!gameover) {
             // arito.MovimientoAro(delta);
             mono.MovimientoMono(delta);
-            monoazul.MovimientoMono(delta*2);
+            monoazul.MovimientoMono(delta * 2);
             Charlie.update(delta);
-           
-            if(!mono.getHitbox().intersects(monoazul.getHitbox())){
-            mono.update(delta);
-            monoazul.update(delta);}
+
+            if (!mono.getHitbox().intersects(monoazul.getHitbox())) {
+                mono.update(delta);
+                monoazul.update(delta);
+            }
         }
 
         // Desplazar el aro hacia la izquierda
@@ -144,22 +148,23 @@ public class CharlieNivel2 extends JGame {
 
                 mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
                 cont++;
-                if (cont%5 == 0 ) 
-                    monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX*1.5);
-                
+                if (cont % 5 == 0)
+                    monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX * 1.5);
+
             }
 
-            if (mono.getHitbox().intersects(monoazul.getHitbox())) //&& mono.getY()==monoazul.getY() )
-            monoazul.SaltoMono(delta);
+            if (mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY()==monoazul.getY() )
+                monoazul.SaltoMono(delta);
 
-            //if (!mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY() != monoazul.getY() )
-            //monoazul.update(delta);
+            // if (!mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY() !=
+            // monoazul.getY() )
+            // monoazul.update(delta);
 
             if (Charlie.getHitbox().intersects(mono.getHitbox()))
                 gameover = true;
             if (Charlie.getHitbox().intersects(monoazul.getHitbox()))
-                gameover = true;    
-            if (Charlie.getHitbox().intersects(tarima)){
+                gameover = true;
+            if (Charlie.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 Charlie.ganar(10050, 270);
             }
@@ -184,7 +189,7 @@ public class CharlieNivel2 extends JGame {
         // arito.displayDelante(g);
 
         Charlie.display(g);
-        
+
         mono.display(g);
         monoazul.display(g);
 
