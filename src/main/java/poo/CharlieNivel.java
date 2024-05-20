@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
+import javax.swing.Timer;
 
 public class CharlieNivel {
 
@@ -22,11 +23,12 @@ public class CharlieNivel {
     Caldera calderass;
     Bonus bolsa;
     int espacioEntreCalderas = 800;
-    int posicion_aro;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
+    boolean bonus = false;
+    Timer bonusTimer;
     int cont = 0;
     int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
@@ -64,7 +66,7 @@ public class CharlieNivel {
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
-        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
@@ -82,6 +84,15 @@ public class CharlieNivel {
         leoncito.quieto();
 
         tarima = new tarima("imagenes/tarima.png", 10000, 530);
+
+        // cuenta el tiempo cuando aparece el carterl "Bonus"
+        bonusTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bonus = false;
+                bonusTimer.stop();
+            }
+        });
+        bonusTimer.setRepeats(false);
 
     }
 
@@ -168,6 +179,7 @@ public class CharlieNivel {
                 if (cont % 5 == 0) {
                     arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
                     bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
+                    contbon = 0;
                 }
             }
 
@@ -181,12 +193,18 @@ public class CharlieNivel {
                 ganaste = true;
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
+                aro.MovimientoAro(0);
+                arito.MovimientoAro(0);
+                bolsa.Movimientobonus(0);
             }
             if (Charlie.getHitbox().intersects(bolsa)) {
                 contbon++;
+                bonus = true;
+                if (!bonusTimer.isRunning()) {
+                    bonusTimer.start();
+                }
             }
         }
-
     }
 
     public void Draw(Graphics2D g) {
@@ -203,21 +221,25 @@ public class CharlieNivel {
 
         calderass.display(g);
 
+        if (!ganaste) {
+            aro.displayDelante(g);
+            arito.displayDelante(g);
+        }
         aro.displayDelante(g);
 
         arito.displayDelante(g);
 
-        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) {
+        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0)
             bolsa.display(g);
-        }
 
         leoncito.display(g);
 
         Charlie.display(g);
 
-        aro.displayDetras(g);
-
-        arito.displayDetras(g);
+        if (!ganaste) {
+            aro.displayDetras(g);
+            arito.displayDetras(g);
+        }
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -226,6 +248,12 @@ public class CharlieNivel {
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
         marcador.display(g);
+
+        // if (bonus) {
+        // g.setColor(Color.white);
+        // g.setFont(new Font("Arial", Font.BOLD, 40));
+        // g.drawString("500", (getWidth() / 2) - 200, (getWidth() / 2) - 200);
+        // }
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -236,11 +264,13 @@ public class CharlieNivel {
 
         if (gameover) {
             g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GAME OVER!", 100, 250);
         }
 
         if (ganaste) {
             g.setColor(Color.GREEN);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GANASTE!", 100, 250);
         }
     }
