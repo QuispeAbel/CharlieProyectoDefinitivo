@@ -51,7 +51,7 @@ public class CharlieNivel extends JGame {
 
     public CharlieNivel() {
         // call game constructor
-        super("DemoCamaraHeroe ", 800, 600);
+        super("DemoCamaraHeroe ", 1024, 720);
 
     }
 
@@ -89,10 +89,13 @@ public class CharlieNivel extends JGame {
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
 
+        marcador.setNroJugador(j1);
+
         //Puntos
-        if(leoncito.getX() > aro.getX()){
+        if(leoncito.getX() >= aro.getX()){
 //          if(j1_jugando)
                 j1.sumarPuntos(100);
+                marcador.getPuntajeTotal(j1);
 //          else   
 //              j2.sumarPuntosPasados(100);
         }
@@ -161,7 +164,6 @@ public class CharlieNivel extends JGame {
         // long currentTime = System.currentTimeMillis();
         if (!gameover ) {
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
-
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
