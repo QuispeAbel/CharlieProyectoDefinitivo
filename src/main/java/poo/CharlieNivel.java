@@ -66,7 +66,7 @@ public class CharlieNivel {
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
-        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
