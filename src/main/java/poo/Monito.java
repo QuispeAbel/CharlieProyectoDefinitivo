@@ -32,6 +32,8 @@ public class Monito extends obstaculo {
     public void update(double delta) {
         if (this.getY() < POSICION_Y_PISO)
             this.setY(getY() + gravity);
+        else
+            this.setY(getY());        
     }
 
     void MovimientoMono(double delta) {
