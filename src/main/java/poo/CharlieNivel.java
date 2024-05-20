@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
+import javax.swing.Timer;
 
 public class CharlieNivel extends JGame {
 
@@ -26,6 +27,8 @@ public class CharlieNivel extends JGame {
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
+    boolean bonus = false;
+    Timer bonusTimer;
     int cont=0;
     int contbon=0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
@@ -79,6 +82,15 @@ public class CharlieNivel extends JGame {
         leoncito.quieto();
 
         tarima = new tarima("imagenes/tarima.png", 10000, 530);
+
+        //cuenta el tiempo cuando aparece el carterl "Bonus" 
+        bonusTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bonus = false;
+                bonusTimer.stop();
+            }
+        });
+        bonusTimer.setRepeats(false);
 
     }
 
@@ -175,11 +187,16 @@ public class CharlieNivel extends JGame {
                 ganaste = true;
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
+                aro.MovimientoAro(0);
                 arito.MovimientoAro(0);
                 bolsa.Movimientobonus(0);
             }
             if (Charlie.getHitbox().intersects(bolsa)) {
                 contbon++;
+                bonus=true;
+                if (!bonusTimer.isRunning()) {
+                    bonusTimer.start();
+                }
             }
         }
 
@@ -202,15 +219,11 @@ public class CharlieNivel extends JGame {
         if (!ganaste) {
             aro.displayDelante(g);
             arito.displayDelante(g);   
-        }
+        }    
 
-
-            
-
-        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) {
+        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) 
             bolsa.display(g);
-        }
-
+        
         leoncito.display(g);
 
         Charlie.display(g);
@@ -229,6 +242,11 @@ public class CharlieNivel extends JGame {
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
         marcador.display(g);
+
+        if (bonus){     
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString("500", (getWidth()/2)-200, (getWidth()/2)-200);}
 
         if (gameover) {
             g.setColor(Color.RED);
