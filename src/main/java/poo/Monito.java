@@ -30,8 +30,9 @@ public class Monito extends obstaculo {
     }
 
     public void update(double delta) {
-		if(this.getY()<POSICION_Y_PISO)
-        this.setY(getY()+ gravity );}
+        if (this.getY() < POSICION_Y_PISO)
+            this.setY(getY() + gravity);
+    }
 
     void MovimientoMono(double delta) {
         setX(getX() - 100 * delta, posXhitbox);
@@ -40,11 +41,12 @@ public class Monito extends obstaculo {
     void SaltoMono(double delta) {
         setX(getX() - 2000 * delta, posXhitbox);
         setY(getY() - 2000 * delta, posYhitbox);
+        setX(getX() - 1500 * delta, posXhitbox);
     }
 
     public void setPiso(int PosNueva) {
-		POSICION_Y_PISO = PosNueva;
-	}
+        POSICION_Y_PISO = PosNueva;
+    }
 
     void ubicaMono(double xheroe) {
         this.setX(xheroe, posXhitbox);

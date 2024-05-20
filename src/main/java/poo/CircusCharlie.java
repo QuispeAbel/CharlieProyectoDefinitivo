@@ -9,6 +9,8 @@ import java.awt.event.*;
 
 public class CircusCharlie extends JFrame implements ActionListener {
 
+    CharlieNivel Nivel1;
+
     public CircusCharlie() {
         setBackground(Color.ORANGE);
         WindowListener l = new WindowAdapter() {

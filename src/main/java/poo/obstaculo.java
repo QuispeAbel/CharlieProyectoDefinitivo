@@ -5,13 +5,13 @@ import java.awt.*;
 
 abstract class obstaculo extends ObjetoGrafico implements Hiteable {
     protected double velocidadDesplazamientoX = 100;
-    protected double alturaY;
+    // protected double alturaY;
     protected double x;
     protected Rectangle hitbox = new Rectangle();
 
     obstaculo(String filename, double alturaY) {
-        super(filename);
-        this.alturaY = alturaY;
+        super(filename, alturaY);
+        // this.alturaY = alturaY;
     }
 
     obstaculo(String filename, double x, double alturaY) {
