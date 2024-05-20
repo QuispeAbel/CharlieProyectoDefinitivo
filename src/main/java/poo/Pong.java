@@ -51,7 +51,7 @@ public class Pong extends JGame {
 
     public Pong(String img_pelota, String img_paleta1, String img_paleta2) {
 
-        super("Pong", 1240, 720);
+        super("Pong", 1024, 768);
 
         this.img_pelota = img_pelota;
         this.img_paleta1 = img_paleta1;
