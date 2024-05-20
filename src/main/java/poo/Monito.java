@@ -38,6 +38,7 @@ public class Monito extends obstaculo {
     }
 
     void SaltoMono(double delta) {
+        setX(getX() - 2000 * delta, posXhitbox);
         setY(getY() - 2000 * delta, posYhitbox);
     }
 
