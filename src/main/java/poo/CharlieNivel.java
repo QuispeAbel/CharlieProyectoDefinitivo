@@ -106,6 +106,17 @@ public class CharlieNivel {
             // j2.sumarPuntosPasados(100);
         }
 
+        marcador.setNroJugador(j1);
+
+        //Puntos
+        if(leoncito.getX() >= aro.getX()){
+//          if(j1_jugando)
+                j1.sumarPuntos(100);
+                marcador.getPuntajeTotal(j1);
+//          else   
+//              j2.sumarPuntosPasados(100);
+        }
+
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
             /// shipX -= NAVE_DESPLAZAMIENTO * delta;
@@ -168,7 +179,6 @@ public class CharlieNivel {
         // long currentTime = System.currentTimeMillis();
         if (!gameover) {
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
-
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
