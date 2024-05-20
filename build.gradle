@@ -17,7 +17,7 @@ dependencies {
 tasks.named("assemble"){
 	doLast{
 		copy{
-			from("src/main/resourses/jgame.properties")
+			from("src/main/resources/jgame.properties")
 			into(".")
 		}
 	}

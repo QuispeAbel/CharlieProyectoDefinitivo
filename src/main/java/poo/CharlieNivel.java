@@ -20,22 +20,29 @@ public class CharlieNivel extends JGame {
     Charlie Charlie;
     tarima tarima;
     Caldera calderass;
+    Bonus bolsa = new Bonus("imagenes/ufo.png");
     int espacioEntreCalderas = 800;
     int posicion_aro;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
+<<<<<<< HEAD
     //boolean j1_jugando = true;
     
+=======
+    int cont=0;
+    int contbon=0;
+>>>>>>> 29666039fba9c4106121c15a18a05ee13290862a
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-    aro aro = new aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
+    Aro arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+    Aro aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
 
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
+    private double DistanciaNuevoSpawnXbonus = 4515;
     private double DistanciaNuevoSpawnXaro = 700;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
@@ -49,7 +56,7 @@ public class CharlieNivel extends JGame {
 
     public CharlieNivel() {
         // call game constructor
-        super("DemoCamaraHeroe ", 1024, 720);
+        super("DemoCamaraHeroe ", 800, 600);
 
     }
 
@@ -143,6 +150,7 @@ public class CharlieNivel extends JGame {
 
         if (!gameover) {
             arito.MovimientoAro(delta);
+            bolsa.Movimientobonus(delta);
             aro.MovimientoAro(delta);
             leoncito.update(delta);
             Charlie.update(delta);
@@ -156,20 +164,22 @@ public class CharlieNivel extends JGame {
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
 
         // long currentTime = System.currentTimeMillis();
-        if (!gameover) {
-            if (leoncito.getX() > calderass.getX() + 250) {
+        if (!gameover ) {
+            if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
 
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (leoncito.getX() > aro.getX() + 350) {
+            if (leoncito.getX() > aro.getX() + 350 && !ganaste) {
                 aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
+                cont++;
+                if (cont%5 == 0) {
+                    arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
+                    bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
+                }
             }
-
-            if (leoncito.getX() > arito.getX() + 350) {
-                arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
-            }
+            
 
             if (leoncito.getHitbox().intersects(aro.getHitbox()) || leoncito.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
@@ -182,6 +192,9 @@ public class CharlieNivel extends JGame {
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
             }
+            if (Charlie.getHitbox().intersects(bolsa)) {
+                contbon++;
+            }    
         }
 
     }
@@ -202,7 +215,11 @@ public class CharlieNivel extends JGame {
 
         aro.displayDelante(g);
 
-        arito.displayDelante(g);
+        arito.displayDelante(g);        
+
+        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) {
+            bolsa.display(g);
+        }
 
         leoncito.display(g);
 

@@ -30,6 +30,7 @@ public class CharlieNivel2 extends JGame {
     // aro arito = new aro("imagenes/aroMitad2Peque.png",
     // "imagenes/aroMitad1Peque.png");
     Monito mono, monoazul;
+    int cont=0;
 
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
@@ -139,10 +140,13 @@ public class CharlieNivel2 extends JGame {
 
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (Charlie.getX() > mono.getX() + 350) {
+            if (Charlie.getX() > mono.getX() + 350 && !ganaste) {
 
                 mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
-                monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX*1.5);
+                cont++;
+                if (cont%5 == 0 ) 
+                    monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX*1.5);
+                
             }
 
             if (mono.getHitbox().intersects(monoazul.getHitbox())) //&& mono.getY()==monoazul.getY() )
@@ -180,7 +184,7 @@ public class CharlieNivel2 extends JGame {
         // arito.displayDelante(g);
 
         Charlie.display(g);
-
+        
         mono.display(g);
         monoazul.display(g);
 
