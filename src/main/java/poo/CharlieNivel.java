@@ -22,7 +22,6 @@ public class CharlieNivel extends JGame {
     Caldera calderass;
     Bonus bolsa = new Bonus("imagenes/ufo.png");
     int espacioEntreCalderas = 800;
-    int posicion_aro;
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
@@ -51,7 +50,7 @@ public class CharlieNivel extends JGame {
 
     public CharlieNivel() {
         // call game constructor
-        super("DemoCamaraHeroe ", 800, 600);
+        super("DemoCamaraHeroe ", 1024, 720);
 
     }
 
@@ -59,17 +58,14 @@ public class CharlieNivel extends JGame {
 
         Mundo m = Mundo.getInstance();
 
-        j1 = new Jugador();
-
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
-        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
-        
         aro.aroGrande();
 
         cam = new Camara(0, 0);
@@ -88,14 +84,6 @@ public class CharlieNivel extends JGame {
 
     public void gameUpdate(double delta) {
         Keyboard keyboard = getKeyboard();
-
-        //Puntos
-        if(leoncito.getX() > aro.getX()){
-//          if(j1_jugando)
-                j1.sumarPuntos(100);
-//          else   
-//              j2.sumarPuntosPasados(100);
-        }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -172,6 +160,7 @@ public class CharlieNivel extends JGame {
                 if (cont%5 == 0) {
                     arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
                     bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
+                    contbon=0;
                 }
             }
             
@@ -186,10 +175,12 @@ public class CharlieNivel extends JGame {
                 ganaste = true;
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
+                arito.MovimientoAro(0);
+                bolsa.Movimientobonus(0);
             }
             if (Charlie.getHitbox().intersects(bolsa)) {
                 contbon++;
-            }    
+            }
         }
 
     }
@@ -208,9 +199,13 @@ public class CharlieNivel extends JGame {
 
         calderass.display(g);
 
-        aro.displayDelante(g);
+        if (!ganaste) {
+            aro.displayDelante(g);
+            arito.displayDelante(g);   
+        }
 
-        arito.displayDelante(g);        
+
+            
 
         if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0) {
             bolsa.display(g);
@@ -220,9 +215,12 @@ public class CharlieNivel extends JGame {
 
         Charlie.display(g);
 
-        aro.displayDetras(g);
+        if (!ganaste) {
+            aro.displayDetras(g);
+            arito.displayDetras(g);  
+        }
 
-        arito.displayDetras(g);
+        
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -232,21 +230,15 @@ public class CharlieNivel extends JGame {
 
         marcador.display(g);
 
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        j1.sumarPuntos(100);
-        marcador.draw(g);
-        
-
-        g.setFont(new Font("Arial", Font.BOLD, 70));
-
         if (gameover) {
             g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GAME OVER!", 100, 250);
         }
 
         if (ganaste) {
             g.setColor(Color.GREEN);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GANASTE!", 100, 250);
         }
     }
