@@ -108,13 +108,13 @@ public class CharlieNivel {
 
         marcador.setNroJugador(j1);
 
-        //Puntos
-        if(leoncito.getX() >= aro.getX()){
-//          if(j1_jugando)
-                j1.sumarPuntos(100);
-                marcador.getPuntajeTotal(j1);
-//          else   
-//              j2.sumarPuntosPasados(100);
+        // Puntos
+        if (leoncito.getX() >= aro.getX()) {
+            // if(j1_jugando)
+            j1.sumarPuntos(100);
+            marcador.getPuntajeTotal(j1);
+            // else
+            // j2.sumarPuntosPasados(100);
         }
 
         // Procesar teclas de direccion
@@ -259,11 +259,11 @@ public class CharlieNivel {
 
         marcador.display(g);
 
-         if (bonus) {
-         g.setColor(Color.white);
-         g.setFont(new Font("Arial", Font.BOLD, 40));
-         g.drawString("500", (1024 / 2) - 200, ( 720 / 2) - 200);
-         }
+        if (bonus) {
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
+        }
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));

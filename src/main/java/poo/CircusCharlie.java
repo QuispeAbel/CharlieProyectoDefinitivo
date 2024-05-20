@@ -14,7 +14,7 @@ public class CircusCharlie extends JGame {
 
     public CircusCharlie() {
         // call game constructor
-        super("CircusCharlie", 1024, 720);
+        super("CircusCharlie", 1024, 768);
 
     }
 
