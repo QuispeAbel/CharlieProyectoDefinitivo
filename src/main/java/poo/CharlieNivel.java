@@ -27,13 +27,8 @@ public class CharlieNivel extends JGame {
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
-<<<<<<< HEAD
-    //boolean j1_jugando = true;
-    
-=======
     int cont=0;
     int contbon=0;
->>>>>>> 29666039fba9c4106121c15a18a05ee13290862a
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
