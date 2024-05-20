@@ -1,38 +1,52 @@
 package poo;
 
-import javax.swing.*;
+import com.entropyinteractive.JGame;
+import com.entropyinteractive.Keyboard;
 
 //import com.entropyinteractive.JGame;
 
 import java.awt.*;
 import java.awt.event.*;
 
-public class CircusCharlie extends JFrame implements ActionListener {
+public class CircusCharlie extends JGame {
 
-    CharlieNivel Nivel1;
+    CharlieNivel Nivel1 = new CharlieNivel();
 
     public CircusCharlie() {
-        setBackground(Color.ORANGE);
-        WindowListener l = new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            };
-        };
-        addWindowListener(l);
-        pack();
-        setVisible(true);
-        setLocationRelativeTo(null);
+        // call game constructor
+        super("CircusCharlie", 1024, 720);
 
     }
 
     public static void main(String... z) {
-        new CircusCharlie();
+        CircusCharlie jogo = new CircusCharlie();
+        jogo.run(1.0 / 60.0);
+        System.exit(0);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void gameDraw(Graphics2D arg0) {
+        Nivel1.Draw(arg0);
+    }
+
+    @Override
+    public void gameShutdown() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+
+    @Override
+    public void gameStartup() {
+        Nivel1.Start();
+    }
+
+    @Override
+    public void gameUpdate(double arg0) {
+        Keyboard keyboard = getKeyboard();
+
+        Nivel1.Update(arg0, keyboard);
+        if ((keyboard.isKeyPressed(KeyEvent.VK_ESCAPE))) {
+            stop();
+        }
     }
 
 }

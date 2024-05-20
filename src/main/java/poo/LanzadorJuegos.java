@@ -155,7 +155,7 @@ public class LanzadorJuegos extends JFrame implements ActionListener {
         }
 
         if (JuegoSel == 2) {
-            CharlieNivel juego = new CharlieNivel();
+            CircusCharlie juego = new CircusCharlie();
 
             t = new Thread() {
                 public void run() {
