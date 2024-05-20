@@ -3,13 +3,16 @@ package poo;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class aro {
+public class Aro {
     private MedioAro AroDelante;
     private MedioAro AroDetras;
     private double altura_AroDelante = 253;
     private double altura_AroDetras = 272;
+    // protected static final BufferedImage adelante = null;
+    // protected static final BufferedImage atras = null;
 
-    aro(String filename, String filename2) {
+    Aro(String filename, String filename2) {
+
         // setAltura_AroDetras(272);
         AroDelante = new MedioAro(filename, altura_AroDelante);
         AroDetras = new MedioAro(filename2, altura_AroDetras);
@@ -44,11 +47,15 @@ public class aro {
     }
 
     public void displayDelante(Graphics2D g2) {
-        g2.drawImage(AroDelante.imagen, (int) AroDelante.getX(), (int) AroDelante.getY(), null);
+        AroDelante.draw(g2);
+        // g2.drawImage(AroDelante.imagen, (int) AroDelante.getX(), (int)
+        // AroDelante.getY(), null);
     }
 
     public void displayDetras(Graphics2D g2) {
-        g2.drawImage(AroDetras.imagen, (int) AroDetras.getX(), (int) AroDetras.getY(), null);
+        AroDetras.draw(g2);
+        // g2.drawImage(AroDetras.imagen, (int) AroDetras.getX(), (int)
+        // AroDetras.getY(), null);
     }
 
     public void aroGrande() {

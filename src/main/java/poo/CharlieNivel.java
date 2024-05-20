@@ -28,8 +28,8 @@ public class CharlieNivel extends JGame {
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    aro arito = new aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-    aro aro = new aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
+    Aro arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
+    Aro aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
 
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
@@ -46,7 +46,7 @@ public class CharlieNivel extends JGame {
 
     public CharlieNivel() {
         // call game constructor
-        super("DemoCamaraHeroe ", 1024, 720);
+        super("DemoCamaraHeroe ", 800, 600);
 
     }
 
