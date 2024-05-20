@@ -66,7 +66,7 @@ public class CharlieNivel {
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
         Charlie.setPiso(515);
 
-        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
@@ -259,11 +259,11 @@ public class CharlieNivel {
 
         marcador.display(g);
 
-        // if (bonus) {
-        // g.setColor(Color.white);
-        // g.setFont(new Font("Arial", Font.BOLD, 40));
-        // g.drawString("500", (getWidth() / 2) - 200, (getWidth() / 2) - 200);
-        // }
+         if (bonus) {
+         g.setColor(Color.white);
+         g.setFont(new Font("Arial", Font.BOLD, 40));
+         g.drawString("500", (1024 / 2) - 200, ( 720 / 2) - 200);
+         }
 
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
