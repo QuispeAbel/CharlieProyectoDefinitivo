@@ -181,7 +181,7 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         }
 
         if (PelotaComboBox.getSelectedItem() == "Mario") {
-            direccion = "imagenes/icons8-super-mario-48.png";
+            direccion = "imagenes/mario-48.png";
         }
 
         return direccion;

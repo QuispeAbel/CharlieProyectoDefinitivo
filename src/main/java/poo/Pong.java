@@ -106,13 +106,13 @@ public class Pong extends JGame {
         if (!gameover) {
             if (paleta2.intersects(pelota)) { // Golpe Paleta Derecha
                 pelota.invertirVelX();
-                pelota.invertirVelY();
+                // pelota.invertirVelY();
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
             if (paleta1.intersects(pelota)) { // Golpe Paleta Derecha
                 pelota.invertirVelX();
-                pelota.invertirVelY();
+                // pelota.invertirVelY();
                 pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
             }
 
