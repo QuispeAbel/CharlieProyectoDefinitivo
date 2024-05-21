@@ -3,7 +3,6 @@ package poo;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.*;
 
 public class ConfiguracionPong extends ConfiguracionVideoJuegos {
     protected JCheckBox sonidoCheckBox;
@@ -19,6 +18,10 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
             moverArriba, IniciarJuego, SelecPistaMusical, selecPersonaje, selecPersonaje2;
 
     public ConfiguracionPong() {
+        setConfiguracion();
+    }
+
+    public void setConfiguracion() {
 
         setBackground(ColorFondo);
         setLayout(new GridLayout(0, 2, 0, 0));
@@ -201,11 +204,4 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         return direccion;
     }
 
-    public static void main(String[] args) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
 }
