@@ -41,6 +41,7 @@ public class CharlieNivel1 {
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
 
     private int CantidadArosChicos = 4;
+    private int Cantidabonus = 4;
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
@@ -84,6 +85,8 @@ public class CharlieNivel1 {
             if (i < CantidadArosChicos && 0 < i) {
                 aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
                 aroschicos.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
+                bolsa.add(new Bonus("imagenes/ufo.png"));
+                bolsa.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
             }
         }
 
