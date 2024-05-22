@@ -44,6 +44,11 @@ public class CharlieNivel1 extends CharlieNivel {
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
+    int cont[] = { 0, 0, 0, 0 };
+    // private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar
+    // que el objeto aparezca adelante del
+    // personaje
+    // private double DistanciaNuevoSpawnXbonus = 4515;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -91,6 +96,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
+        marcador.getHi();
 
         calderass = new Caldera("imagenes/caldera1.png");
 
@@ -107,15 +113,13 @@ public class CharlieNivel1 extends CharlieNivel {
         tarima = new tarima("imagenes/tarima.png", 10000, 530);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
-        /*
-         * bonusTimer = new Timer(1000, new ActionListener() {
-         * public void actionPerformed(ActionEvent e) {
-         * bonus = false;
-         * bonusTimer.stop();
-         * }
-         * });
-         * bonusTimer.setRepeats(false);
-         */
+        bonusTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bonus = false;
+                bonusTimer.stop();
+            }
+        });
+        bonusTimer.setRepeats(false);
 
     }
 
@@ -182,6 +186,17 @@ public class CharlieNivel1 extends CharlieNivel {
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
+
+                // Suma Puntos Aro Grande
+                if (leoncito.getX() >= arosgrandes.get(i).getX() - 3
+                        && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
+                    // if(j1_jugando)
+                    j1.sumarPuntos(100);
+                    marcador.getPuntajeTotal(j1);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                }
+
                 // respawn al final del mapa
                 if (arosgrandes.get(i).getX() <= 350)
                     arosgrandes.get(i).spawnAroGrande(10000);
@@ -236,13 +251,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
                 // bolsa.Movimientobonus(0);
             }
-            // if (Charlie.getHitbox().intersects(bolsa)) {
-            // contbon++;
-            // bonus = true;
-            // if (!bonusTimer.isRunning()) {
-            // bonusTimer.start();
-            // }
-            // }
+
         }
     }
 
@@ -269,9 +278,6 @@ public class CharlieNivel1 extends CharlieNivel {
                 }
             }
         }
-
-        // if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0)
-        // bolsa.display(g);
 
         leoncito.display(g);
 

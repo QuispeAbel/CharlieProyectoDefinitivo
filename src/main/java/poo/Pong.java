@@ -174,13 +174,13 @@ public class Pong extends JGame {
         g2d.setStroke(dashed);
         g.drawLine(getWidth() / 2 - 5, 0, getWidth() / 2 - 5, getHeight());
 
-        g.setColor(Color.white);
-        g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
-        g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
+        
+        // g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
+        // g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
 
-        g.setFont(new Font("Arial", Font.BOLD, 70));
-        g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 100, 100);
-        g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 50, 100);
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 70));
+        g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 150, 120);
+        g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 80, 120);
 
         paleta1.draw(g);
 
@@ -189,12 +189,12 @@ public class Pong extends JGame {
         pelota.draw(g);
 
         if (gameover) {
-            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.setFont(new Font("Press Start 2P", Font.BOLD, 30));
             String winner = jugadorIzq.getPuntos() > jugador2Der.getPuntos() ? "Player 1" : "Player 2";
-            g.drawString("Game Over!  " + winner + " wins!", getWidth() / 2 - 180, getHeight() / 2 - 10);
+            g.drawString(" Game Over!  " + winner + " wins!", getWidth() / 2 - 370, getHeight() / 2 - 10);
             g.setColor(Color.GRAY);
-            g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString("[press ESC to quit]", getWidth() / 2 - 90, getHeight() / 2 + 130);
+            g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
+            g.drawString("[press ESC to quit]", getWidth() / 2 - 200, getHeight() / 2 + 130);
         }
 
     }
