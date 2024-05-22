@@ -7,9 +7,8 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 import javax.swing.Timer;
-import java.util.ArrayList;
 
-public class CharlieNivel1 {
+public class CharlieNivel1 extends CharlieNivel {
 
     Date dInit;
     Date dAhora;
@@ -184,7 +183,7 @@ public class CharlieNivel1 {
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
                 // respawn al final del mapa
-                if (arosgrandes.get(i).getX() == 10)
+                if (arosgrandes.get(i).getX() <= 350)
                     arosgrandes.get(i).spawnAroGrande(10000);
                 // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
@@ -196,8 +195,8 @@ public class CharlieNivel1 {
                     aroschicos.get(i).MovimientoAro(delta);
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
-                    if (arosgrandes.get(i).getX() == 10) {
-                        aroschicos.get(i).spawnAroGrande(8500);
+                    if (aroschicos.get(i).getX() <= 350) {
+                        aroschicos.get(i).spawn(8500);
                         bolsa.get(i).spawn(8510);
                     }
                     // choque con personajes

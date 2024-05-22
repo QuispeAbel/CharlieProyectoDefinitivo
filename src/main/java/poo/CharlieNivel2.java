@@ -9,7 +9,7 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 
-public class CharlieNivel2 {
+public class CharlieNivel2 extends CharlieNivel {
     Date dInit;
     Date dAhora;
     SimpleDateFormat ft;
