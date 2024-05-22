@@ -7,9 +7,8 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 import javax.swing.Timer;
-import java.util.ArrayList;
 
-public class CharlieNivel1 {
+public class CharlieNivel1 extends CharlieNivel {
 
     Date dInit;
     Date dAhora;
@@ -29,6 +28,7 @@ public class CharlieNivel1 {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
+    int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -39,6 +39,7 @@ public class CharlieNivel1 {
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
 
     private int CantidadArosChicos = 4;
+    private int Cantidabonus = 4;
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
@@ -93,6 +94,7 @@ public class CharlieNivel1 {
 
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
+        marcador.getHi();
 
         calderass = new Caldera("imagenes/caldera1.png");
 
@@ -182,8 +184,19 @@ public class CharlieNivel1 {
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
+
+                // Suma Puntos Aro Grande
+                if (leoncito.getX() >= arosgrandes.get(i).getX() - 3
+                        && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
+                    // if(j1_jugando)
+                    j1.sumarPuntos(100);
+                    marcador.getPuntajeTotal(j1);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                }
+
                 // respawn al final del mapa
-                if (arosgrandes.get(i).getX() <= 30)
+                if (arosgrandes.get(i).getX() <= 350)
                     arosgrandes.get(i).spawnAroGrande(10000);
                 // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
@@ -195,8 +208,8 @@ public class CharlieNivel1 {
                     aroschicos.get(i).MovimientoAro(delta);
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
-                    if (arosgrandes.get(i).getX() <= 30){
-                        aroschicos.get(i).spawnAroGrande(8500);
+                    if (aroschicos.get(i).getX() <= 350) {
+                        aroschicos.get(i).spawn(8500);
                         bolsa.get(i).spawn(8510);
                     }
                     // choque con personajes
@@ -212,6 +225,10 @@ public class CharlieNivel1 {
                         if (!bonusTimer.isRunning()) {
                             bonusTimer.start();
                             }
+                    }
+                    if(Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (leoncito.getX() >= aroschicos.get(i).getX() - 3 && leoncito.getX() <= aroschicos.get(i).getX() + 3)){
+                        j1.sumarPuntos(500);
+                        marcador.getPuntajeTotal(j1);
                     }
                 }
 
@@ -240,7 +257,7 @@ public class CharlieNivel1 {
 
                 // bolsa.Movimientobonus(0);
             }
-    
+
         }
     }
 
@@ -291,12 +308,9 @@ public class CharlieNivel1 {
             g.setColor(Color.white);
             g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString("500", (1024 / 2) - 200, 315);
-        }
-
-           g.setColor(Color.WHITE);
-            g.setFont(new Font("Arial", Font.BOLD, 20));
-            j1.sumarPuntos(100);
-            marcador.draw(g);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
+            g.drawString("bonus!", 100, 250);
+            // g.setColor(Color.white);
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
 
@@ -312,7 +326,7 @@ public class CharlieNivel1 {
             g.drawString("GANASTE!", 100, 250);
         }
     }
-}
+}}
 
 /*
  * private void reiniciarObjeto() {
