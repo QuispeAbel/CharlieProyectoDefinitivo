@@ -81,7 +81,7 @@ public class CharlieNivel1 {
             // aros chicos
             if (i < CantidadArosChicos && 0 < i) {
                 aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
-                aroschicos.get(i).spawn(DistanciaEntreArosChicos * (i + 1));
+                aroschicos.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
             }
         }
 
