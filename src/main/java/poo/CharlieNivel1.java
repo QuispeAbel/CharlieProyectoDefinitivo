@@ -43,10 +43,11 @@ public class CharlieNivel1 extends CharlieNivel {
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-    int cont [] ={0,0,0,0};
-    //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
+    int cont[] = { 0, 0, 0, 0 };
+    // private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar
+    // que el objeto aparezca adelante del
     // personaje
-    //private double DistanciaNuevoSpawnXbonus = 4515;
+    // private double DistanciaNuevoSpawnXbonus = 4515;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -221,12 +222,14 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
-                        cont[i]= 1;
+                        cont[i] = 1;
                         if (!bonusTimer.isRunning()) {
                             bonusTimer.start();
-                            }
+                        }
                     }
-                    if(Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (leoncito.getX() >= aroschicos.get(i).getX() - 3 && leoncito.getX() <= aroschicos.get(i).getX() + 3)){
+                    if (Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())
+                            && (leoncito.getX() >= aroschicos.get(i).getX() - 3
+                                    && leoncito.getX() <= aroschicos.get(i).getX() + 3)) {
                         j1.sumarPuntos(500);
                         marcador.getPuntajeTotal(j1);
                     }
@@ -254,14 +257,13 @@ public class CharlieNivel1 extends CharlieNivel {
                         bolsa.get(i).Movimientobonus(0);
                     }
                 }
-
-                // bolsa.Movimientobonus(0);
             }
 
         }
     }
 
     public void Draw(Graphics2D g) {
+        g.setColor(Color.WHITE);
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -279,8 +281,8 @@ public class CharlieNivel1 extends CharlieNivel {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)){
-                bolsa.get(i).display(g);
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)) {
+                    bolsa.get(i).display(g);
                 }
             }
         }
@@ -298,35 +300,34 @@ public class CharlieNivel1 extends CharlieNivel {
 
         g.translate(-cam.getX(), -cam.getY());
 
-        g.setColor(Color.red);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
 
-        g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
-
-        marcador.display(g);
+        marcador.draw(g);
 
         if (bonus) {
-            g.setColor(Color.white);
+
             g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString("500", (1024 / 2) - 200, 315);
             g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("bonus!", 100, 250);
             // g.setColor(Color.white);
 
-        g.setFont(new Font("Arial", Font.BOLD, 70));
-
-        if (gameover) {
-            g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 70));
-            g.drawString("GAME OVER!", 100, 250);
-        }
 
-        if (ganaste) {
-            g.setColor(Color.GREEN);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
-            g.drawString("GANASTE!", 100, 250);
+            if (gameover) {
+                // g.setColor(Color.RED);
+                g.setFont(new Font("Arial", Font.BOLD, 70));
+                g.drawString("GAME OVER!", 100, 250);
+            }
+
+            if (ganaste) {
+                // g.setColor(Color.GREEN);
+                g.setFont(new Font("Arial", Font.BOLD, 70));
+                g.drawString("GANASTE!", 100, 250);
+            }
         }
     }
-}}
+}
 
 /*
  * private void reiniciarObjeto() {
