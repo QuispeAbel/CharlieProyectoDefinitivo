@@ -42,13 +42,10 @@ public class CharlieNivel1 {
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-<<<<<<< HEAD
     int cont [] ={0,0,0,0};
     //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
     //private double DistanciaNuevoSpawnXbonus = 4515;
-=======
->>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -112,7 +109,6 @@ public class CharlieNivel1 {
         tarima = new tarima("imagenes/tarima.png", 10000, 530);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
-<<<<<<< HEAD
         bonusTimer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bonus = false;
@@ -120,17 +116,6 @@ public class CharlieNivel1 {
             }
         });
         bonusTimer.setRepeats(false);
-=======
-        /*
-         * bonusTimer = new Timer(1000, new ActionListener() {
-         * public void actionPerformed(ActionEvent e) {
-         * bonus = false;
-         * bonusTimer.stop();
-         * }
-         * });
-         * bonusTimer.setRepeats(false);
-         */
->>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
 
     }
 
@@ -210,11 +195,7 @@ public class CharlieNivel1 {
                     aroschicos.get(i).MovimientoAro(delta);
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
-<<<<<<< HEAD
                     if (arosgrandes.get(i).getX() <= 30){
-=======
-                    if (arosgrandes.get(i).getX() == 10) {
->>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
                         aroschicos.get(i).spawnAroGrande(8500);
                         bolsa.get(i).spawn(8510);
                     }
@@ -281,13 +262,8 @@ public class CharlieNivel1 {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-<<<<<<< HEAD
                 if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)){
                 bolsa.get(i).display(g);
-=======
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
-                    bolsa.get(i).display(g);
->>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
                 }
             }
         }
@@ -312,18 +288,9 @@ public class CharlieNivel1 {
         marcador.display(g);
 
         if (bonus) {
-<<<<<<< HEAD
             g.setColor(Color.white);
             g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString("500", (1024 / 2) - 200, 315);
-=======
-            g.setColor(Color.RED);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
-            g.drawString("bonus!", 100, 250);
-            // g.setColor(Color.white);
-            // g.setFont(new Font("Arial", Font.BOLD, 40));
-            // g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
->>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
         }
 
            g.setColor(Color.WHITE);
