@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 public class Bonus extends obstaculo {
     private int posXhitbox = 0;
     private int posYhitbox = 0;
-    private int widthHitbox = 32;
-    private int heigthHitbox = 32;
+    private int widthHitbox = 35;
+    private int heigthHitbox = 35;
 
     //private double altura_bonus = 253;
 
