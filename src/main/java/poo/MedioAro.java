@@ -36,7 +36,7 @@ public class MedioAro extends obstaculo {
         setX(getX() - 100 * delta, posXhitbox);
     }
 
-    void ubicaAropost(double xheroe) {
+    void respawnMedioAro(double xheroe) {
         this.setX(xheroe, posXhitbox);
         this.setY(getY(), posYhitbox);
         // this.setPosicion(xheroe, alturaY);

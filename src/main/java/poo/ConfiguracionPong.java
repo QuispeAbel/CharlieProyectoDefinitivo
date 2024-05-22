@@ -3,22 +3,21 @@ package poo;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.*;
 
 public class ConfiguracionPong extends ConfiguracionVideoJuegos {
     protected JCheckBox sonidoCheckBox;
     protected JComboBox<String> PelotaComboBox, pistaMusicalComboBox, personajeComboBox, ModoDeJuegoComboBox,
             personaje2ComboBox,
             TeclasJ1ComboBoxBajar, TeclasJ1ComboBoxSubir, TeclasJ2ComboBoxSubir, TeclasJ2ComboBoxBajar;
-    protected JTextField teclaEfectosTextField, teclaMusicaTextField, teclaPausaTextField,
-            teclaIzquierdaTextField, teclaDerechaTextField, teclaArribaTextField,
-            teclaAbajoTextField, teclaSaltoTextField, teclaInicioTextField;
     protected Color ColorFondo = new Color(7, 14, 17);
-    protected JLabel modojuego, sonidogeneral, SonidoFX, musicaFondo, PausarReanudar, MoverIzquierda, MoverDerecha,
-            moverAbajo, moverAbajo2, moverArriba2,
-            moverArriba, IniciarJuego, SelecPistaMusical, selecPersonaje, selecPersonaje2;
+    protected JLabel modojuego, sonidogeneral, moverAbajo, moverAbajo2, moverArriba2, moverArriba, SelecPistaMusical,
+            selecPersonaje, selecPersonaje2;
 
     public ConfiguracionPong() {
+        setConfiguracion();
+    }
+
+    public void setConfiguracion() {
 
         setBackground(ColorFondo);
         setLayout(new GridLayout(0, 2, 0, 0));
@@ -181,7 +180,7 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         }
 
         if (PelotaComboBox.getSelectedItem() == "Mario") {
-            direccion = "imagenes/icons8-super-mario-48.png";
+            direccion = "imagenes/mario-48.png";
         }
 
         return direccion;
@@ -201,11 +200,4 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
         return direccion;
     }
 
-    public static void main(String[] args) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
 }

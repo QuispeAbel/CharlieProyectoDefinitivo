@@ -58,6 +58,7 @@ public class Pelota extends ObjetoGrafico {
 
     public void invertirVelX() {
         velocidadPelotaX = -velocidadPelotaX;
+        setX(getX() + 2 * velocidadPelotaX);
     }
 
     public void invertirVelY() {
@@ -71,6 +72,14 @@ public class Pelota extends ObjetoGrafico {
 
     public Rectangle getColiton() {
         return this;
+    }
+
+    public void setVelocidadPelotaX(int velocidadPelotaX) {
+        this.velocidadPelotaX = velocidadPelotaX;
+    }
+
+    public void setVelocidadPelotaY(int velocidadPelotaY) {
+        this.velocidadPelotaY = velocidadPelotaY;
     }
 
 }

@@ -22,14 +22,14 @@ public class Aro {
         this.altura_AroDetras = altura_AroDetras;
     }
 
-    public void spawn(double xheroe) {
-        AroDelante.ubicaAropost(xheroe);
-        AroDetras.ubicaAropost(xheroe + 30);
+    public void spawn(double X) {
+        AroDelante.respawnMedioAro(X);
+        AroDetras.respawnMedioAro(X + 30);
     }
 
-    public void spawnAroGrande(double xheroe) {
-        AroDelante.ubicaAropost(xheroe);
-        AroDetras.ubicaAropost(xheroe + 40);
+    public void spawnAroGrande(double X) {
+        AroDelante.respawnMedioAro(X);
+        AroDetras.respawnMedioAro(X + 40);
     }
 
     // PROVISORIO
