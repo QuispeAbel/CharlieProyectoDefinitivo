@@ -9,13 +9,9 @@ public class ConfiguracionPong extends ConfiguracionVideoJuegos {
     protected JComboBox<String> PelotaComboBox, pistaMusicalComboBox, personajeComboBox, ModoDeJuegoComboBox,
             personaje2ComboBox,
             TeclasJ1ComboBoxBajar, TeclasJ1ComboBoxSubir, TeclasJ2ComboBoxSubir, TeclasJ2ComboBoxBajar;
-    protected JTextField teclaEfectosTextField, teclaMusicaTextField, teclaPausaTextField,
-            teclaIzquierdaTextField, teclaDerechaTextField, teclaArribaTextField,
-            teclaAbajoTextField, teclaSaltoTextField, teclaInicioTextField;
     protected Color ColorFondo = new Color(7, 14, 17);
-    protected JLabel modojuego, sonidogeneral, SonidoFX, musicaFondo, PausarReanudar, MoverIzquierda, MoverDerecha,
-            moverAbajo, moverAbajo2, moverArriba2,
-            moverArriba, IniciarJuego, SelecPistaMusical, selecPersonaje, selecPersonaje2;
+    protected JLabel modojuego, sonidogeneral, moverAbajo, moverAbajo2, moverArriba2, moverArriba, SelecPistaMusical,
+            selecPersonaje, selecPersonaje2;
 
     public ConfiguracionPong() {
         setConfiguracion();

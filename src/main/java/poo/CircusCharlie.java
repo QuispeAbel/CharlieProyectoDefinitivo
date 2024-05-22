@@ -10,7 +10,7 @@ import java.awt.event.*;
 
 public class CircusCharlie extends JGame {
 
-    CharlieNivel Nivel1 = new CharlieNivel();
+    CharlieNivel1 Nivel1 = new CharlieNivel1();
 
     public CircusCharlie() {
         // call game constructor

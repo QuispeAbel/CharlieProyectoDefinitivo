@@ -7,8 +7,9 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 import javax.swing.Timer;
+import java.util.ArrayList;
 
-public class CharlieNivel {
+public class CharlieNivel1 {
 
     Date dInit;
     Date dAhora;
@@ -37,6 +38,8 @@ public class CharlieNivel {
     Aro arito;
     Aro aro;
 
+    ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
+
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
     private double DistanciaNuevoSpawnXbonus = 4515;
@@ -44,7 +47,7 @@ public class CharlieNivel {
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
-    CharlieNivel() {
+    CharlieNivel1() {
     }
 
     public void Start() {
@@ -60,7 +63,13 @@ public class CharlieNivel {
         bolsa = new Bonus("imagenes/ufo.png");
 
         arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-        aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
+        for (int i = 0; i < 10; i++) {
+            arosgrandes.add(new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png"));
+            arosgrandes.get(i).aroGrande();
+            arosgrandes.get(i).spawnAroGrande(1000 * (i + 1));
+        }
+        // aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
+        // aro.aroGrande();
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
@@ -70,8 +79,6 @@ public class CharlieNivel {
         marcador.setPosicion(4, 30);
 
         calderass = new Caldera("imagenes/caldera1.png");
-
-        aro.aroGrande();
 
         cam = new Camara(0, 0);
 
@@ -98,24 +105,24 @@ public class CharlieNivel {
 
     public void Update(double delta, Keyboard keyboard) {
 
-        // Puntos
-        if (leoncito.getX() > aro.getX()) {
-            // if(j1_jugando)
-            j1.sumarPuntos(100);
-            // else
-            // j2.sumarPuntosPasados(100);
-        }
+        // // Puntos
+        // if (leoncito.getX() > aro.getX()) {
+        // // if(j1_jugando)
+        // j1.sumarPuntos(100);
+        // // else
+        // // j2.sumarPuntosPasados(100);
+        // }
 
-        marcador.setNroJugador(j1);
+        // marcador.setNroJugador(j1);
 
-        // Puntos
-        if (leoncito.getX() >= aro.getX()) {
-            // if(j1_jugando)
-            j1.sumarPuntos(100);
-            marcador.getPuntajeTotal(j1);
-            // else
-            // j2.sumarPuntosPasados(100);
-        }
+        // // Puntos
+        // if (leoncito.getX() >= aro.getX()) {
+        // // if(j1_jugando)
+        // j1.sumarPuntos(100);
+        // marcador.getPuntajeTotal(j1);
+        // // else
+        // // j2.sumarPuntosPasados(100);
+        // }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -164,15 +171,15 @@ public class CharlieNivel {
         if (!gameover) {
             arito.MovimientoAro(delta);
             bolsa.Movimientobonus(delta);
-            aro.MovimientoAro(delta);
+            // aro.MovimientoAro(delta);
+            for (int i = 0; i < 10; i++) {
+                arosgrandes.get(i).MovimientoAro(delta);
+                if (arosgrandes.get(i).getX() == 10)
+                    arosgrandes.get(i).spawnAroGrande(10000);
+            }
             leoncito.update(delta);
             Charlie.update(delta);
         }
-
-        // Desplazar el aro hacia la izquierda
-        // arito.MovimientoAro(delta);
-
-        // leoncito.applyForce(gravedad);
 
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
 
@@ -183,8 +190,8 @@ public class CharlieNivel {
             }
             // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
             // los medios aros
-            if (leoncito.getX() > aro.getX() + 350 && !ganaste) {
-                aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
+            if (leoncito.getX() > arito.getX() + 350 && !ganaste) {
+                // aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
                 cont++;
                 if (cont % 5 == 0) {
                     arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
@@ -193,9 +200,16 @@ public class CharlieNivel {
                 }
             }
 
-            if (leoncito.getHitbox().intersects(aro.getHitbox()) || leoncito.getHitbox().intersects(arito.getHitbox()))
+            for (int i = 0; i < 10; i++) {
+                if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
+                        || Charlie.getHitbox().intersects(arosgrandes.get(i).getHitbox())) {
+                    gameover = true;
+                }
+            }
+
+            if (leoncito.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
-            if (Charlie.getHitbox().intersects(aro.getHitbox()) || Charlie.getHitbox().intersects(arito.getHitbox()))
+            if (Charlie.getHitbox().intersects(arito.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
@@ -203,7 +217,9 @@ public class CharlieNivel {
                 ganaste = true;
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
-                aro.MovimientoAro(0);
+                for (int i = 0; i < 10; i++) {
+                    arosgrandes.get(i).MovimientoAro(0);
+                }
                 arito.MovimientoAro(0);
                 bolsa.Movimientobonus(0);
             }
@@ -231,11 +247,11 @@ public class CharlieNivel {
 
         calderass.display(g);
 
-        if (!ganaste) {
-            aro.displayDelante(g);
-            arito.displayDelante(g);
+        for (int i = 0; i < 10; i++) {
+            arosgrandes.get(i).displayDelante(g);
         }
-        aro.displayDelante(g);
+
+        arito.displayDelante(g);
 
         arito.displayDelante(g);
 
@@ -246,10 +262,11 @@ public class CharlieNivel {
 
         Charlie.display(g);
 
-        if (!ganaste) {
-            aro.displayDetras(g);
-            arito.displayDetras(g);
+        for (int i = 0; i < 10; i++) {
+            arosgrandes.get(i).displayDetras(g);
         }
+
+        arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -283,10 +300,6 @@ public class CharlieNivel {
             g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("GANASTE!", 100, 250);
         }
-    }
-
-    public void Sdown() {
-        // Log.info(getClass().getSimpleName(), "Shutting down game");
     }
 }
 
