@@ -28,7 +28,6 @@ public class CharlieNivel1 extends CharlieNivel {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    int cont = 0;
     int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
@@ -223,6 +222,14 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
+                        cont[i]= 1;
+                        if (!bonusTimer.isRunning()) {
+                            bonusTimer.start();
+                            }
+                    }
+                    if(Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (leoncito.getX() >= aroschicos.get(i).getX() - 3 && leoncito.getX() <= aroschicos.get(i).getX() + 3)){
+                        j1.sumarPuntos(500);
+                        marcador.getPuntajeTotal(j1);
                     }
                 }
 
@@ -307,10 +314,9 @@ public class CharlieNivel1 extends CharlieNivel {
             // g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
         }
 
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        j1.sumarPuntos(100);
-        marcador.draw(g);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
+            marcador.draw(g);
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
 
