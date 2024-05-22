@@ -117,7 +117,8 @@ class ObjetoGrafico extends Rectangle {
     }
 
     public void draw(Graphics2D g) {
-        g.drawImage(imagen, (int) this.getX() - (imagen.getWidth() / 2), (int) this.getY(), null);
+        g.drawImage(imagen, (int) this.getX()/* (int) this.getX() - (imagen.getWidth() / 2) */, (int) this.getY(),
+                null);
     }
 
     public void display(Graphics2D g2) {
