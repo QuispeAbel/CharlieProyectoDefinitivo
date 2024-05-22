@@ -46,11 +46,6 @@ public class CharlieNivel1 {
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
 
-    // private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar
-    // que el objeto aparezca adelante del
-    // personaje
-    // private double DistanciaNuevoSpawnXbonus = 4515;
-
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
     CharlieNivel1() {
@@ -86,11 +81,8 @@ public class CharlieNivel1 {
             if (i < CantidadArosChicos && 0 < i) {
                 aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
                 aroschicos.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
-<<<<<<< HEAD
-=======
                 bolsa.add(new Bonus("imagenes/ufo.png"));
                 bolsa.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
->>>>>>> de9cee10fce385063305129d2c4841d3a930ed0f
             }
         }
 
@@ -188,8 +180,6 @@ public class CharlieNivel1 {
         }
 
         if (!gameover) {
-            // bolsa.Movimientobonus(delta);
-
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
@@ -230,18 +220,6 @@ public class CharlieNivel1 {
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
-
-            /*
-             * if (leoncito.getX() > arito.getX() + 350 && !ganaste) {
-             * 
-             * cont++;
-             * if (cont % 5 == 0) {
-             * arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
-             * bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
-             * contbon = 0;
-             * }
-             * }
-             */
 
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
