@@ -96,6 +96,7 @@ public class CharlieNivel1 {
 
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
+        marcador.getHi();
 
         calderass = new Caldera("imagenes/caldera1.png");
 
@@ -125,13 +126,9 @@ public class CharlieNivel1 {
     public void Update(double delta, Keyboard keyboard) {
 
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
-        // // Puntos
-        // if (leoncito.getX() > aro.getX()) {
-        // // if(j1_jugando)
-        // j1.sumarPuntos(100);
-        // // else
-        // // j2.sumarPuntosPasados(100);
-        // }
+        
+        //Puntos
+        
 
         // marcador.setNroJugador(j1);
 
@@ -187,6 +184,16 @@ public class CharlieNivel1 {
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
+
+                //Suma Puntos Aro Grande
+                if (leoncito.getX() >= arosgrandes.get(i).getX() - 3 && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
+                    // if(j1_jugando)
+                        j1.sumarPuntos(100);
+                        marcador.getPuntajeTotal(j1);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                }
+
                 // respawn al final del mapa
                 if (arosgrandes.get(i).getX() == 10)
                     arosgrandes.get(i).spawnAroGrande(10000);
@@ -204,6 +211,15 @@ public class CharlieNivel1 {
                         aroschicos.get(i).spawnAroGrande(8500);
                         bolsa.get(i).spawn(8510);
                     }
+
+                    // //Suma Puntos Aro Chico
+                    // if (leoncito.getX() >= aroschicos.get(i).getX() - 3 && leoncito.getX() <= aroschicos.get(i).getX() + 3) {
+                    // // if(j1_jugando)
+                    //     
+                    // // else
+                    // // j2.sumarPuntosPasados(100);
+                    // }
+
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(aroschicos.get(i).getHitbox())) {
@@ -213,6 +229,8 @@ public class CharlieNivel1 {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
+                        // j1.sumarPuntos(500);
+                        // marcador.getPuntajeTotal(j1);
                     }
                 }
 
@@ -319,8 +337,7 @@ public class CharlieNivel1 {
         }
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        j1.sumarPuntos(100);
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         marcador.draw(g);
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
