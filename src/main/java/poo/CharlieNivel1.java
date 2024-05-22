@@ -36,14 +36,18 @@ public class CharlieNivel1 {
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
     Aro arito;
-    Aro aro;
 
+    private int CantidadArosGrandes = 10;
+    private int DistanciaEntreAros = 1000;
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
+
+    private int CantidadArosChicos = 4;
+    private int DistanciaEntreArosChicos = 2000;
+    ArrayList<Aro> aroschicos = new ArrayList<Aro>();
 
     private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
     private double DistanciaNuevoSpawnXbonus = 4515;
-    private double DistanciaNuevoSpawnXaro = 700;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -60,16 +64,26 @@ public class CharlieNivel1 {
 
         j1 = new Jugador();
 
-        bolsa = new Bonus("imagenes/ufo.png");
+        // bolsa = new Bonus("imagenes/ufo.png");
 
-        arito = new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png");
-        for (int i = 0; i < 10; i++) {
+        // primer aro chico necesario porque la diferencia entre aros es distinta al
+        // primer spawn
+        aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
+        aroschicos.get(0).spawn(2500);
+
+        // arito = new Aro("imagenes/aroMitad2Peque.png",
+        // "imagenes/aroMitad1Peque.png");
+        for (int i = 0; i < CantidadArosGrandes; i++) {
             arosgrandes.add(new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png"));
             arosgrandes.get(i).aroGrande();
-            arosgrandes.get(i).spawnAroGrande(1000 * (i + 1));
+            arosgrandes.get(i).spawnAroGrande(DistanciaEntreAros * (i + 1));
+
+            // aros chicos
+            if (i < CantidadArosChicos && 0 < i) {
+                aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
+                aroschicos.get(i).spawn(DistanciaEntreArosChicos * (i + 1));
+            }
         }
-        // aro = new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png");
-        // aro.aroGrande();
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
@@ -105,6 +119,7 @@ public class CharlieNivel1 {
 
     public void Update(double delta, Keyboard keyboard) {
 
+        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
         // // Puntos
         // if (leoncito.getX() > aro.getX()) {
         // // if(j1_jugando)
@@ -126,7 +141,6 @@ public class CharlieNivel1 {
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-            /// shipX -= NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
                 leoncito.quieto();
                 Charlie.quieto();
@@ -137,7 +151,6 @@ public class CharlieNivel1 {
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            // shipX += NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
                 leoncito.quieto();
                 Charlie.quieto();
@@ -163,73 +176,75 @@ public class CharlieNivel1 {
             }
         }
 
-        // if ((event.getID() == KeyEvent.KEY_PRESSED) &&
-        // (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
-        // stop();
-        // }
-
         if (!gameover) {
-            arito.MovimientoAro(delta);
-            bolsa.Movimientobonus(delta);
-            // aro.MovimientoAro(delta);
-            for (int i = 0; i < 10; i++) {
+            // bolsa.Movimientobonus(delta);
+
+            // arosgrandes
+            for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
+                // respawn al final del mapa
                 if (arosgrandes.get(i).getX() == 10)
                     arosgrandes.get(i).spawnAroGrande(10000);
-            }
-            leoncito.update(delta);
-            Charlie.update(delta);
-        }
-
-        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
-
-        // long currentTime = System.currentTimeMillis();
-        if (!gameover) {
-            if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
-                calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
-            }
-            // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
-            // los medios aros
-            if (leoncito.getX() > arito.getX() + 350 && !ganaste) {
-                // aro.spawnAroGrande(leoncito.getX() + DistanciaNuevoSpawnXaro);
-                cont++;
-                if (cont % 5 == 0) {
-                    arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
-                    bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
-                    contbon = 0;
-                }
-            }
-
-            for (int i = 0; i < 10; i++) {
+                // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
                         || Charlie.getHitbox().intersects(arosgrandes.get(i).getHitbox())) {
                     gameover = true;
                 }
+                // aros chicos
+                if (i < CantidadArosChicos) {
+                    aroschicos.get(i).MovimientoAro(delta);
+                    // respawn al final del mapa
+                    if (arosgrandes.get(i).getX() == 10)
+                        aroschicos.get(i).spawnAroGrande(8500);
+                    // choque con personajes
+                    if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
+                            || Charlie.getHitbox().intersects(aroschicos.get(i).getHitbox())) {
+                        gameover = true;
+                    }
+                }
+
+            }
+            leoncito.update(delta);
+            Charlie.update(delta);
+
+            if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
+                calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
 
-            if (leoncito.getHitbox().intersects(arito.getHitbox()))
-                gameover = true;
-            if (Charlie.getHitbox().intersects(arito.getHitbox()))
-                gameover = true;
+            /*
+             * if (leoncito.getX() > arito.getX() + 350 && !ganaste) {
+             * 
+             * cont++;
+             * if (cont % 5 == 0) {
+             * arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
+             * bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
+             * contbon = 0;
+             * }
+             * }
+             */
+
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < CantidadArosGrandes; i++) {
                     arosgrandes.get(i).MovimientoAro(0);
+                    if (i < CantidadArosChicos) {
+                        aroschicos.get(i).MovimientoAro(0);
+                    }
                 }
-                arito.MovimientoAro(0);
-                bolsa.Movimientobonus(0);
+
+                // bolsa.Movimientobonus(0);
             }
-            if (Charlie.getHitbox().intersects(bolsa)) {
-                contbon++;
-                bonus = true;
-                if (!bonusTimer.isRunning()) {
-                    bonusTimer.start();
-                }
-            }
+            // if (Charlie.getHitbox().intersects(bolsa)) {
+            // contbon++;
+            // bonus = true;
+            // if (!bonusTimer.isRunning()) {
+            // bonusTimer.start();
+            // }
+            // }
         }
     }
 
@@ -247,26 +262,26 @@ public class CharlieNivel1 {
 
         calderass.display(g);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < CantidadArosGrandes; i++) {
             arosgrandes.get(i).displayDelante(g);
+            if (i < CantidadArosChicos) {
+                aroschicos.get(i).displayDelante(g);
+            }
         }
 
-        arito.displayDelante(g);
-
-        arito.displayDelante(g);
-
-        if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0)
-            bolsa.display(g);
+        // if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0)
+        // bolsa.display(g);
 
         leoncito.display(g);
 
         Charlie.display(g);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < CantidadArosGrandes; i++) {
             arosgrandes.get(i).displayDetras(g);
+            if (i < CantidadArosChicos) {
+                aroschicos.get(i).displayDetras(g);
+            }
         }
-
-        arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
