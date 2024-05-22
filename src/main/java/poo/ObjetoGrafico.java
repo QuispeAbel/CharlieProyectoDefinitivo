@@ -1,17 +1,89 @@
 package poo;
 
+import java.awt.*;
 import java.awt.image.*; //imagenes
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.geom.*; //Point2d
+import java.io.*;
+import javax.imageio.*;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 class ObjetoGrafico extends Rectangle {
 
-    BufferedImage imagen = null;
-    private Point2D.Double posicion = new Point2D.Double();
+    protected BufferedImage imagen = null;
+
+    public void playSound(String soundFilePath) {
+        try {
+            File soundFile = new File(soundFilePath);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObjetoGrafico(String filename, int x, int y) {
+        try {
+
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            this.x = x;
+            this.y = y;
+            this.width = getWidthIm();
+            this.height = getHeightIm();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public ObjetoGrafico(String filename, int x, int y, int weight, int height) {
+        try {
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            this.x = x;
+            this.y = y;
+            this.width = weight;
+            this.height = height;
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public ObjetoGrafico(String filename) {
+        try {
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            // posiblemente se saque
+            this.width = getWidthIm();
+            this.height = getHeightIm();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public ObjetoGrafico(String filename, double alturafija) {
+        try {
+            this.imagen = ImageIO.read(getClass().getResource(filename));
+            // posiblemente se saque
+            this.y = (int) alturafija;
+            this.width = getWidthIm();
+            this.height = getHeightIm();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
     public ObjetoGrafico() {
 
+    }
+
+    public int getHeightIm() {
+        return imagen.getHeight();
+    }
+
+    public int getWidthIm() {
+        return imagen.getWidth();
     }
 
     public void setImagen(BufferedImage img) {
@@ -20,23 +92,24 @@ class ObjetoGrafico extends Rectangle {
     }
 
     public void setPosicion(double x, double y) {
-        posicion.setLocation(x, y);
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
     public void setX(double x) {
-        posicion.x = x;
+        this.x = (int) x;
     }
 
     public void setY(double y) {
-        posicion.y = y;
+        this.y = (int) y;
     }
 
     public double getX() {
-        return posicion.getX();
+        return this.x;
     }
 
     public double getY() {
-        return posicion.getY();
+        return this.y;
     }
 
     public void update(double delta) {
@@ -44,7 +117,11 @@ class ObjetoGrafico extends Rectangle {
     }
 
     public void draw(Graphics2D g) {
+        g.drawImage(imagen, (int) this.getX()/* (int) this.getX() - (imagen.getWidth() / 2) */, (int) this.getY(),
+                null);
+    }
 
-        g.drawImage(imagen, (int) posicion.getX() - (imagen.getWidth() / 2), (int) posicion.getY(), null);
+    public void display(Graphics2D g2) {
+        g2.drawImage(imagen, (int) this.getX(), (int) this.getY(), null);
     }
 }

@@ -14,12 +14,8 @@ import java.awt.*;
 import java.awt.event.*; //eventos
 
 import java.awt.image.*; //imagenes
+
 import javax.imageio.*; //imagenes
-
-import java.awt.Graphics2D;
-
-import java.util.LinkedList;
-
 import java.util.*;
 import java.text.*;
 
@@ -28,25 +24,38 @@ public class Pong extends JGame {
     Date dInit = new Date();
     Date dAhora;
     SimpleDateFormat ft = new SimpleDateFormat("mm:ss");
-    final double velocidadPaleta = 500.0;  //Velocidad Pelota
-    BufferedImage img_fondo = null;  //Crear Imágen
 
-    Paleta paleta1 = new Paleta(); 
+    final double velocidadPaleta = 500.0; // Velocidad Pelota
+    BufferedImage img_fondo = null; // Crear Imágen
+    String img_pelota;
+    String img_paleta1;
+    String img_paleta2;
 
-    Paleta paleta2 = new Paleta();
+    boolean gameover = false;
 
-    Pelota pelota = new Pelota();
+    int sounds = 1;
+
+    Paleta paleta1;
+
+    Paleta paleta2;
+
+    Pelota pelota;
+
+    Jugador jugadorIzq = new JugadorPong();
+
+    Jugador jugador2Der = new JugadorPong();
 
     public static void main(String[] args) {
 
-        Pong game = new Pong();
-        game.run(1.0 / 60.0);
-        System.exit(0);
     }
 
-    public Pong() {
+    public Pong(String img_pelota, String img_paleta1, String img_paleta2) {
 
-        super("DemoJuego02", 800, 600);
+        super("Pong", 1024, 768);
+
+        this.img_pelota = img_pelota;
+        this.img_paleta1 = img_paleta1;
+        this.img_paleta2 = img_paleta2;
 
         System.out.println(appProperties.stringPropertyNames());
 
@@ -55,13 +64,14 @@ public class Pong extends JGame {
     public void gameStartup() {
 
         try {
-            img_fondo = ImageIO.read(getClass().getResource("imagenes/Pong-Fondo.jpg"));
-            paleta1.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
-            paleta1.setPosicion(19, getHeight() / 2);
-            paleta2.setImagen(ImageIO.read(getClass().getResource("imagenes/paleta.jpg")));
-            paleta2.setPosicion(getWidth() - 19, getHeight() / 2);
-            pelota.setImagen(ImageIO.read(getClass().getResource("imagenes/pelota.jpg")));
-            pelota.setPosicion(getWidth() / 2, getHeight() / 2);
+
+            img_fondo = ImageIO.read(getClass().getResource("imagenes/FondoNegro.png"));
+
+            paleta1 = new Paleta(img_paleta1, 19, getHeight() / 2);
+            paleta2 = new Paleta(img_paleta2, getWidth() - 19, getHeight() / 2);
+
+            pelota = new Pelota(img_pelota, getWidth() / 2, getHeight() / 2);
+
         } catch (Exception e) {
 
         }
@@ -72,41 +82,69 @@ public class Pong extends JGame {
 
         Keyboard keyboard = this.getKeyboard();
 
-        pelota.moverPelota(getWidth(), getHeight());  //Movimiento continuo de la pelota
+        pelota.moverPelota(getWidth(), getHeight(), gameover); // Movimiento continuo de la pelota
 
-        //Reiniciar Pelota
-        if(pelota.getPelotaFueraDer()){  //Pregunta si la pelota se salio a la derecha
-            pelota.invertirVelX();      //La pelota ahora sale para el otro lado de la cancha
-            pelota.setPelotaFueraDer();  //se vuelve a poner falso que la pelota salio a la derecha
-            pelota.setPosicion(getWidth() / 2, getHeight() / 2);  //setea la posición al medio
-        } else if(pelota.getPelotaFueraIzq()) {     //lo mismo que arriba con izquierda
+        if (jugador2Der.getPuntos() == 10 || jugadorIzq.getPuntos() == 10) {
+            pelota.detenerPelota();
+            pelota.setPosicion(getWidth() / 2, getHeight());
+            gameover = true;
+        }
+
+        // Reiniciar Pelota
+        if (pelota.getPelotaFueraDer()) { // Pregunta si la pelota se salio a la derecha
+            pelota.invertirVelX(); // La pelota ahora sale para el otro lado de la cancha
+            pelota.setPelotaFueraDer(); // se vuelve a poner falso que la pelota salio a la derecha
+            pelota.setPosicion(getWidth() / 2, getHeight() / 2); // setea la posición al medio
+            jugadorIzq.sumarPuntos();
+        } else if (pelota.getPelotaFueraIzq()) { // lo mismo que arriba con izquierda
             pelota.invertirVelX();
             pelota.setPelotaFueraIzq();
             pelota.setPosicion(getWidth() / 2, getHeight() / 2);
-        }
-        
-        if(pelota.getY() <= paleta2.getY() + 100 && pelota.getY() >= paleta2.getY()&& pelota.getX() >= getWidth() - 35)  //Golpe Paleta Derecha
-            pelota.invertirVelX();
-
-        //Movimiento de Paletas
-
-        if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) { //agregué que no haya llegado a su límite superior
-            paleta1.setY(paleta1.getY() - velocidadPaleta * delta);
+            jugador2Der.sumarPuntos();
         }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) { //agregué que no haya llegado a su límite inferior
-            paleta1.setY(paleta1.getY() + velocidadPaleta * delta);
-        }
+        if (!gameover) {
+            if (paleta2.intersects(pelota)) { // Golpe Paleta Derecha
+                pelota.invertirVelX();
+                // pelota.invertirVelY();
+                pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+            }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) { //agregué que no haya llegado a su límite superior
-            paleta2.setY(paleta2.getY() - velocidadPaleta * delta);
-        }
+            if (paleta1.intersects(pelota)) { // Golpe Paleta Derecha
+                pelota.invertirVelX();
+                // pelota.invertirVelY();
+                pelota.playSound("src\\main\\resources\\poo\\sonidos\\golpe.wav");
+            }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) {  //agregué que no haya llegado a su límite inferior
-            paleta2.setY(paleta2.getY() + velocidadPaleta * delta);
-        }
+            if (keyboard.isKeyPressed(KeyEvent.VK_W) && paleta1.getY() >= 25) // agregué
+                                                                              // que no
+                                                                              // haya
+                                                                              // llegado
+                                                                              // a su
+                                                                              // límite
+                // superior
+                paleta1.moverPaletaarriba(delta);
 
-        
+            if (keyboard.isKeyPressed(KeyEvent.VK_S) && paleta1.getY() <= getHeight() - 100) // agregué que no haya
+                // llegado a su límite
+                // inferior
+                paleta1.moverPaletabajo(delta);
+
+            if (keyboard.isKeyPressed(KeyEvent.VK_UP) && paleta2.getY() >= 25) // agregué
+                                                                               // que no
+                                                                               // haya
+                                                                               // llegado
+                                                                               // a su
+                // límite
+                // superior
+                paleta2.moverPaletaarriba(delta);
+
+            if (keyboard.isKeyPressed(KeyEvent.VK_DOWN) && paleta2.getY() <= getHeight() - 100) // agregué que no haya
+                // llegado a su límite
+                // inferior
+                paleta2.moverPaletabajo(delta);
+
+        }
 
         // Esc fin del juego
         LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
@@ -129,19 +167,36 @@ public class Pong extends JGame {
 
         g.drawImage(img_fondo, 0, 0, null);// imagen de fondo
 
-        g.setColor(Color.black);
-        g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 12, 42);
-        g.drawString("Tecla ESC = Fin del Juego ", 592, 42);
+        // Dibujar una línea punteada en la mitad de la ventana
+        g.setColor(Color.WHITE);
+        Graphics2D g2d = (Graphics2D) g;
+        Stroke dashed = new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
+        g2d.setStroke(dashed);
+        g.drawLine(getWidth() / 2 - 5, 0, getWidth() / 2 - 5, getHeight());
 
-        g.setColor(Color.white);
-        g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
-        g.drawString("Tecla ESC = Fin del Juego ", 590, 40);
+        
+        // g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
+        // g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
+
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 70));
+        g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 150, 120);
+        g.drawString("" + jugador2Der.getPuntos(), getWidth() / 2 + 80, 120);
 
         paleta1.draw(g);
 
         paleta2.draw(g);
 
         pelota.draw(g);
+
+        if (gameover) {
+            g.setFont(new Font("Press Start 2P", Font.BOLD, 30));
+            String winner = jugadorIzq.getPuntos() > jugador2Der.getPuntos() ? "Player 1" : "Player 2";
+            g.drawString(" Game Over!  " + winner + " wins!", getWidth() / 2 - 370, getHeight() / 2 - 10);
+            g.setColor(Color.GRAY);
+            g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
+            g.drawString("[press ESC to quit]", getWidth() / 2 - 200, getHeight() / 2 + 130);
+        }
+
     }
 
     public void gameShutdown() {
