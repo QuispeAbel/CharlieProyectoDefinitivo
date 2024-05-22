@@ -7,9 +7,8 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import java.text.*;
 import javax.swing.Timer;
-import java.util.ArrayList;
 
-public class CharlieNivel1 {
+public class CharlieNivel1 extends CharlieNivel {
 
     Date dInit;
     Date dAhora;
@@ -29,6 +28,7 @@ public class CharlieNivel1 {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
+    int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -39,13 +39,15 @@ public class CharlieNivel1 {
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
 
     private int CantidadArosChicos = 4;
+    private int Cantidabonus = 4;
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-    int cont [] ={0,0,0,0};
-    //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
+    int cont[] = { 0, 0, 0, 0 };
+    // private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar
+    // que el objeto aparezca adelante del
     // personaje
-    //private double DistanciaNuevoSpawnXbonus = 4515;
+    // private double DistanciaNuevoSpawnXbonus = 4515;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -123,9 +125,13 @@ public class CharlieNivel1 {
     public void Update(double delta, Keyboard keyboard) {
 
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
-        
-        //Puntos
-        
+        // // Puntos
+        // if (leoncito.getX() > aro.getX()) {
+        // // if(j1_jugando)
+        // j1.sumarPuntos(100);
+        // // else
+        // // j2.sumarPuntosPasados(100);
+        // }
 
         // marcador.setNroJugador(j1);
 
@@ -180,17 +186,18 @@ public class CharlieNivel1 {
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
 
-                //Suma Puntos Aro Grande
-                if (leoncito.getX() >= arosgrandes.get(i).getX() - 3 && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
+                // Suma Puntos Aro Grande
+                if (leoncito.getX() >= arosgrandes.get(i).getX() - 3
+                        && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
                     // if(j1_jugando)
-                        j1.sumarPuntos(100);
-                        marcador.getPuntajeTotal(j1);
+                    j1.sumarPuntos(100);
+                    marcador.getPuntajeTotal(j1);
                     // else
                     // j2.sumarPuntosPasados(100);
                 }
 
                 // respawn al final del mapa
-                if (arosgrandes.get(i).getX() <= 30)
+                if (arosgrandes.get(i).getX() <= 350)
                     arosgrandes.get(i).spawnAroGrande(10000);
                 // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
@@ -202,19 +209,10 @@ public class CharlieNivel1 {
                     aroschicos.get(i).MovimientoAro(delta);
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
-                    if (arosgrandes.get(i).getX() <= 30){
-                        aroschicos.get(i).spawnAroGrande(8500);
+                    if (aroschicos.get(i).getX() <= 350) {
+                        aroschicos.get(i).spawn(8500);
                         bolsa.get(i).spawn(8510);
                     }
-
-                    // //Suma Puntos Aro Chico
-                    // if (leoncito.getX() >= aroschicos.get(i).getX() - 3 && leoncito.getX() <= aroschicos.get(i).getX() + 3) {
-                    // // if(j1_jugando)
-                    //     
-                    // // else
-                    // // j2.sumarPuntosPasados(100);
-                    // }
-
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(aroschicos.get(i).getHitbox())) {
@@ -260,7 +258,7 @@ public class CharlieNivel1 {
 
                 // bolsa.Movimientobonus(0);
             }
-    
+
         }
     }
 
