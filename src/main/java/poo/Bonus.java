@@ -26,6 +26,7 @@ public class Bonus extends obstaculo {
 
     void spawn(double xheroe) {
         this.setX(xheroe, posXhitbox);
+        this.setY(315, posYhitbox);
     }    
 
     public Rectangle getColiton() {
