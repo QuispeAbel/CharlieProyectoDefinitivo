@@ -43,11 +43,10 @@ public class CharlieNivel1 extends CharlieNivel {
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-    int cont[] = { 0, 0, 0, 0 };
-    // private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar
-    // que el objeto aparezca adelante del
+    int cont [] ={0,0,0,0};
+    //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
-    // private double DistanciaNuevoSpawnXbonus = 4515;
+    //private double DistanciaNuevoSpawnXbonus = 4515;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -280,8 +279,8 @@ public class CharlieNivel1 extends CharlieNivel {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
-                    bolsa.get(i).display(g);
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)){
+                bolsa.get(i).display(g);
                 }
             }
         }
@@ -306,17 +305,12 @@ public class CharlieNivel1 extends CharlieNivel {
         marcador.display(g);
 
         if (bonus) {
-            g.setColor(Color.RED);
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString("500", (1024 / 2) - 200, 315);
             g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("bonus!", 100, 250);
             // g.setColor(Color.white);
-            // g.setFont(new Font("Arial", Font.BOLD, 40));
-            // g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
-        }
-
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
-            marcador.draw(g);
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
 
@@ -332,7 +326,7 @@ public class CharlieNivel1 extends CharlieNivel {
             g.drawString("GANASTE!", 100, 250);
         }
     }
-}
+}}
 
 /*
  * private void reiniciarObjeto() {

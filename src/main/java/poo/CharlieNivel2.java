@@ -9,7 +9,7 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 
-public class CharlieNivel2 extends CharlieNivel {
+public class CharlieNivel2 {
     Date dInit;
     Date dAhora;
     SimpleDateFormat ft;
@@ -32,6 +32,14 @@ public class CharlieNivel2 extends CharlieNivel {
     Monito mono, monoazul;
     int cont = 0;
 
+    private int CantidadMonos = 10;
+    private int DistanciaEntreMonos = 1000;
+    ArrayList<Monito> monos = new ArrayList<Monito>();
+
+    private int CantidadMonosaz = 4;
+    private int DistanciaEntreMonosaz = 2000;
+    ArrayList<Monito> monosaz = new ArrayList<Monito>();
+
     private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
                                                // personaje
 
@@ -51,9 +59,26 @@ public class CharlieNivel2 extends CharlieNivel {
         Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
         Charlie.setPiso(322);
 
-        mono = new Monito("imagenes/mono.png");
+        //monoazul = new Monito("imagenes/mono_azul.png");
+        // primer aro chico necesario porque la diferencia entre aros es distinta al
+        // primer spawn
+        monosaz.add(new Monito("imagenes/mono_azul.png"));
+        monosaz.get(0).spawn(2500);
 
-        monoazul = new Monito("imagenes/mono_azul.png");
+         //mono = new Monito("imagenes/mono.png");
+         for (int i = 0; i < CantidadMonos; i++) {
+            monos.add(new Monito("imagenes/mono.png"));
+            //monos.get(i).aroGrande();
+            monos.get(i).spawn(DistanciaEntreMonos * (i + 1));
+
+            // aros chicos
+            if (i < CantidadMonosaz && 0 < i) {
+                monosaz.add(new Monito("imagenes/mono_azul.png"));
+                monosaz.get(i).spawn((DistanciaEntreMonosaz * (i + 1)) + 500);
+            }
+        }
+
+        
 
         marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
         marcador.setPosicion(4, 30);
