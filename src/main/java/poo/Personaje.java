@@ -63,8 +63,6 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 		this.setY(getY() + velocityY * delta);
 		this.setX(getX() + velocityX * delta);
 
-		angulo = (angulo % 360);
-
 		Mundo m = Mundo.getInstance();
 
 		/* Rebota contra los margenes X del mundo */

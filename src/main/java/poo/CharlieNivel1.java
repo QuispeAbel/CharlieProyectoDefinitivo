@@ -29,8 +29,6 @@ public class CharlieNivel1 {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    int cont = 0;
-    int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -41,14 +39,16 @@ public class CharlieNivel1 {
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
 
     private int CantidadArosChicos = 4;
-    private int Cantidabonus = 4;
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-
+<<<<<<< HEAD
+    int cont [] ={0,0,0,0};
     //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
     // personaje
     //private double DistanciaNuevoSpawnXbonus = 4515;
+=======
+>>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -113,13 +113,25 @@ public class CharlieNivel1 {
         tarima = new tarima("imagenes/tarima.png", 10000, 530);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
-        /*bonusTimer = new Timer(1000, new ActionListener() {
+<<<<<<< HEAD
+        bonusTimer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 bonus = false;
                 bonusTimer.stop();
             }
         });
-        bonusTimer.setRepeats(false);*/
+        bonusTimer.setRepeats(false);
+=======
+        /*
+         * bonusTimer = new Timer(1000, new ActionListener() {
+         * public void actionPerformed(ActionEvent e) {
+         * bonus = false;
+         * bonusTimer.stop();
+         * }
+         * });
+         * bonusTimer.setRepeats(false);
+         */
+>>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
 
     }
 
@@ -179,8 +191,6 @@ public class CharlieNivel1 {
         }
 
         if (!gameover) {
-            // bolsa.Movimientobonus(delta);
-
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
@@ -195,7 +205,7 @@ public class CharlieNivel1 {
                 }
 
                 // respawn al final del mapa
-                if (arosgrandes.get(i).getX() == 10)
+                if (arosgrandes.get(i).getX() <= 30)
                     arosgrandes.get(i).spawnAroGrande(10000);
                 // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
@@ -207,7 +217,11 @@ public class CharlieNivel1 {
                     aroschicos.get(i).MovimientoAro(delta);
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
-                    if (arosgrandes.get(i).getX() == 10){
+<<<<<<< HEAD
+                    if (arosgrandes.get(i).getX() <= 30){
+=======
+                    if (arosgrandes.get(i).getX() == 10) {
+>>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
                         aroschicos.get(i).spawnAroGrande(8500);
                         bolsa.get(i).spawn(8510);
                     }
@@ -229,8 +243,15 @@ public class CharlieNivel1 {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
+<<<<<<< HEAD
                         // j1.sumarPuntos(500);
                         // marcador.getPuntajeTotal(j1);
+=======
+                        cont[i]= 1;
+                        if (!bonusTimer.isRunning()) {
+                            bonusTimer.start();
+                            }
+>>>>>>> 069ec23032279e1c35aa2c801c0c5db4f422e533
                     }
                 }
 
@@ -242,18 +263,6 @@ public class CharlieNivel1 {
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
             }
-
-            /*
-             * if (leoncito.getX() > arito.getX() + 350 && !ganaste) {
-             * 
-             * cont++;
-             * if (cont % 5 == 0) {
-             * arito.spawn(leoncito.getX() + DistanciaNuevoSpawnXarito);
-             * bolsa.spawn(leoncito.getX() + DistanciaNuevoSpawnXbonus);
-             * contbon = 0;
-             * }
-             * }
-             */
 
             if (leoncito.getHitbox().intersects(calderass.getHitbox()))
                 gameover = true;
@@ -271,13 +280,7 @@ public class CharlieNivel1 {
 
                 // bolsa.Movimientobonus(0);
             }
-            // if (Charlie.getHitbox().intersects(bolsa)) {
-            // contbon++;
-            // bonus = true;
-            // if (!bonusTimer.isRunning()) {
-            // bonusTimer.start();
-            // }
-            // }
+    
         }
     }
 
@@ -299,14 +302,16 @@ public class CharlieNivel1 {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())){
+<<<<<<< HEAD
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)){
                 bolsa.get(i).display(g);
+=======
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
+                    bolsa.get(i).display(g);
+>>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
                 }
             }
         }
-
-        // if (!Charlie.getHitbox().intersects(bolsa) && contbon == 0)
-        // bolsa.display(g);
 
         leoncito.display(g);
 
@@ -328,17 +333,30 @@ public class CharlieNivel1 {
         marcador.display(g);
 
         if (bonus) {
+<<<<<<< HEAD
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString("500", (1024 / 2) - 200, 315);
+=======
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 70));
             g.drawString("bonus!", 100, 250);
-            //g.setColor(Color.white);
-            //g.setFont(new Font("Arial", Font.BOLD, 40));
-            //g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
+            // g.setColor(Color.white);
+            // g.setFont(new Font("Arial", Font.BOLD, 40));
+            // g.drawString("500", (1024 / 2) - 200, (720 / 2) - 200);
+>>>>>>> 16080327c5dda4e9ef634fdbe39d0e87455680f6
         }
 
+<<<<<<< HEAD
         g.setColor(Color.WHITE);
         g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         marcador.draw(g);
+=======
+           g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            j1.sumarPuntos(100);
+            marcador.draw(g);
+>>>>>>> 069ec23032279e1c35aa2c801c0c5db4f422e533
 
         g.setFont(new Font("Arial", Font.BOLD, 70));
 

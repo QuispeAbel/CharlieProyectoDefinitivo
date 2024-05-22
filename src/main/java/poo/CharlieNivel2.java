@@ -9,7 +9,7 @@ import java.util.*;
 
 import java.text.SimpleDateFormat;
 
-public class CharlieNivel2 extends JGame {
+public class CharlieNivel2 {
     Date dInit;
     Date dAhora;
     SimpleDateFormat ft;
@@ -37,19 +37,10 @@ public class CharlieNivel2 extends JGame {
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
-    public static void main(String[] args) {
-
-        CharlieNivel2 game = new CharlieNivel2();
-        game.run(1.0 / 60.0);
-        System.exit(0);
-    }
-
     public CharlieNivel2() {
-        // call game constructor
-        super("Nivel2", 1024, 720);
     }
 
-    public void gameStartup() {
+    public void Start() {
 
         ft = new SimpleDateFormat("mm:ss");
 
@@ -80,8 +71,8 @@ public class CharlieNivel2 extends JGame {
 
     }
 
-    public void gameUpdate(double delta) {
-        Keyboard keyboard = getKeyboard();
+    public void Update(double delta, Keyboard keyboard) {
+        // Keyboard keyboard = getKeyboard();
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -102,23 +93,14 @@ public class CharlieNivel2 extends JGame {
             }
 
         }
-        LinkedList<KeyEvent> keyEvents = keyboard.getEvents();
-        for (KeyEvent event : keyEvents) {
-            if ((event.getID() == KeyEvent.KEY_RELEASED)) {
+        if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
+            Charlie.quieto();
+        }
+        if (keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
+            if (gameover || ganaste) {
                 Charlie.quieto();
-            }
-            if ((event.getID() == KeyEvent.KEY_PRESSED) &&
-                    (event.getKeyCode() == KeyEvent.VK_SPACE)) {
-                if (gameover || ganaste) {
-                    Charlie.quieto();
-                } else {
-                    Charlie.jump();
-                }
-            }
-
-            if ((event.getID() == KeyEvent.KEY_PRESSED) &&
-                    (event.getKeyCode() == KeyEvent.VK_ESCAPE)) {
-                stop();
+            } else {
+                Charlie.jump();
             }
         }
 
@@ -172,7 +154,7 @@ public class CharlieNivel2 extends JGame {
 
     }
 
-    public void gameDraw(Graphics2D g) {
+    public void Draw(Graphics2D g) {
 
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
