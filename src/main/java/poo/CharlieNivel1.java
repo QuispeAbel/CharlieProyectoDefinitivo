@@ -300,7 +300,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
         g.translate(-cam.getX(), -cam.getY());
 
-        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
 
         marcador.draw(g);
 
