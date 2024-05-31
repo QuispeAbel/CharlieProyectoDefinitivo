@@ -5,7 +5,10 @@ import java.awt.*;
 
 public abstract class CharlieNivel {
 
-    public int Estado = 0;
+    protected Camara cam;
+    protected Fondo fondo;
+    protected Marcador_Puntaje marcador;
+    protected int Estado = 0;
 
     public int getEstado() {
         return Estado;

@@ -10,13 +10,7 @@ import javax.swing.Timer;
 import java.text.SimpleDateFormat;
 
 public class CharlieNivel2 extends CharlieNivel {
-    Date dInit;
-    Date dAhora;
-    SimpleDateFormat ft;
 
-    Camara cam;
-    Fondo fondo;
-    Marcador_Puntaje marcador;
     Charlie Charlie;
     tarima tarima;
     boolean gameover = false;
@@ -41,10 +35,6 @@ public class CharlieNivel2 extends CharlieNivel {
 
     public CharlieNivel2() {
         setEstado(2);
-
-        ft = new SimpleDateFormat("mm:ss");
-
-        dInit = new Date();
 
         Mundo m = Mundo.getInstance();
 
