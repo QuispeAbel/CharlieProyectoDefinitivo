@@ -210,8 +210,8 @@ public class CharlieNivel1 extends CharlieNivel {
                     bolsa.get(i).Movimientobonus(delta);
                     // respawn al final del mapa
                     if (aroschicos.get(i).getX() <= 350) {
-                        aroschicos.get(i).spawn(8500);
-                        bolsa.get(i).spawn(8510);
+                        aroschicos.get(i).spawn(10000);
+                        bolsa.get(i).spawn(10010);
                     }
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
