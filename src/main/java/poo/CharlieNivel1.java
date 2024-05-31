@@ -59,7 +59,7 @@ public class CharlieNivel1 extends CharlieNivel {
         // primer spawn
         aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
         aroschicos.get(0).spawn(2500);
-        bolsa.add(new Bonus("imagenes/ufo.png"));
+        bolsa.add(new Bonus("imagenes/Bolsa.gif"));
         bolsa.get(0).spawn(2510);
         cont.add(0);
 
@@ -74,7 +74,7 @@ public class CharlieNivel1 extends CharlieNivel {
             if (i < CantidadArosChicos && 0 < i) {
                 aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
                 aroschicos.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
-                bolsa.add(new Bonus("imagenes/ufo.png"));
+                bolsa.add(new Bonus("imagenes/Bolsa.gif"));
                 bolsa.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
                 cont.add(0);
             }
