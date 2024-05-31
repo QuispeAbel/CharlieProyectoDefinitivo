@@ -1,13 +1,5 @@
 package poo;
 
-/**
-Compilar
-javac -cp ".;bucleJuego.jar" DemoJuego02.java 
-
-Ejecutar
-java -cp ".;bucleJuego.jar" DemoJuego02
-  */
-
 import com.entropyinteractive.*;
 
 import java.awt.*;
@@ -161,9 +153,9 @@ public class Pong extends JGame {
     public void gameDraw(Graphics2D g) {
 
         dAhora = new Date();
-        long dateDiff = dAhora.getTime() - dInit.getTime();
-        long diffSeconds = dateDiff / 1000 % 60;
-        long diffMinutes = dateDiff / (60 * 1000) % 60;
+        // long dateDiff = dAhora.getTime() - dInit.getTime();
+        // long diffSeconds = dateDiff / 1000 % 60;
+        // long diffMinutes = dateDiff / (60 * 1000) % 60;
 
         g.drawImage(img_fondo, 0, 0, null);// imagen de fondo
 
@@ -173,10 +165,6 @@ public class Pong extends JGame {
         Stroke dashed = new BasicStroke(10, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
         g2d.setStroke(dashed);
         g.drawLine(getWidth() / 2 - 5, 0, getWidth() / 2 - 5, getHeight());
-
-        
-        // g.drawString("Tiempo de Juego: " + diffMinutes + ":" + diffSeconds, 10, 40);
-        // g.drawString("Tecla ESC = Fin del Juego ", getWidth() - 160, 40);
 
         g.setFont(new Font("Press Start 2P", Font.BOLD, 70));
         g.drawString("" + jugadorIzq.getPuntos(), getWidth() / 2 - 150, 120);

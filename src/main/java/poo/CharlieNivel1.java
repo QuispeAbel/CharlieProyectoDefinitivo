@@ -5,7 +5,6 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import java.text.*;
 import javax.swing.Timer;
 
 public class CharlieNivel1 extends CharlieNivel {

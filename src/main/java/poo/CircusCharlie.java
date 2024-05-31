@@ -12,22 +12,11 @@ public class CircusCharlie extends JGame {
     CharlieNivel nivelActual;
     Jugador jugador1;
 
-    // CharlieNivel1 nivel1 = new CharlieNivel1();
-    // CharlieNivel2 nivel2 = new CharlieNivel2();
-    // CharlieNivel3 nivel3 = new CharlieNivel3();
-
     public CircusCharlie() {
-        // call game constructor
         super("CircusCharlie", 1024, 768);
         jugador1 = new Jugador();
         nivelActual = new CharlieNivel2();
     }
-
-    // public static void main(String... z) {
-    // CircusCharlie jogo = new CircusCharlie();
-    // jogo.run(1.0 / 60.0);
-    // System.exit(0);
-    // }
 
     @Override
     public void gameDraw(Graphics2D arg0) {
@@ -36,12 +25,10 @@ public class CircusCharlie extends JGame {
 
     @Override
     public void gameShutdown() {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void gameStartup() {
-        // nivelActual.Start();
     }
 
     @Override

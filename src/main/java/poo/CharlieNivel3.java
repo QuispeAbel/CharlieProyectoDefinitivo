@@ -1,17 +1,12 @@
 package poo;
 
-import java.text.SimpleDateFormat;
-
 import javax.swing.Timer;
 
 import com.entropyinteractive.Keyboard;
 
-import com.entropyinteractive.*;
-
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import java.text.*;
 
 public class CharlieNivel3 extends CharlieNivel {
 
@@ -112,17 +107,19 @@ public class CharlieNivel3 extends CharlieNivel {
             } else {
                 Charlie.right(HEROE_DESPLAZAMIENTO * delta);
                 for (int i = 0; i < CantidadPelotas; i++) {
-                    if(Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
-                    pelotas.get(i).right(HEROE_DESPLAZAMIENTO * delta);
-                        /*if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
-                            Charlie.setY(350);
-                            pelotas.get(i).DisparadaIzq(delta);
-                            pelotas.get(i+1).Disparadader(delta);
-                            Charlie.setPiso(575);
-                            Charlie.perder(575);
-                            gameover=true;
-                        }*/
-                        
+                    if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
+                        pelotas.get(i).right(HEROE_DESPLAZAMIENTO * delta);
+                    /*
+                     * if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
+                     * Charlie.setY(350);
+                     * pelotas.get(i).DisparadaIzq(delta);
+                     * pelotas.get(i+1).Disparadader(delta);
+                     * Charlie.setPiso(575);
+                     * Charlie.perder(575);
+                     * gameover=true;
+                     * }
+                     */
+
                 }
             }
         }
@@ -138,17 +135,19 @@ public class CharlieNivel3 extends CharlieNivel {
             } else {
                 Charlie.left(HEROE_DESPLAZAMIENTO * delta);
                 for (int i = 0; i < CantidadPelotas; i++) {
-                    if(Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
-                    pelotas.get(i).left(HEROE_DESPLAZAMIENTO * delta);
-                        /*if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
-                            Charlie.setY(350);
-                            pelotas.get(i).DisparadaIzq(delta);
-                            pelotas.get(i+1).Disparadader(delta);
-                            Charlie.setPiso(575);
-                            Charlie.perder(575);
-                            gameover=true;
-                        }*/
-                        
+                    if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
+                        pelotas.get(i).left(HEROE_DESPLAZAMIENTO * delta);
+                    /*
+                     * if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
+                     * Charlie.setY(350);
+                     * pelotas.get(i).DisparadaIzq(delta);
+                     * pelotas.get(i+1).Disparadader(delta);
+                     * Charlie.setPiso(575);
+                     * Charlie.perder(575);
+                     * gameover=true;
+                     * }
+                     */
+
                 }
             }
 
@@ -157,8 +156,8 @@ public class CharlieNivel3 extends CharlieNivel {
         if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
             Charlie.quieto();
             for (int i = 0; i < CantidadPelotas; i++) {
-                if(Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
-                pelotas.get(i).quieto();
+                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
+                    pelotas.get(i).quieto();
             }
         }
 
@@ -174,25 +173,22 @@ public class CharlieNivel3 extends CharlieNivel {
             }
         }
 
-        
         if (!gameover) {
             // arosgrandes
             for (int i = 0; i < CantidadPelotas; i++) {
                 if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())) {
                     pelotas.get(i).MovimientoPelota(delta);
                 }
-                
-                if(Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())){
+
+                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())) {
                     Charlie.setX(pelotas.get(i).getX());
                     Charlie.setPiso(525);
                 }
 
-                if(!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && Charlie.getX()>pelotas.get(i).getX() && Charlie.getX()>pelotas.get(i+1).getX()){
+                if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())
+                        && Charlie.getX() > pelotas.get(i).getX() && Charlie.getX() > pelotas.get(i + 1).getX()) {
                     Charlie.setPiso(575);
-                }     
-            
-                
-                
+                }
 
                 // respawn al final del mapa
                 if (pelotas.get(i).getX() <= 20)

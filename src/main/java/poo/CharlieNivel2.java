@@ -7,8 +7,6 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import javax.swing.Timer;
 
-import java.text.SimpleDateFormat;
-
 public class CharlieNivel2 extends CharlieNivel {
 
     private Charlie Charlie;
