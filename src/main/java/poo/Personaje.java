@@ -44,6 +44,10 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 		POSICION_Y_PISO = y;
 	}
 
+	public void perder(int y) {
+		POSICION_Y_PISO = y;
+	}
+
 	public void quieto() {
 		estadoActual = ESTADO_QUIETO;
 		// acceleration.mult(0);
