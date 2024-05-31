@@ -20,7 +20,7 @@ public class CircusCharlie extends JGame {
         // call game constructor
         super("CircusCharlie", 1024, 768);
         jugador1 = new Jugador();
-        nivelActual = new CharlieNivel1();
+        nivelActual = new CharlieNivel2();
     }
 
     // public static void main(String... z) {

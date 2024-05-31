@@ -220,7 +220,9 @@ public class CharlieNivel3 extends CharlieNivel {
 
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         marcador.display(g);
+        marcador.draw(g);
 
         if (bonus) {
             g.setColor(Color.white);
