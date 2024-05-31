@@ -5,12 +5,12 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-//import java.text.*;
+import javax.swing.Timer;
 
 import java.text.SimpleDateFormat;
 
-public class CharlieNivel2 {
-    Date dInit;
+public class CharlieNivel2 extends CharlieNivel {
+      Date dInit;
     Date dAhora;
     SimpleDateFormat ft;
 
@@ -19,33 +19,29 @@ public class CharlieNivel2 {
     Marcador_Puntaje marcador;
     Charlie Charlie;
     tarima tarima;
-
     Jugador j1;
     Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
+    boolean bonus = false;
+    Timer bonusTimer;
+    //int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    // aro arito = new aro("imagenes/aroMitad2Peque.png",
-    // "imagenes/aroMitad1Peque.png");
-    Monito mono, monoazul;
-    int cont = 0;
 
     private int CantidadMonos = 10;
-    private int DistanciaEntreMonos = 1000;
+    private int DistanciaEntreMonos= 1000;
     ArrayList<Monito> monos = new ArrayList<Monito>();
 
-    private int CantidadMonosaz = 4;
-    private int DistanciaEntreMonosaz = 2000;
+    private int CantidadMonosAz = 4;
+    private int DistanciaEntreMonosAz = 2000;
     ArrayList<Monito> monosaz = new ArrayList<Monito>();
-
-    private double DistanciaNuevoSpawnX = 700; // Offset en X para asegurar que el objeto aparezca adelante del
-                                               // personaje
+    ArrayList<Integer> cont = new ArrayList<Integer>();
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
-    public CharlieNivel2() {
+    CharlieNivel2() {
     }
 
     public void Start() {
@@ -56,32 +52,35 @@ public class CharlieNivel2 {
 
         Mundo m = Mundo.getInstance();
 
-        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
-        Charlie.setPiso(322);
+        j1 = new Jugador();
 
-        //monoazul = new Monito("imagenes/mono_azul.png");
         // primer aro chico necesario porque la diferencia entre aros es distinta al
         // primer spawn
         monosaz.add(new Monito("imagenes/mono_azul.png"));
         monosaz.get(0).spawn(2500);
+        cont.add(0);
 
-         //mono = new Monito("imagenes/mono.png");
-         for (int i = 0; i < CantidadMonos; i++) {
+        // arito = new Aro("imagenes/aroMitad2Peque.png",
+        // "imagenes/aroMitad1Peque.png");
+        for (int i = 0; i < CantidadMonos; i++) {
             monos.add(new Monito("imagenes/mono.png"));
-            //monos.get(i).aroGrande();
-            monos.get(i).spawn(DistanciaEntreMonos * (i + 1));
+            monos.get(i).spawn(DistanciaEntreMonos* (i + 1));
 
             // aros chicos
-            if (i < CantidadMonosaz && 0 < i) {
+            if (i < CantidadMonosAz && 0 < i) {
                 monosaz.add(new Monito("imagenes/mono_azul.png"));
-                monosaz.get(i).spawn((DistanciaEntreMonosaz * (i + 1)) + 500);
+                monosaz.get(i).spawn((DistanciaEntreMonosAz * (i + 1)) + 500);
+                cont.add(0);
             }
         }
 
-        
+        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 640);
+        Charlie.setPiso(322);
 
-        marcador = new Marcador_Puntaje("imagenes/marcador.jpg");
+        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
+        marcador.getHi();
+
 
         cam = new Camara(0, 0);
 
@@ -94,14 +93,41 @@ public class CharlieNivel2 {
 
         tarima = new tarima("imagenes/tarima_columna.gif", 10000, 320);
 
+        // cuenta el tiempo cuando aparece el carterl "Bonus"
+        bonusTimer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bonus = false;
+                bonusTimer.stop();
+            }
+        });
+        bonusTimer.setRepeats(false);
+
     }
 
     public void Update(double delta, Keyboard keyboard) {
-        // Keyboard keyboard = getKeyboard();
+
+        cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
+        // // Puntos
+        // if (leoncito.getX() > aro.getX()) {
+        // // if(j1_jugando)
+        // j1.sumarPuntos(100);
+        // // else
+        // // j2.sumarPuntosPasados(100);
+        // }
+
+        // marcador.setNroJugador(j1);
+
+        // // Puntos
+        // if (leoncito.getX() >= aro.getX()) {
+        // // if(j1_jugando)
+        // j1.sumarPuntos(100);
+        // marcador.getPuntajeTotal(j1);
+        // // else
+        // // j2.sumarPuntosPasados(100);
+        // }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-            /// shipX -= NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
                 Charlie.quieto();
             } else {
@@ -110,7 +136,6 @@ public class CharlieNivel2 {
         }
 
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            // shipX += NAVE_DESPLAZAMIENTO * delta;
             if (gameover || ganaste) {
                 Charlie.quieto();
             } else {
@@ -118,10 +143,12 @@ public class CharlieNivel2 {
             }
 
         }
+
         if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
             Charlie.quieto();
         }
-        if (keyboard.isKeyPressed(KeyEvent.VK_SPACE)) {
+
+        if ((keyboard.isKeyPressed(KeyEvent.VK_SPACE))) {
             if (gameover || ganaste) {
                 Charlie.quieto();
             } else {
@@ -130,53 +157,78 @@ public class CharlieNivel2 {
         }
 
         if (!gameover) {
-            // arito.MovimientoAro(delta);
-            mono.MovimientoMono(delta);
-            monoazul.MovimientoMono(delta * 2);
+            // monos
+            for (int i = 0; i < CantidadMonos; i++) {
+                monos.get(i).MovimientoMono(delta);
+
+                // Suma Puntos Aro Grande
+                /*if (leoncito.getX() >= monos.get(i).getX() - 3
+                        && leoncito.getX() <= monos.get(i).getX() + 3) {
+                    // if(j1_jugando)
+                    j1.sumarPuntos(100);
+                    marcador.getPuntajeTotal(j1);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                }*/
+
+                // respawn al final del mapa
+                if (monos.get(i).getX() <= 350)
+                    monos.get(i).spawn(10000);
+                // choque con personajes
+                if (Charlie.getHitbox().intersects(monos.get(i).getHitbox())) {
+                    gameover = true;
+                }
+                // aros chicos
+                if (i < CantidadMonosAz) {
+                    monosaz.get(i).MovimientoMono(delta*2.5);
+                    // respawn al final del mapa
+                    if (monosaz.get(i).getX() <= 350) {
+                        monosaz.get(i).spawn(8500);
+                    }
+
+                    if (monos.get(i).getHitbox().intersects(monosaz.get(i).getHitbox())  && monos.get(i).getY()== monosaz.get(i).getY() )
+                        monosaz.get(i).SaltoMono(delta);
+
+                    if (!monos.get(i).getHitbox().intersects(monosaz.get(i).getHitbox()))
+                        monosaz.get(i).update(delta);
+
+                    // choque con personajes
+                    if (Charlie.getHitbox().intersects(monosaz.get(i).getHitbox())) {
+                        gameover = true;
+                    }
+
+                    /*if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
+                            || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
+                        bonus = true;
+                        cont.set(i,1);
+                        if (!bonusTimer.isRunning()) {
+                            bonusTimer.start();
+                            }
+                    }*/
+                    /*if(Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (leoncito.getX() >= monosaz.get(i).getX() - 3 && leoncito.getX() <= monosaz.get(i).getX() + 3)){
+                        j1.sumarPuntos(500);
+                        marcador.getPuntajeTotal(j1);
+                    }*/
+                }
+
+            }
+
             Charlie.update(delta);
 
-            if (!mono.getHitbox().intersects(monoazul.getHitbox())) {
-                mono.update(delta);
-                monoazul.update(delta);
-            }
-        }
+           
 
-        // Desplazar el aro hacia la izquierda
-        // arito.MovimientoAro(delta);
-
-        cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
-
-        // long currentTime = System.currentTimeMillis();
-        if (!gameover) {
-
-            // editar arito: proximamente el setX tomara el x del hitbox y no el de uno de
-            // los medios aros
-            if (Charlie.getX() > mono.getX() + 350 && !ganaste) {
-
-                mono.spawn(Charlie.getX() + DistanciaNuevoSpawnX);
-                cont++;
-                if (cont % 5 == 0)
-                    monoazul.spawn(Charlie.getX() + DistanciaNuevoSpawnX * 1.5);
-
-            }
-
-            if (mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY()==monoazul.getY() )
-                monoazul.SaltoMono(delta);
-
-            // if (!mono.getHitbox().intersects(monoazul.getHitbox())) // && mono.getY() !=
-            // monoazul.getY() )
-            // monoazul.update(delta);
-
-            if (Charlie.getHitbox().intersects(mono.getHitbox()))
-                gameover = true;
-            if (Charlie.getHitbox().intersects(monoazul.getHitbox()))
-                gameover = true;
             if (Charlie.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 Charlie.ganar(10050, 270);
+                for (int i = 0; i < CantidadMonos; i++) {
+                    monos.get(i).MovimientoMono(0);
+                    if (i < CantidadMonosAz) {
+                        monosaz.get(i).MovimientoMono(0);
+                    }
+                }
             }
-        }
 
+        }
     }
 
     public void Draw(Graphics2D g) {
@@ -191,16 +243,19 @@ public class CharlieNivel2 {
         m.display(g);
         tarima.display(g);
 
-        // arito.displayDelante(g);
+        for (int i = 0; i < CantidadMonos; i++) {
+            monos.get(i).display(g);
+            if (i < CantidadMonosAz) {
+                monosaz.get(i).display(g);
+                /*if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)){
+                bolsa.get(i).display(g);
+                }*/
+            }
+        }
 
-        // arito.displayDelante(g);
 
         Charlie.display(g);
 
-        mono.display(g);
-        monoazul.display(g);
-
-        // arito.displayDetras(g);
 
         g.translate(-cam.getX(), -cam.getY());
 
@@ -209,6 +264,16 @@ public class CharlieNivel2 {
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
         marcador.display(g);
+
+        if (bonus) {
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString("500", (1024 / 2) - 200, 315);
+            g.setFont(new Font("Arial", Font.BOLD, 70));
+            g.drawString("bonus!", 100, 250);
+            // g.setColor(Color.white);
+
+        g.setFont(new Font("Arial", Font.BOLD, 70));
 
         if (gameover) {
             g.setColor(Color.RED);
@@ -222,8 +287,5 @@ public class CharlieNivel2 {
             g.drawString("GANASTE!", 100, 250);
         }
     }
-
-    public void gameShutdown() {
-        // Log.info(getClass().getSimpleName(), "Shutting down game");
-    }
+}
 }

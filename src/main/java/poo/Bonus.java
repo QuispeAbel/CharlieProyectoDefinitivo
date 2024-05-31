@@ -46,6 +46,10 @@ public class Bonus extends obstaculo {
         this.setY(y, posYhitbox);
     }
 
+    public void update(double delta) {
+
+    }
+
     @Override
     void desplazamientoX() {
     }// anula

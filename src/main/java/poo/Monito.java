@@ -58,6 +58,7 @@ public class Monito extends obstaculo {
 
     public void spawn(double xheroe) {
         this.setX(xheroe, posXhitbox);
+        this.setY(340, posYhitbox);
     }
 
     public Rectangle getColiton() {

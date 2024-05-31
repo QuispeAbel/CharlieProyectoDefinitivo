@@ -13,11 +13,12 @@ public class CircusCharlie extends JGame {
 
     CharlieNivel1 nivel1 = new CharlieNivel1();
     CharlieNivel2 nivel2 = new CharlieNivel2();
+    CharlieNivel3 nivel3 = new CharlieNivel3();
 
     public CircusCharlie() {
         // call game constructor
         super("CircusCharlie", 1024, 768);
-        nivelActual = nivel1;
+        nivelActual = nivel3;
     }
 
     public static void main(String... z) {
@@ -38,7 +39,7 @@ public class CircusCharlie extends JGame {
 
     @Override
     public void gameStartup() {
-        nivel1.Start();
+        nivel3.Start();
     }
 
     @Override
