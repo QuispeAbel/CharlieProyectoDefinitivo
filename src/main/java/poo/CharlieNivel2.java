@@ -154,6 +154,15 @@ public class CharlieNivel2 extends CharlieNivel {
             for (int i = 0; i < CantidadMonos; i++) {
                 monos.get(i).MovimientoMono(delta);
 
+                if (Charlie.getX() >= monos.get(i).getX() - 3
+                    && Charlie.getX() <= monos.get(i).getX() + 3) {
+                    // if(j1_jugando)
+                    jugador.sumarPuntos(100);
+                    marcador.getPuntajeTotal(jugador);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                }
+
                 // Suma Puntos Aro Grande
                 /*
                  * if (leoncito.getX() >= monos.get(i).getX() - 3
@@ -175,6 +184,16 @@ public class CharlieNivel2 extends CharlieNivel {
                 }
                 // aros chicos
                 if (i < CantidadMonosAz) {
+
+                    if (Charlie.getX() >= monosaz.get(i).getX() - 10
+                    && Charlie.getX() <= monosaz.get(i).getX() + 10) {
+                    // if(j1_jugando)
+                    jugador.sumarPuntos(500);
+                    marcador.getPuntajeTotal(jugador);
+                    // else
+                    // j2.sumarPuntosPasados(100);
+                    }
+
                     monosaz.get(i).MovimientoMono(delta * 2.5);
                     // respawn al final del mapa
                     if (monosaz.get(i).getX() <= 350) {
@@ -183,6 +202,9 @@ public class CharlieNivel2 extends CharlieNivel {
 
                     if (monos.get(i).getHitbox().intersects(monosaz.get(i).getHitbox())
                             && monos.get(i).getY() == monosaz.get(i).getY())
+                        monosaz.get(i).SaltoMono(delta);
+
+                    if(Charlie.getX() >= monosaz.get(i).getX() - 5 && Charlie.getX() <= monosaz.get(i).getX() + 5)
                         monosaz.get(i).SaltoMono(delta);
 
                     if (!monos.get(i).getHitbox().intersects(monosaz.get(i).getHitbox()))
@@ -265,7 +287,9 @@ public class CharlieNivel2 extends CharlieNivel {
 
         g.drawString("Tecla ESC = Fin del Juego ", 490, 20);
 
+        g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         marcador.display(g);
+        marcador.draw(g);
 
         if (bonus) {
             g.setColor(Color.white);
