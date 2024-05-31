@@ -11,21 +11,21 @@ import java.awt.event.*;
 public class CircusCharlie extends JGame {
     CharlieNivel nivelActual;
 
-    CharlieNivel1 nivel1 = new CharlieNivel1();
-    CharlieNivel2 nivel2 = new CharlieNivel2();
-    CharlieNivel3 nivel3 = new CharlieNivel3();
+    // CharlieNivel1 nivel1 = new CharlieNivel1();
+    // CharlieNivel2 nivel2 = new CharlieNivel2();
+    // CharlieNivel3 nivel3 = new CharlieNivel3();
 
     public CircusCharlie() {
         // call game constructor
         super("CircusCharlie", 1024, 768);
-        nivelActual = nivel3;
+        nivelActual = new CharlieNivel1();
     }
 
-    public static void main(String... z) {
-        CircusCharlie jogo = new CircusCharlie();
-        jogo.run(1.0 / 60.0);
-        System.exit(0);
-    }
+    // public static void main(String... z) {
+    // CircusCharlie jogo = new CircusCharlie();
+    // jogo.run(1.0 / 60.0);
+    // System.exit(0);
+    // }
 
     @Override
     public void gameDraw(Graphics2D arg0) {
@@ -39,12 +39,27 @@ public class CircusCharlie extends JGame {
 
     @Override
     public void gameStartup() {
-        nivel3.Start();
+        // nivelActual.Start();
     }
 
     @Override
     public void gameUpdate(double arg0) {
         Keyboard keyboard = getKeyboard();
+
+        switch (nivelActual.getEstado()) {
+            case 1:
+                nivelActual = new CharlieNivel2();
+                break;
+            case 3:
+                nivelActual = new CharlieNivel3();
+                break;
+
+            default:
+                break;
+        }
+
+        // if (nivelActual.getEstado() == 1)
+        // nivelActual = new CharlieNivel2();
 
         nivelActual.Update(arg0, keyboard);
         if ((keyboard.isKeyPressed(KeyEvent.VK_ESCAPE))) {

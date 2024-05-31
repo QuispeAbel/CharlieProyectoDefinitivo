@@ -28,7 +28,7 @@ public class CharlieNivel1 extends CharlieNivel {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    //int contbon = 0;
+    // int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -45,10 +45,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
-    CharlieNivel1() {
-    }
-
-    public void Start() {
+    public CharlieNivel1() {
 
         ft = new SimpleDateFormat("mm:ss");
 
@@ -216,7 +213,7 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
-                        cont.set(i,1);
+                        cont.set(i, 1);
                         if (!bonusTimer.isRunning()) {
                             bonusTimer.start();
                         }
@@ -242,6 +239,7 @@ public class CharlieNivel1 extends CharlieNivel {
                 gameover = true;
             if (leoncito.getHitbox().intersects(tarima)) {
                 ganaste = true;
+                setEstado(1);
                 Charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
                 for (int i = 0; i < CantidadArosGrandes; i++) {
@@ -275,8 +273,8 @@ public class CharlieNivel1 extends CharlieNivel {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)){
-                bolsa.get(i).display(g);
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)) {
+                    bolsa.get(i).display(g);
                 }
             }
         }
@@ -322,7 +320,6 @@ public class CharlieNivel1 extends CharlieNivel {
         }
     }
 }
-
 
 /*
  * private void reiniciarObjeto() {
