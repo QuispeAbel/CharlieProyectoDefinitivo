@@ -28,25 +28,20 @@ public class CharlieNivel1 extends CharlieNivel {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    int contbon = 0;
+    //int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
-    Aro arito;
 
     private int CantidadArosGrandes = 10;
     private int DistanciaEntreAros = 1000;
     ArrayList<Aro> arosgrandes = new ArrayList<Aro>();
 
     private int CantidadArosChicos = 4;
-    private int Cantidabonus = 4;
     private int DistanciaEntreArosChicos = 2000;
     ArrayList<Aro> aroschicos = new ArrayList<Aro>();
     ArrayList<Bonus> bolsa = new ArrayList<Bonus>();
-    int cont [] ={0,0,0,0};
-    //private double DistanciaNuevoSpawnXarito = 4500; // Offset en X para asegurar que el objeto aparezca adelante del
-    // personaje
-    //private double DistanciaNuevoSpawnXbonus = 4515;
+    ArrayList<Integer> cont = new ArrayList<Integer>();
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -63,14 +58,13 @@ public class CharlieNivel1 extends CharlieNivel {
 
         j1 = new Jugador();
 
-        // bolsa = new Bonus("imagenes/ufo.png");
-
         // primer aro chico necesario porque la diferencia entre aros es distinta al
         // primer spawn
         aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
         aroschicos.get(0).spawn(2500);
         bolsa.add(new Bonus("imagenes/ufo.png"));
         bolsa.get(0).spawn(2510);
+        cont.add(0);
 
         // arito = new Aro("imagenes/aroMitad2Peque.png",
         // "imagenes/aroMitad1Peque.png");
@@ -85,12 +79,13 @@ public class CharlieNivel1 extends CharlieNivel {
                 aroschicos.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
                 bolsa.add(new Bonus("imagenes/ufo.png"));
                 bolsa.get(i).spawn((DistanciaEntreArosChicos * (i + 1)) + 500);
+                cont.add(0);
             }
         }
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
-        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 515);
-        Charlie.setPiso(515);
+        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 525);
+        Charlie.setPiso(525);
 
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
@@ -221,7 +216,7 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
                             || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
-                        cont[i]= 1;
+                        cont.set(i,1);
                         if (!bonusTimer.isRunning()) {
                             bonusTimer.start();
                             }
@@ -254,8 +249,6 @@ public class CharlieNivel1 extends CharlieNivel {
                         bolsa.get(i).Movimientobonus(0);
                     }
                 }
-
-                // bolsa.Movimientobonus(0);
             }
 
         }
@@ -279,7 +272,7 @@ public class CharlieNivel1 extends CharlieNivel {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont[i] == 0)){
+                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)){
                 bolsa.get(i).display(g);
                 }
             }
@@ -326,7 +319,8 @@ public class CharlieNivel1 extends CharlieNivel {
             g.drawString("GANASTE!", 100, 250);
         }
     }
-}}
+}
+}
 
 /*
  * private void reiniciarObjeto() {
