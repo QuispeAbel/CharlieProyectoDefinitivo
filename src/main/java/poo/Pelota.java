@@ -3,8 +3,8 @@ package poo;
 import java.awt.Rectangle;
 
 public class Pelota extends ObjetoGrafico {
-    private int velocidadPelotaX = 500;
-    private int velocidadPelotaY = 500;
+    private int velocidadPelotaX = 5;
+    private int velocidadPelotaY = 5;
     private boolean pelotaFueraIzq = false;
     private boolean pelotaFueraDer = false;
     // private Rectangle rectangulo;
