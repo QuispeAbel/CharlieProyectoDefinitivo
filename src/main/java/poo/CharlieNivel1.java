@@ -10,23 +10,15 @@ import javax.swing.Timer;
 
 public class CharlieNivel1 extends CharlieNivel {
 
-    Camara cam;
-    Fondo fondo;
-    Marcador_Puntaje marcador;
     Leon leoncito;
     Charlie Charlie;
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
-    // Jugador jugadorDeNivel;
     boolean gameover = false;
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    // int contbon = 0;
-    // private long lastSpawnTime; // Guarda el tiempo del último spawn
-    // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
-    // milisegundos
 
     private int CantidadArosGrandes = 10;
     private int DistanciaEntreAros = 1000;

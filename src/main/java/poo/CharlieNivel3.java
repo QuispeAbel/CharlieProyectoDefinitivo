@@ -15,13 +15,6 @@ import java.text.*;
 
 public class CharlieNivel3 extends CharlieNivel {
 
-    Date dInit;
-    Date dAhora;
-    SimpleDateFormat ft;
-
-    Camara cam;
-    Fondo fondo;
-    Marcador_Puntaje marcador;
     Charlie Charlie;
     tarima tarima;
     boolean gameover = false;
@@ -44,10 +37,6 @@ public class CharlieNivel3 extends CharlieNivel {
     public CharlieNivel3() {
 
         setEstado(4);
-
-        ft = new SimpleDateFormat("mm:ss");
-
-        dInit = new Date();
 
         Mundo m = Mundo.getInstance();
 
