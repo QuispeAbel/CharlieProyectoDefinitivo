@@ -1,5 +1,6 @@
 package poo;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Marcador_Puntaje extends ObjetoGrafico {
@@ -20,18 +21,20 @@ public class Marcador_Puntaje extends ObjetoGrafico {
         PuntajeTotal = j.getPuntos();
     }
 
-    public void getHi (){
-        record = 38000; //Acceder al Archivo del record (es provisorio)
+    public void getHi() {
+        record = 38000; // Acceder al Archivo del record (es provisorio)
     }
 
-    public void getStage(){
-        stage = 0; //cambiar luego
+    public void getStage() {
+        stage = 0; // cambiar luego
     }
 
-    public void draw(Graphics2D g){
-        g.drawString(Integer.toString(nro_jugador_actual)+"P- ", 50, 78);
+    public void draw(Graphics2D g) {
+        super.draw(g);
+        g.setColor(Color.white);
+        g.drawString(Integer.toString(nro_jugador_actual) + "P- ", 50, 78);
         g.drawString(Integer.toString(PuntajeTotal), 112, 78);
-        g.drawString("HI-"+Integer.toString(record), 450, 78);
-        g.drawString("STAGE-0"+Integer.toString(stage), 820, 78);
+        g.drawString("HI-" + Integer.toString(record), 450, 78);
+        g.drawString("STAGE-0" + Integer.toString(stage), 820, 78);
     }
 }
