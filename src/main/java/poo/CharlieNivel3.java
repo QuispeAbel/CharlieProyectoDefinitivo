@@ -24,8 +24,6 @@ public class CharlieNivel3 extends CharlieNivel {
     Marcador_Puntaje marcador;
     Charlie Charlie;
     tarima tarima;
-    Jugador j1;
-    Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
     boolean bonus = false;
@@ -52,8 +50,6 @@ public class CharlieNivel3 extends CharlieNivel {
         dInit = new Date();
 
         Mundo m = Mundo.getInstance();
-
-        j1 = new Jugador();
 
         pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), 350, 575));
         pelotas.get(0).spawn(-500);
@@ -94,7 +90,7 @@ public class CharlieNivel3 extends CharlieNivel {
 
     }
 
-    public void Update(double delta, Keyboard keyboard) {
+    public void Update(double delta, Keyboard keyboard, Jugador jugador) {
 
         cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
         // // Puntos

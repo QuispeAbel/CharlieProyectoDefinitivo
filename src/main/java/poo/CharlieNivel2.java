@@ -19,8 +19,6 @@ public class CharlieNivel2 extends CharlieNivel {
     Marcador_Puntaje marcador;
     Charlie Charlie;
     tarima tarima;
-    Jugador j1;
-    Jugador j2;
     boolean gameover = false;
     boolean ganaste = false;
     boolean bonus = false;
@@ -49,8 +47,6 @@ public class CharlieNivel2 extends CharlieNivel {
         dInit = new Date();
 
         Mundo m = Mundo.getInstance();
-
-        j1 = new Jugador();
 
         // primer aro chico necesario porque la diferencia entre aros es distinta al
         // primer spawn
@@ -101,7 +97,7 @@ public class CharlieNivel2 extends CharlieNivel {
 
     }
 
-    public void Update(double delta, Keyboard keyboard) {
+    public void Update(double delta, Keyboard keyboard, Jugador jugador) {
 
         cam.seguirPersonaje(Charlie); /// la camara sigue al Personaje
         // // Puntos

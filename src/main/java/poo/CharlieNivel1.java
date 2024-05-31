@@ -10,10 +10,6 @@ import javax.swing.Timer;
 
 public class CharlieNivel1 extends CharlieNivel {
 
-    Date dInit;
-    Date dAhora;
-    SimpleDateFormat ft;
-
     Camara cam;
     Fondo fondo;
     Marcador_Puntaje marcador;
@@ -22,8 +18,7 @@ public class CharlieNivel1 extends CharlieNivel {
     tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
-    Jugador j1;
-    Jugador j2;
+    // Jugador jugadorDeNivel;
     boolean gameover = false;
     boolean ganaste = false;
     boolean bonus = false;
@@ -47,13 +42,9 @@ public class CharlieNivel1 extends CharlieNivel {
 
     public CharlieNivel1() {
 
-        ft = new SimpleDateFormat("mm:ss");
-
-        dInit = new Date();
-
         Mundo m = Mundo.getInstance();
 
-        j1 = new Jugador();
+        // jugadorDeNivel = new Jugador();
 
         // primer aro chico necesario porque la diferencia entre aros es distinta al
         // primer spawn
@@ -113,7 +104,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
     }
 
-    public void Update(double delta, Keyboard keyboard) {
+    public void Update(double delta, Keyboard keyboard, Jugador jugador) {
 
         cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
         // // Puntos
@@ -181,8 +172,8 @@ public class CharlieNivel1 extends CharlieNivel {
                 if (leoncito.getX() >= arosgrandes.get(i).getX() - 3
                         && leoncito.getX() <= arosgrandes.get(i).getX() + 3) {
                     // if(j1_jugando)
-                    j1.sumarPuntos(100);
-                    marcador.getPuntajeTotal(j1);
+                    jugador.sumarPuntos(100);
+                    marcador.getPuntajeTotal(jugador);
                     // else
                     // j2.sumarPuntosPasados(100);
                 }
@@ -221,8 +212,8 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())
                             && (leoncito.getX() >= aroschicos.get(i).getX() - 3
                                     && leoncito.getX() <= aroschicos.get(i).getX() + 3)) {
-                        j1.sumarPuntos(500);
-                        marcador.getPuntajeTotal(j1);
+                        jugador.sumarPuntos(500);
+                        marcador.getPuntajeTotal(jugador);
                     }
                 }
 

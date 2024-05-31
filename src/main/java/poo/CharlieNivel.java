@@ -17,7 +17,7 @@ public abstract class CharlieNivel {
 
     // public abstract void Start();
 
-    public abstract void Update(double delta, Keyboard keyboard);
+    public abstract void Update(double delta, Keyboard keyboard, Jugador jugador);
 
     public abstract void Draw(Graphics2D g);
 }
