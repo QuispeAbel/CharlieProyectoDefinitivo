@@ -4,7 +4,7 @@ public class Charlie extends Personaje {
   private int posXhitbox = 5;
   private int posYhitbox = 0;
   private int widthHitbox = 30;
-  private int heigthHitbox = 65;
+  private int heigthHitbox = 60;
 
   public Charlie(String filename, double x, double y) {
     super(filename, x, y);

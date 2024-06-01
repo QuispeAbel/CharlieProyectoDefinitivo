@@ -10,13 +10,13 @@ import java.util.*;
 
 public class CharlieNivel3 extends CharlieNivel {
 
-    Charlie Charlie;
-    tarima tarima;
-    boolean gameover = false;
-    boolean ganaste = false;
-    boolean bonus = false;
-    Timer bonusTimer;
-    // int contbon = 0;
+    private Charlie Charlie;
+    private tarima tarima;
+    private boolean gameover = false;
+    private boolean ganaste = false;
+    private boolean bonus = false;
+    private Timer bonusTimer;
+
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos

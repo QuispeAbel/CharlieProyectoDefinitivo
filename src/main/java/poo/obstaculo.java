@@ -51,13 +51,16 @@ abstract class obstaculo extends ObjetoGrafico implements Hiteable {
         super.setY(y);
         hitbox.y = (int) y + posYhitbox;
     }
-    /*
-     * private void reiniciarObjeto() {
-     * // Establece la posición de reinicio del objeto delante del personaje
-     * double posX = heroe.getX() + offsetSpawnX;
-     * double posY = y; // Define la posición adecuada en Y según sea necesario
-     * objetoEnJuego.setPosicion(posX, posY);
-     * }
-     */
+
+    // NUEVOS DRAW PARA VER LAS HITBOX
+    public void draw(Graphics2D g) {
+        super.draw(g);
+        g.draw(hitbox);
+    }
+
+    public void display(Graphics2D g) {
+        super.display(g);
+        g.draw(hitbox);
+    }
 
 }

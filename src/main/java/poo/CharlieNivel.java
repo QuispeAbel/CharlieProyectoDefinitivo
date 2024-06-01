@@ -14,11 +14,9 @@ public abstract class CharlieNivel {
         return Estado;
     }
 
-    public void setEstado(int estado) {
-        Estado = estado;
+    public void setEstado(int Estado) {
+        this.Estado = Estado;
     }
-
-    // public abstract void Start();
 
     public abstract void Update(double delta, Keyboard keyboard, Jugador jugador);
 
