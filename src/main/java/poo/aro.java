@@ -60,9 +60,9 @@ public class Aro {
 
     public void aroGrande() {
         AroDelante.setPosXhitbox(10);
-        AroDelante.setPosYhitbox(252);
+        AroDelante.setPosYhitbox(253);
         AroDelante.setWidthHitbox(25);
-        AroDelante.setHeigthHitbox(20);
+        AroDelante.setHeigthHitbox(70);
     }
 
 }
