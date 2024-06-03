@@ -10,9 +10,9 @@ public class Monito extends Obstaculo {
 
     protected double gravity = 10.0;
 
-    private int alturaY = 340;
+    protected int alturaY = 340;
 
-    public int POSICION_Y_PISO = 340;
+    // public int POSICION_Y_PISO = 340;
 
     Monito(String filename) {
         super(filename, 340);
@@ -29,25 +29,8 @@ public class Monito extends Obstaculo {
 
     }
 
-    public void update(double delta) {
-        if (this.getY() < POSICION_Y_PISO)
-            this.setY(getY() + gravity);
-        else
-            this.setY(getY());
-    }
-
     void MovimientoMono(double delta) {
         setX(getX() - 100 * delta, posXhitbox);
-    }
-
-    void SaltoMono(double delta) {
-        setX(getX() - 2000 * delta, posXhitbox);
-        setY(getY() - 2000 * delta, posYhitbox);
-        setX(getX() - 1500 * delta, posXhitbox);
-    }
-
-    public void setPiso(int PosNueva) {
-        POSICION_Y_PISO = PosNueva;
     }
 
     void ubicaMono(double xheroe) {
