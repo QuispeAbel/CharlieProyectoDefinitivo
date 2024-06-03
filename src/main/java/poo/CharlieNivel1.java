@@ -11,7 +11,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
     Leon leoncito;
     Charlie Charlie;
-    tarima tarima;
+    Tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
     boolean gameover = false;
@@ -82,7 +82,7 @@ public class CharlieNivel1 extends CharlieNivel {
         Charlie.quieto();
         leoncito.quieto();
 
-        tarima = new tarima("imagenes/tarima.png", 10000, 530);
+        tarima = new Tarima("imagenes/tarima.png", 10000, 530);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
         bonusTimer = new Timer(1000, new ActionListener() {

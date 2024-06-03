@@ -3,22 +3,22 @@ package poo;
 import java.awt.*;
 //import java.awt.geom.*;
 
-abstract class obstaculo extends ObjetoGrafico implements Hiteable {
+abstract class Obstaculo extends ObjetoGrafico implements Hiteable {
     protected double velocidadDesplazamientoX = 100;
     // protected double alturaY;
     protected double x;
     protected Rectangle hitbox = new Rectangle();
 
-    obstaculo(String filename, double alturaY) {
+    Obstaculo(String filename, double alturaY) {
         super(filename, alturaY);
         // this.alturaY = alturaY;
     }
 
-    obstaculo(String filename, double x, double alturaY) {
+    Obstaculo(String filename, double x, double alturaY) {
         super(filename, (int) x, (int) alturaY);
     }
 
-    obstaculo() {
+    Obstaculo() {
     }
 
     void desplazamientoX() {

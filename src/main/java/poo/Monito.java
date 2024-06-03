@@ -2,7 +2,7 @@ package poo;
 
 import java.awt.Rectangle;
 
-public class Monito extends obstaculo {
+public class Monito extends Obstaculo {
     private int posXhitbox = 0;
     private int posYhitbox = 0;
     private int widthHitbox = 50;
@@ -33,7 +33,7 @@ public class Monito extends obstaculo {
         if (this.getY() < POSICION_Y_PISO)
             this.setY(getY() + gravity);
         else
-            this.setY(getY());        
+            this.setY(getY());
     }
 
     void MovimientoMono(double delta) {

@@ -2,13 +2,13 @@ package poo;
 
 import java.awt.Rectangle;
 
-public class tarima extends obstaculo {
+public class Tarima extends Obstaculo {
 
-    tarima(String filename, double Y) {
+    Tarima(String filename, double Y) {
         super(filename, 190);
     }
 
-    public tarima(String filename, double x, double y) {
+    public Tarima(String filename, double x, double y) {
         super(filename, (int) x, (int) y);
     }
 

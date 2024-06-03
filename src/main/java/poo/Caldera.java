@@ -2,7 +2,7 @@ package poo;
 
 import java.awt.Rectangle;
 
-public class Caldera extends obstaculo {
+public class Caldera extends Obstaculo {
 
     private int posXhitbox = 15;
     private int posYhitbox = 39;

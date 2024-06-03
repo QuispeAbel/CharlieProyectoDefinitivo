@@ -10,7 +10,7 @@ import javax.swing.Timer;
 public class CharlieNivel2 extends CharlieNivel {
 
     private Charlie Charlie;
-    private tarima tarima;
+    private Tarima tarima;
     private boolean gameover = false;
     private boolean ganaste = false;
     private boolean bonus = false;
@@ -72,7 +72,7 @@ public class CharlieNivel2 extends CharlieNivel {
 
         Charlie.quieto();
 
-        tarima = new tarima("imagenes/tarima_columna.gif", 10000, 320);
+        tarima = new Tarima("imagenes/tarima_columna.gif", 10000, 320);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
         bonusTimer = new Timer(1000, new ActionListener() {
