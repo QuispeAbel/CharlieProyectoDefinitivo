@@ -11,7 +11,7 @@ import java.util.*;
 public class CharlieNivel3 extends CharlieNivel {
 
     private Charlie Charlie;
-    private tarima tarima;
+    private Tarima tarima;
     private boolean gameover = false;
     private boolean ganaste = false;
     private boolean bonus = false;
@@ -27,8 +27,8 @@ public class CharlieNivel3 extends CharlieNivel {
     ArrayList<Pelota_Charlie> pelotas = new ArrayList<Pelota_Charlie>();
     Pelota_Charlie pelota_inicial;
     ArrayList<Integer> cont = new ArrayList<Integer>();
-    private int piso=575;
-    private int altura_pelota= 515;
+    private int piso = 575;
+    private int altura_pelota = 515;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -38,16 +38,17 @@ public class CharlieNivel3 extends CharlieNivel {
 
         Mundo m = Mundo.getInstance();
 
-
         for (int i = 0; i < CantidadPelotas; i++) {
-            //el spawn de pelotas se realiza de este modo 
-            //para que no esten siempre a la misma distancia
-            if (i%5 == 0 && i> 0 ) {
-                pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-1400 ), 575));
-                //pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-1200 ), 575));
-            }
-            else{
-                pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-630 ), 575));
+            // el spawn de pelotas se realiza de este modo
+            // para que no esten siempre a la misma distancia
+            if (i % 5 == 0 && i > 0) {
+                pelotas.add(
+                        new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas * (i + 1)) - 1400), 575));
+                // pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"),
+                // ((DistanciaEntrePelotas* (i + 1))-1200 ), 575));
+            } else {
+                pelotas.add(
+                        new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas * (i + 1)) - 630), 575));
             }
         }
 
@@ -69,7 +70,7 @@ public class CharlieNivel3 extends CharlieNivel {
 
         Charlie.quieto();
 
-        tarima = new tarima("imagenes/tarima.png", 10000, 530);
+        tarima = new Tarima("imagenes/tarima.png", 10000, 530);
 
         // cuenta el tiempo cuando aparece el carterl "Bonus"
         bonusTimer = new Timer(1000, new ActionListener() {
@@ -113,12 +114,12 @@ public class CharlieNivel3 extends CharlieNivel {
                         pelotas.get(i).quieto();
                 }
             } else {
-                
+
                 Charlie.right(HEROE_DESPLAZAMIENTO * delta);
-                
+
                 for (int i = 0; i < CantidadPelotas; i++) {
-                    //condicion charlie intersecta la pelota i y la 
-                    //pos X de charlie no es mayor a la posicion X de pelota (i)
+                    // condicion charlie intersecta la pelota i y la
+                    // pos X de charlie no es mayor a la posicion X de pelota (i)
                     if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())
                             && !(Charlie.getX() > pelotas.get(i).getX()))
                         pelotas.get(i).right(HEROE_DESPLAZAMIENTO * delta);
@@ -146,12 +147,12 @@ public class CharlieNivel3 extends CharlieNivel {
                         pelotas.get(i).quieto();
                 }
             } else {
-                
+
                 Charlie.left(HEROE_DESPLAZAMIENTO * delta);
-                
+
                 for (int i = 0; i < CantidadPelotas; i++) {
-                    //condicion charlie intersecta la pelota i y la 
-                    //pos X de charlie no es mayor a la posicion X de pelota (i)
+                    // condicion charlie intersecta la pelota i y la
+                    // pos X de charlie no es mayor a la posicion X de pelota (i)
                     if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
                         pelotas.get(i).left(HEROE_DESPLAZAMIENTO * delta);
                 }
@@ -177,69 +178,66 @@ public class CharlieNivel3 extends CharlieNivel {
                         pelotas.get(i).quieto();
                 }
             } else {
-                //solo salta charlie la pelota no
+                // solo salta charlie la pelota no
                 Charlie.jump();
             }
         }
 
         if (!gameover) {
             for (int i = 0; i < CantidadPelotas; i++) {
-                // si charlie no intersecta la pelota 
-                //la pelota se movera por su cuenta
+                // si charlie no intersecta la pelota
+                // la pelota se movera por su cuenta
 
-                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste && sobrePelota%2==0){
+                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste && sobrePelota % 2 == 0) {
                     jugador.sumarPuntos(100);
                     marcador.getPuntajeTotal(jugador);
                     sobrePelota = 1;
                 }
 
-                if(Charlie.getY() < 500){
+                if (Charlie.getY() < 500) {
                     sobrePelota = 2;
                 }
 
                 // if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste){
-                //     sobrePelota = 2;
+                // sobrePelota = 2;
                 // }
 
                 if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())) {
-                    
+
                     pelotas.get(i).MovimientoPelota(delta);
-                    
-                    //si charlie esta adelante de la pelota i y detras de la pelota i+1
-                    //y aun no gano el juego, el piso de charlie sera piso y perdera
-                    //sino intersecta la pelota i+1
-                    if( Charlie.getX()>pelotas.get(i).getX() && Charlie.getX()<pelotas.get(i+1).getX() && !ganaste){
+
+                    // si charlie esta adelante de la pelota i y detras de la pelota i+1
+                    // y aun no gano el juego, el piso de charlie sera piso y perdera
+                    // sino intersecta la pelota i+1
+                    if (Charlie.getX() > pelotas.get(i).getX() && Charlie.getX() < pelotas.get(i + 1).getX()
+                            && !ganaste) {
                         Charlie.setPiso(piso);
                     }
 
                     // sobrePelota = 2;
                 }
 
-                //charlie intersecta la pelota i 
-                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste){
-                    
-                    //ubicar a personaje en el centro de la pelota
+                // charlie intersecta la pelota i
+                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste) {
+
+                    // ubicar a personaje en el centro de la pelota
                     // setear el piso de charlie a la altura de la pelota
                     Charlie.setX(pelotas.get(i).getX());
                     Charlie.setPiso(altura_pelota);
-                    
-                    //si se intersecta la pelota i y i+1 mientras charlie esta en la pelota i
-                    if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
-                            // cada pelota saldra en direccion opuesta
-                            //charlie dara un salto y caera al piso, pierde
-                            pelotas.get(i).DisparadaIzq(delta*70);  
-                            pelotas.get(i+1).Disparadader(delta*70);  
-                            Charlie.setY(480);
+
+                    // si se intersecta la pelota i y i+1 mientras charlie esta en la pelota i
+                    if (pelotas.get(i).getHitbox().intersects(pelotas.get(i + 1).getHitbox())) {
+                        // cada pelota saldra en direccion opuesta
+                        // charlie dara un salto y caera al piso, pierde
+                        pelotas.get(i).DisparadaIzq(delta * 70);
+                        pelotas.get(i + 1).Disparadader(delta * 70);
+                        Charlie.setY(480);
                     }
-                    
+
                 }
 
                 if (Charlie.getY() == piso)
-                gameover=true;
-
-                
-                 
-                 
+                    gameover = true;
 
                 // respawn al final del mapa
                 if (pelotas.get(i).getX() <= 20)
@@ -254,10 +252,10 @@ public class CharlieNivel3 extends CharlieNivel {
                 for (int i = 0; i < CantidadPelotas; i++) {
                     pelotas.get(i).MovimientoPelota(0);
                 }
-            }}
-
+            }
         }
-    
+
+    }
 
     public void Draw(Graphics2D g) {
 
@@ -271,7 +269,7 @@ public class CharlieNivel3 extends CharlieNivel {
         m.display(g);
         tarima.display(g);
 
-        if(!ganaste){
+        if (!ganaste) {
             for (int i = 0; i < CantidadPelotas; i++) {
                 pelotas.get(i).display(g);
             }
@@ -313,5 +311,3 @@ public class CharlieNivel3 extends CharlieNivel {
         }
     }
 }
-
-

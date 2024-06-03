@@ -2,13 +2,13 @@ package poo;
 
 import java.awt.Rectangle;
 
-public class Bonus extends obstaculo {
+public class Bonus extends Obstaculo {
     private int posXhitbox = 0;
     private int posYhitbox = 0;
     private int widthHitbox = 35;
     private int heigthHitbox = 35;
 
-    //private double altura_bonus = 253;
+    // private double altura_bonus = 253;
 
     Bonus(String filename) {
         super(filename, 315);
@@ -27,7 +27,7 @@ public class Bonus extends obstaculo {
     void spawn(double xheroe) {
         this.setX(xheroe, posXhitbox);
         this.setY(315, posYhitbox);
-    }    
+    }
 
     public Rectangle getColiton() {
         return this;

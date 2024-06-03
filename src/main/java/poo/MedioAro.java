@@ -1,6 +1,6 @@
 package poo;
 
-public class MedioAro extends obstaculo {
+public class MedioAro extends Obstaculo {
 
     private int posXhitbox = 19;
     private int posYhitbox = 190;
