@@ -25,6 +25,7 @@ public class CharlieNivel2 extends CharlieNivel {
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
     public CharlieNivel2() {
+
         setEstado(2);
 
         Mundo m = Mundo.getInstance();
@@ -55,6 +56,7 @@ public class CharlieNivel2 extends CharlieNivel {
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
         marcador.getHi();
+        marcador.setStage(2);
 
         cam = new Camara(0, 0);
 

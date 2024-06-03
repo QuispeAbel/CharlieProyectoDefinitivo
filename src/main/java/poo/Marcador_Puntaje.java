@@ -7,10 +7,14 @@ public class Marcador_Puntaje extends ObjetoGrafico {
     int nro_jugador_actual = 1;
     int PuntajeTotal = 0;
     int record = 38000;
-    int stage = 01;
+    int stage = 1;
 
     public Marcador_Puntaje(String filename) {
         super(filename);
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
     }
 
     public void setNroJugador(Jugador j) {
