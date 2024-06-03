@@ -16,6 +16,7 @@ public class CharlieNivel3 extends CharlieNivel {
     private boolean ganaste = false;
     private boolean bonus = false;
     private Timer bonusTimer;
+    private int sobrePelota = 1;
 
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
@@ -56,6 +57,8 @@ public class CharlieNivel3 extends CharlieNivel {
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
         marcador.setPosicion(4, 30);
         marcador.getHi();
+
+        marcador.setStage(3);
 
         cam = new Camara(0, 0);
 
@@ -183,6 +186,21 @@ public class CharlieNivel3 extends CharlieNivel {
             for (int i = 0; i < CantidadPelotas; i++) {
                 // si charlie no intersecta la pelota 
                 //la pelota se movera por su cuenta
+
+                if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste && sobrePelota%2==0){
+                    jugador.sumarPuntos(100);
+                    marcador.getPuntajeTotal(jugador);
+                    sobrePelota = 1;
+                }
+
+                if(Charlie.getY() < 500){
+                    sobrePelota = 2;
+                }
+
+                // if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste){
+                //     sobrePelota = 2;
+                // }
+
                 if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())) {
                     
                     pelotas.get(i).MovimientoPelota(delta);
@@ -193,6 +211,8 @@ public class CharlieNivel3 extends CharlieNivel {
                     if( Charlie.getX()>pelotas.get(i).getX() && Charlie.getX()<pelotas.get(i+1).getX() && !ganaste){
                         Charlie.setPiso(piso);
                     }
+
+                    // sobrePelota = 2;
                 }
 
                 //charlie intersecta la pelota i 
