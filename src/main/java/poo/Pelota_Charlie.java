@@ -3,10 +3,10 @@ package poo;
 import java.awt.Rectangle;
 
 public class Pelota_Charlie extends Personaje {
-    private int posXhitbox = 15;
+    private int posXhitbox = 28;
     private int posYhitbox = 0;
-    private int widthHitbox = 40;
-    private int heigthHitbox = 40;
+    private int widthHitbox = 28;
+    private int heigthHitbox = 60;
 
     protected double gravity = 10.0;
 
@@ -14,6 +14,19 @@ public class Pelota_Charlie extends Personaje {
 
     public int POSICION_Y_PISO = 575;
     
+
+    Pelota_Charlie(String filename) {
+        super(filename, 575);
+        this.setHitbox(heigthHitbox, widthHitbox);
+    }
+    
+    public void setHitbox(int x, int y, int width, int height) {
+        hitbox.x = x;
+        hitbox.y = y;
+        hitbox.width = width;
+        hitbox.height = height;
+        // hitbox = new Rectangle(x, y, width, height);
+    }
 
     public Pelota_Charlie(String filename, double x, double y) {
         super(filename, x, y);
