@@ -28,6 +28,11 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 
 	public int POSICION_Y_PISO = 575;
 
+	Personaje(String filename, double alturaY) {
+        super(filename, alturaY);
+        // this.alturaY = alturaY;
+    }
+	
 	public Personaje(String filename, double x, double y) {
 		super(filename, (int) x, (int) y);
 	}
