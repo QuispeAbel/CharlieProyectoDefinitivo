@@ -5,7 +5,6 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import java.text.*;
 import javax.swing.Timer;
 
 public class CharlieNivel1 extends CharlieNivel {
@@ -275,29 +274,19 @@ public class CharlieNivel1 extends CharlieNivel {
 
         g.translate(-cam.getX(), -cam.getY());
 
-        g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
-
         marcador.draw(g);
 
         if (bonus) {
 
-            g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString("500", (1024 / 2) - 200, 315);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
-            g.drawString("bonus!", 100, 250);
-            // g.setColor(Color.white);
 
-            g.setFont(new Font("Arial", Font.BOLD, 70));
+            g.drawString("bonus!", 100, 250);
 
             if (gameover) {
-                // g.setColor(Color.RED);
-                g.setFont(new Font("Arial", Font.BOLD, 70));
                 g.drawString("GAME OVER!", 100, 250);
             }
 
             if (ganaste) {
-                // g.setColor(Color.GREEN);
-                g.setFont(new Font("Arial", Font.BOLD, 70));
                 g.drawString("GANASTE!", 100, 250);
             }
         }

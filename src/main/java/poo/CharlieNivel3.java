@@ -1,27 +1,22 @@
 package poo;
 
-import java.text.SimpleDateFormat;
-
 import javax.swing.Timer;
 
 import com.entropyinteractive.Keyboard;
 
-import com.entropyinteractive.*;
-
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import java.text.*;
 
 public class CharlieNivel3 extends CharlieNivel {
 
-    Charlie Charlie;
-    tarima tarima;
-    boolean gameover = false;
-    boolean ganaste = false;
-    boolean bonus = false;
-    Timer bonusTimer;
-    // int contbon = 0;
+    private Charlie Charlie;
+    private tarima tarima;
+    private boolean gameover = false;
+    private boolean ganaste = false;
+    private boolean bonus = false;
+    private Timer bonusTimer;
+
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
     // milisegundos
@@ -29,7 +24,7 @@ public class CharlieNivel3 extends CharlieNivel {
     private int CantidadPelotas = 30;
     private int DistanciaEntrePelotas = 950;
     ArrayList<Pelota_Charlie> pelotas = new ArrayList<Pelota_Charlie>();
-
+    Pelota_Charlie pelota_inicial;
     ArrayList<Integer> cont = new ArrayList<Integer>();
     private int piso=575;
     private int altura_pelota= 515;
@@ -51,7 +46,7 @@ public class CharlieNivel3 extends CharlieNivel {
                 //pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-1200 ), 575));
             }
             else{
-                pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-650 ), 575));
+                pelotas.add(new Pelota_Charlie(("imagenes/pelota.png"), ((DistanciaEntrePelotas* (i + 1))-630 ), 575));
             }
         }
 
@@ -124,8 +119,18 @@ public class CharlieNivel3 extends CharlieNivel {
                     if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())
                             && !(Charlie.getX() > pelotas.get(i).getX()))
                         pelotas.get(i).right(HEROE_DESPLAZAMIENTO * delta);
-                }
+                    /*
+                     * if(pelotas.get(i).getHitbox().intersects(pelotas.get(i+1).getHitbox())){
+                     * Charlie.setY(350);
+                     * pelotas.get(i).DisparadaIzq(delta);
+                     * pelotas.get(i+1).Disparadader(delta);
+                     * Charlie.setPiso(575);
+                     * Charlie.perder(575);
+                     * gameover=true;
+                     * }
+                     */
 
+                }
             }
         }
 
@@ -144,8 +149,7 @@ public class CharlieNivel3 extends CharlieNivel {
                 for (int i = 0; i < CantidadPelotas; i++) {
                     //condicion charlie intersecta la pelota i y la 
                     //pos X de charlie no es mayor a la posicion X de pelota (i)
-                    if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())
-                            && !(Charlie.getX() < pelotas.get(i).getX()))
+                    if (Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
                         pelotas.get(i).left(HEROE_DESPLAZAMIENTO * delta);
                 }
             }
@@ -230,10 +234,10 @@ public class CharlieNivel3 extends CharlieNivel {
                 for (int i = 0; i < CantidadPelotas; i++) {
                     pelotas.get(i).MovimientoPelota(0);
                 }
-            }
+            }}
 
         }
-    }
+    
 
     public void Draw(Graphics2D g) {
 
@@ -288,5 +292,6 @@ public class CharlieNivel3 extends CharlieNivel {
             }
         }
     }
-
 }
+
+

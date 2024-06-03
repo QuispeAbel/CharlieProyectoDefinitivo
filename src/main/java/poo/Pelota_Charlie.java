@@ -45,10 +45,12 @@ public class Pelota_Charlie extends Personaje {
 
     void DisparadaIzq(double delta) {
         setX(getX() - 200 * (delta*2), posXhitbox);
+        setY(getY() - 200 * (delta*2), posYhitbox);
     }
 
     void Disparadader(double delta) {
         setX(getX() + 200 * (delta*2), posXhitbox);
+        setY(getY() - 200 * (delta*2), posYhitbox);
     }
 
     public void setPiso(int PosNueva) {

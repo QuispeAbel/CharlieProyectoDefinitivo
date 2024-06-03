@@ -7,16 +7,14 @@ import java.awt.event.*; //eventos
 import java.util.*;
 import javax.swing.Timer;
 
-import java.text.SimpleDateFormat;
-
 public class CharlieNivel2 extends CharlieNivel {
 
-    Charlie Charlie;
-    tarima tarima;
-    boolean gameover = false;
-    boolean ganaste = false;
-    boolean bonus = false;
-    Timer bonusTimer;
+    private Charlie Charlie;
+    private tarima tarima;
+    private boolean gameover = false;
+    private boolean ganaste = false;
+    private boolean bonus = false;
+    private Timer bonusTimer;
     // int contbon = 0;
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
@@ -24,12 +22,12 @@ public class CharlieNivel2 extends CharlieNivel {
 
     private int CantidadMonos = 10;
     private int DistanciaEntreMonos = 1000;
-    ArrayList<Monito> monos = new ArrayList<Monito>();
+    private ArrayList<Monito> monos = new ArrayList<Monito>();
 
     private int CantidadMonosAz = 4;
     private int DistanciaEntreMonosAz = 2000;
-    ArrayList<Monito> monosaz = new ArrayList<Monito>();
-    ArrayList<Integer> cont = new ArrayList<Integer>();
+    private ArrayList<Monito> monosaz = new ArrayList<Monito>();
+    private ArrayList<Integer> cont = new ArrayList<Integer>();
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -145,7 +143,7 @@ public class CharlieNivel2 extends CharlieNivel {
                 monos.get(i).MovimientoMono(delta);
 
                 if (Charlie.getX() >= monos.get(i).getX() - 3
-                    && Charlie.getX() <= monos.get(i).getX() + 3) {
+                        && Charlie.getX() <= monos.get(i).getX() + 3) {
                     // if(j1_jugando)
                     jugador.sumarPuntos(100);
                     marcador.getPuntajeTotal(jugador);
@@ -176,12 +174,12 @@ public class CharlieNivel2 extends CharlieNivel {
                 if (i < CantidadMonosAz) {
 
                     if (Charlie.getX() >= monosaz.get(i).getX() - 10
-                    && Charlie.getX() <= monosaz.get(i).getX() + 10) {
-                    // if(j1_jugando)
-                    jugador.sumarPuntos(500);
-                    marcador.getPuntajeTotal(jugador);
-                    // else
-                    // j2.sumarPuntosPasados(100);
+                            && Charlie.getX() <= monosaz.get(i).getX() + 10) {
+                        // if(j1_jugando)
+                        jugador.sumarPuntos(500);
+                        marcador.getPuntajeTotal(jugador);
+                        // else
+                        // j2.sumarPuntosPasados(100);
                     }
 
                     monosaz.get(i).MovimientoMono(delta * 2.5);
@@ -194,7 +192,7 @@ public class CharlieNivel2 extends CharlieNivel {
                             && monos.get(i).getY() == monosaz.get(i).getY())
                         monosaz.get(i).SaltoMono(delta);
 
-                    if(Charlie.getX() >= monosaz.get(i).getX() - 5 && Charlie.getX() <= monosaz.get(i).getX() + 5)
+                    if (Charlie.getX() >= monosaz.get(i).getX() - 5 && Charlie.getX() <= monosaz.get(i).getX() + 5)
                         monosaz.get(i).SaltoMono(delta);
 
                     if (!monos.get(i).getHitbox().intersects(monosaz.get(i).getHitbox()))

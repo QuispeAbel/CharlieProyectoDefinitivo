@@ -49,6 +49,10 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 		POSICION_Y_PISO = y;
 	}
 
+	public void perder(int y) {
+		POSICION_Y_PISO = y;
+	}
+
 	public void quieto() {
 		estadoActual = ESTADO_QUIETO;
 		// acceleration.mult(0);
@@ -91,21 +95,10 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 
 	}
 
-	public void draw(Graphics2D g2) {
-		/* Redefinicion de Display para poder hacer la rotacion cuando salta */
-
-		// AffineTransform transform = new AffineTransform();
-		// transform.rotate(Math.toRadians(angulo), this.getX() + getWidth() / 2,
-		// this.getY() + getHeight() / 2);
-
-		// AffineTransform old = g2.getTransform();
-		// g2.transform(transform);
-
-		// g2.drawImage(imagen, (int) this.getX(), (int) this.getY(), null);
-
-		// g2.setTransform(old);
-
-		// g2.fillRect(this.x, this.y, this.width, this.height);
+	// NUEVO PARA DIBUJAR LAS HITBOX
+	public void display(Graphics2D g2) {
+		super.display(g2);
+		g2.draw(hitbox);
 	}
 
 	public Rectangle getColiton() {
