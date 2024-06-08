@@ -12,6 +12,7 @@ public class CharlieNivel2 extends CharlieNivel {
     private Tarima tarima;
     private boolean gameover = false;
     private boolean ganaste = false;
+    private int piso = 575;
 
     private int CantidadMonos = 10;
     private int DistanciaEntreMonos = 1000;
@@ -74,11 +75,14 @@ public class CharlieNivel2 extends CharlieNivel {
 
         cam.seguirPersonaje(charlie); /// la camara sigue al Personaje
 
-        if (gameover) {
-            charlie.setX(350);
-            jugador.setVidas(jugador.getVidas() - 1);
-            gameover = false;
-        }
+        //if (gameover) {
+            //gameover = false;
+            //charlie.setPiso(322);
+           // charlie.setX(350);
+         //   jugador.setVidas(jugador.getVidas() - 1);
+           
+            
+       // }
 
         if (!gameover && !ganaste) {
 
@@ -115,7 +119,7 @@ public class CharlieNivel2 extends CharlieNivel {
                     monos.get(i).spawn(10000);
                 // choque con personajes
                 if (charlie.getHitbox().intersects(monos.get(i).getHitbox())) {
-                    gameover = true;
+                    charlie.setPiso(piso);
                 }
 
                 if (i < CantidadMonosAz) {
@@ -143,11 +147,20 @@ public class CharlieNivel2 extends CharlieNivel {
                         monosaz.get(i).jump();
 
                     if (charlie.getHitbox().intersects(monosaz.get(i).getHitbox())) {
-                        gameover = true;
+                        charlie.setPiso(piso);
                     }
 
                     monosaz.get(i).update(delta);
 
+                }
+
+                if (charlie.getY() == piso){
+                	 gameover = true;
+                    jugador.setVidas(jugador.getVidas() - 1);
+                    if(jugador.getVidas() < 1)
+                    gameover = false;
+                    charlie.setPiso(322);
+                    charlie.setX(350);
                 }
 
             }
