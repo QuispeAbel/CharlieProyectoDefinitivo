@@ -7,6 +7,7 @@ import com.entropyinteractive.Keyboard;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
+import javax.swing.Timer;
 
 public class CharlieNivel3 extends CharlieNivel {
 
@@ -18,6 +19,8 @@ public class CharlieNivel3 extends CharlieNivel {
     private boolean colicion_pelota= false;
     private Timer bonusTimer;
     private int sobrePelota = 1;
+    private Timer timer;
+    private boolean noSumar = true;
 
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
     // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
@@ -81,6 +84,15 @@ public class CharlieNivel3 extends CharlieNivel {
             }
         });
         bonusTimer.setRepeats(false);
+
+        //Pasa el tiempo
+        timer = new Timer(250, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!gameover && !ganaste)
+                marcador.pasaTiempo();
+            }
+        });
+        timer.start();
 
     }
 
@@ -272,6 +284,14 @@ public class CharlieNivel3 extends CharlieNivel {
             if (Charlie.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 Charlie.ganar(10040, 480);
+
+                //Sumar tiempo
+                if(noSumar){
+                    jugador.sumarPuntos(marcador.getTiempo());
+                    marcador.getPuntajeTotal(jugador);
+                    noSumar = false;
+                }
+
                 for (int i = 0; i < CantidadPelotas; i++) {
                     pelotas.get(i).MovimientoPelota(0);
                 }
