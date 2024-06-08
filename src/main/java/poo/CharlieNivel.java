@@ -12,7 +12,7 @@ public abstract class CharlieNivel {
     protected Camara cam;
     protected Fondo fondo;
     protected Marcador_Puntaje marcador;
-    protected static int Estado = -1;
+    protected static int Estado;
     protected Timer timer;
 
     CharlieNivel() {
@@ -22,7 +22,7 @@ public abstract class CharlieNivel {
 
         cam = new Camara(0, 0);
 
-        cam.setRegionVisible(1024, 720);
+        cam.setRegionVisible(1024, 768);
 
         timer = new Timer(250, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
