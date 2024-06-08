@@ -75,14 +75,11 @@ public class CharlieNivel2 extends CharlieNivel {
 
         cam.seguirPersonaje(charlie); /// la camara sigue al Personaje
 
-        //if (gameover) {
-            //gameover = false;
-            //charlie.setPiso(322);
-           // charlie.setX(350);
-         //   jugador.setVidas(jugador.getVidas() - 1);
-           
-            
-       // }
+        if (gameover) {
+            gameover = false;
+            jugador.setVidas(jugador.getVidas() - 1);
+
+        }
 
         if (!gameover && !ganaste) {
 
@@ -154,14 +151,10 @@ public class CharlieNivel2 extends CharlieNivel {
 
                 }
 
-                if (charlie.getY() == piso){
-                	 gameover = true;
-                    jugador.setVidas(jugador.getVidas() - 1);
-                    if(jugador.getVidas() < 0){
-                    gameover = false;
+                if (charlie.getY() == piso) {
                     charlie.setPiso(322);
                     charlie.setX(350);
-                    }
+                    gameover = true;
                 }
 
             }
