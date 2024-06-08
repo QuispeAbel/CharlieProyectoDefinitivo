@@ -6,13 +6,7 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 	private boolean onGround = false;
 	// private boolean saltando = false;
 
-	final int DIRECCION_DERECHA = 0;
-	final int DIRECCION_IZQUIERDA = 1;
-
 	final int ESTADO_QUIETO = -1;
-	final int ESTADO_CAMINANDO = 0;
-	final int ESTADO_ARROJANDO_GRANADA = 4;
-	final int ESTADO_MURIENDO = 5;
 
 	int direccionActual;
 	int estadoActual;
@@ -29,10 +23,10 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 	public int POSICION_Y_PISO = 575;
 
 	Personaje(String filename, double alturaY) {
-        super(filename, alturaY);
-        // this.alturaY = alturaY;
-    }
-	
+		super(filename, alturaY);
+		// this.alturaY = alturaY;
+	}
+
 	public Personaje(String filename, double x, double y) {
 		super(filename, (int) x, (int) y);
 	}

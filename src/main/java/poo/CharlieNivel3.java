@@ -14,15 +14,9 @@ public class CharlieNivel3 extends CharlieNivel {
     private Tarima tarima;
     private boolean gameover = false;
     private boolean ganaste = false;
-    private boolean bonus = false;
     private boolean colicion_pelota = false;
-    private Timer bonusTimer;
     private int sobrePelota = 1;
     private boolean noSumar = true;
-
-    // private long lastSpawnTime; // Guarda el tiempo del último spawn
-    // private long spawnInterval = 5000; // Intervalo de tiempo entre spawns en
-    // milisegundos
 
     private int CantidadPelotas = 30;
     private int DistanciaEntrePelotas = 950;
@@ -66,21 +60,6 @@ public class CharlieNivel3 extends CharlieNivel {
 
         tarima = new Tarima("imagenes/tarima.png", 10000, 530);
 
-        // cuenta el tiempo cuando aparece el carterl "Bonus"
-        bonusTimer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bonus = false;
-                bonusTimer.stop();
-            }
-        });
-        bonusTimer.setRepeats(false);
-
-        // Pasa el tiempo
-        // timer = new Timer(250, new ActionListener() {
-        // public void actionPerformed(ActionEvent e) {
-        // marcador.pasaTiempo();
-        // }
-        // });
         timer.start();
 
     }
@@ -137,16 +116,6 @@ public class CharlieNivel3 extends CharlieNivel {
 
         }
 
-        /*
-         * if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
-         * Charlie.quieto();
-         * for (int i = 0; i < CantidadPelotas; i++) {
-         * if(Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()))
-         * pelotas.get(i).quieto();
-         * }
-         * }
-         */
-
         if ((keyboard.isKeyPressed(KeyEvent.VK_SPACE))) {
             if (gameover || ganaste) {
                 Charlie.quieto();
@@ -183,15 +152,6 @@ public class CharlieNivel3 extends CharlieNivel {
                     sobrePelota = 2;
                 }
 
-                // if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox()) && !ganaste){
-                // sobrePelota = 2;
-                // }
-                // if(colicion_pelota){
-                // pelotas.get(i).DisparadaIzq(delta);
-                // pelotas.get(i + 1).Disparadader(delta);
-                // Charlie.setY(390);
-                // Charlie.setPiso(piso);
-                // }
                 if (!Charlie.getHitbox().intersects(pelotas.get(i).getHitbox())) {
 
                     pelotas.get(i).MovimientoPelota(delta);
@@ -211,7 +171,6 @@ public class CharlieNivel3 extends CharlieNivel {
                         }
                     }
 
-                    // sobrePelota = 2;
                 }
 
                 // charlie intersecta la pelota i
@@ -294,28 +253,5 @@ public class CharlieNivel3 extends CharlieNivel {
         g.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         marcador.display(g);
         marcador.draw(g);
-
-        if (bonus) {
-            g.setColor(Color.white);
-            g.setFont(new Font("Arial", Font.BOLD, 40));
-            g.drawString("500", (1024 / 2) - 200, 315);
-            g.setFont(new Font("Arial", Font.BOLD, 70));
-            g.drawString("bonus!", 100, 250);
-            // g.setColor(Color.white);
-
-            g.setFont(new Font("Arial", Font.BOLD, 70));
-
-            if (gameover) {
-                g.setColor(Color.RED);
-                g.setFont(new Font("Arial", Font.BOLD, 70));
-                g.drawString("GAME OVER!", 100, 250);
-            }
-
-            if (ganaste) {
-                g.setColor(Color.GREEN);
-                g.setFont(new Font("Arial", Font.BOLD, 50));
-                g.drawString("GANASTE!", 250, 500);
-            }
-        }
     }
 }
