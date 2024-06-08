@@ -10,7 +10,7 @@ import javax.swing.Timer;
 public class CharlieNivel1 extends CharlieNivel {
 
     Leon leoncito;
-    Charlie Charlie;
+    Charlie charlie;
     Tarima tarima;
     Caldera calderass;
     int espacioEntreCalderas = 800;
@@ -33,20 +33,19 @@ public class CharlieNivel1 extends CharlieNivel {
 
     public CharlieNivel1() {
 
-        Mundo m = Mundo.getInstance();
+        setEstado(0);
 
-        // jugadorDeNivel = new Jugador();
+        Mundo m = Mundo.getInstance();
 
         // primer aro chico necesario porque la diferencia entre aros es distinta al
         // primer spawn
+
         aroschicos.add(new Aro("imagenes/aroMitad2Peque.png", "imagenes/aroMitad1Peque.png"));
         aroschicos.get(0).spawn(2500);
         bolsa.add(new Bonus("imagenes/Bolsa.gif"));
         bolsa.get(0).spawn(2510);
         cont.add(0);
 
-        // arito = new Aro("imagenes/aroMitad2Peque.png",
-        // "imagenes/aroMitad1Peque.png");
         for (int i = 0; i < CantidadArosGrandes; i++) {
             arosgrandes.add(new Aro("imagenes/aroGrande1.png", "imagenes/aroGrande2.png"));
             arosgrandes.get(i).aroGrande();
@@ -63,23 +62,14 @@ public class CharlieNivel1 extends CharlieNivel {
         }
 
         leoncito = new Leon("imagenes/leoncito.png", 320, 575);
-        Charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 525);
-        Charlie.setPiso(525);
-
-        marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
-        marcador.setPosicion(4, 30);
-        marcador.getHi();
-
+        charlie = new Charlie("imagenes/Charlie/CharlieCaminando3.gif", 350, 525);
+        charlie.setPiso(525);
         calderass = new Caldera("imagenes/caldera1.png");
-
-        cam = new Camara(0, 0);
-
-        cam.setRegionVisible(1024, 720);
 
         fondo = new Fondo("imagenes/FondoCharliLevel1.png");
         m.setLimitesMundo(fondo.getWidthIm(), fondo.getHeightIm());
 
-        Charlie.quieto();
+        charlie.quieto();
         leoncito.quieto();
 
         tarima = new Tarima("imagenes/tarima.png", 10000, 530);
@@ -97,64 +87,37 @@ public class CharlieNivel1 extends CharlieNivel {
 
     public void Update(double delta, Keyboard keyboard, Jugador jugador) {
 
-        cam.seguirPersonaje(leoncito); /// la camara sigue al Personaje
-        // // Puntos
-        // if (leoncito.getX() > aro.getX()) {
-        // // if(j1_jugando)
-        // j1.sumarPuntos(100);
-        // // else
-        // // j2.sumarPuntosPasados(100);
-        // }
+        cam.seguirPersonaje(leoncito);
 
-        // marcador.setNroJugador(j1);
+        if (gameover) {
+            leoncito.setX(320);
+            charlie.setX(350);
+            jugador.setVidas(jugador.getVidas() - 1);
+            gameover = false;
+        }
 
-        // // Puntos
-        // if (leoncito.getX() >= aro.getX()) {
-        // // if(j1_jugando)
-        // j1.sumarPuntos(100);
-        // marcador.getPuntajeTotal(j1);
-        // // else
-        // // j2.sumarPuntosPasados(100);
-        // }
+        if (!gameover && !ganaste) {
 
-        // Procesar teclas de direccion
-        if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
-            if (gameover || ganaste) {
-                leoncito.quieto();
-                Charlie.quieto();
-            } else {
+            leoncito.update(delta);
+            charlie.update(delta);
+
+            if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
                 leoncito.right(HEROE_DESPLAZAMIENTO * delta);
-                Charlie.right(HEROE_DESPLAZAMIENTO * delta);
+                charlie.right(HEROE_DESPLAZAMIENTO * delta);
             }
-        }
 
-        if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            if (gameover || ganaste) {
-                leoncito.quieto();
-                Charlie.quieto();
-            } else {
+            if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
                 leoncito.left(HEROE_DESPLAZAMIENTO * delta);
-                Charlie.left(HEROE_DESPLAZAMIENTO * delta);
+                charlie.left(HEROE_DESPLAZAMIENTO * delta);
             }
-
-        }
-
-        if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
-            leoncito.quieto();
-            Charlie.quieto();
-        }
-
-        if ((keyboard.isKeyPressed(KeyEvent.VK_SPACE))) {
-            if (gameover || ganaste) {
+            if (keyboard.isKeyPressed(KeyEvent.KEY_RELEASED)) {
                 leoncito.quieto();
-                Charlie.quieto();
-            } else {
-                leoncito.jump();
-                Charlie.jump();
+                charlie.quieto();
             }
-        }
-
-        if (!gameover) {
+            if ((keyboard.isKeyPressed(KeyEvent.VK_SPACE))) {
+                leoncito.jump();
+                charlie.jump();
+            }
             // arosgrandes
             for (int i = 0; i < CantidadArosGrandes; i++) {
                 arosgrandes.get(i).MovimientoAro(delta);
@@ -174,8 +137,9 @@ public class CharlieNivel1 extends CharlieNivel {
                     arosgrandes.get(i).spawnAroGrande(10000);
                 // choque con personajes
                 if (leoncito.getHitbox().intersects(arosgrandes.get(i).getHitbox())
-                        || Charlie.getHitbox().intersects(arosgrandes.get(i).getHitbox())) {
+                        || charlie.getHitbox().intersects(arosgrandes.get(i).getHitbox())) {
                     gameover = true;
+
                 }
                 // aros chicos
                 if (i < CantidadArosChicos) {
@@ -188,19 +152,19 @@ public class CharlieNivel1 extends CharlieNivel {
                     }
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
-                            || Charlie.getHitbox().intersects(aroschicos.get(i).getHitbox())) {
+                            || charlie.getHitbox().intersects(aroschicos.get(i).getHitbox())) {
                         gameover = true;
                     }
 
                     if (leoncito.getHitbox().intersects(bolsa.get(i).getHitbox())
-                            || Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
+                            || charlie.getHitbox().intersects(bolsa.get(i).getHitbox())) {
                         bonus = true;
                         cont.set(i, 1);
                         if (!bonusTimer.isRunning()) {
                             bonusTimer.start();
                         }
                     }
-                    if (Charlie.getHitbox().intersects(bolsa.get(i).getHitbox())
+                    if (charlie.getHitbox().intersects(bolsa.get(i).getHitbox())
                             && (leoncito.getX() >= aroschicos.get(i).getX() - 3
                                     && leoncito.getX() <= aroschicos.get(i).getX() + 3)) {
                         jugador.sumarPuntos(500);
@@ -210,8 +174,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
             }
 
-            leoncito.update(delta);
-            Charlie.update(delta);
+            // colisiones
 
             if (leoncito.getX() > calderass.getX() + 250 && !ganaste) {
                 calderass.setPosicion(leoncito.getX() + espacioEntreCalderas, 553);
@@ -222,7 +185,7 @@ public class CharlieNivel1 extends CharlieNivel {
             if (leoncito.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 setEstado(1);
-                Charlie.ganar(10050, 440);
+                charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
                 for (int i = 0; i < CantidadArosGrandes; i++) {
                     arosgrandes.get(i).MovimientoAro(0);
@@ -255,7 +218,7 @@ public class CharlieNivel1 extends CharlieNivel {
             arosgrandes.get(i).displayDelante(g);
             if (i < CantidadArosChicos) {
                 aroschicos.get(i).displayDelante(g);
-                if (!Charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)) {
+                if (!charlie.getHitbox().intersects(bolsa.get(i).getHitbox()) && (cont.get(i) == 0)) {
                     bolsa.get(i).display(g);
                 }
             }
@@ -263,7 +226,7 @@ public class CharlieNivel1 extends CharlieNivel {
 
         leoncito.display(g);
 
-        Charlie.display(g);
+        charlie.display(g);
 
         for (int i = 0; i < CantidadArosGrandes; i++) {
             arosgrandes.get(i).displayDetras(g);
