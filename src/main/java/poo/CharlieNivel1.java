@@ -153,6 +153,7 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (aroschicos.get(i).getX() <= 350) {
                         aroschicos.get(i).spawn(10000);
                         bolsa.get(i).spawn(10010);
+                        cont.set(i, 0);
                     }
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
@@ -251,8 +252,6 @@ public class CharlieNivel1 extends CharlieNivel {
         if (bonus) {
 
             g.drawString("500", (1024 / 2) - 200, 315);
-
-            g.drawString("bonus!", 100, 250);
 
             if (gameover) {
                 g.drawString("GAME OVER!", 100, 250);
