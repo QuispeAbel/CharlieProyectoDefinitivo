@@ -5,7 +5,6 @@ import com.entropyinteractive.*;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import javax.swing.Timer;
 
 public class CharlieNivel2 extends CharlieNivel {
 
@@ -13,7 +12,6 @@ public class CharlieNivel2 extends CharlieNivel {
     private Tarima tarima;
     private boolean gameover = false;
     private boolean ganaste = false;
-    private Timer timer;
 
     private int CantidadMonos = 10;
     private int DistanciaEntreMonos = 1000;
@@ -67,13 +65,7 @@ public class CharlieNivel2 extends CharlieNivel {
 
         tarima = new Tarima("imagenes/tarima_columna.gif", 10000, 320);
 
-        //Pasa el tiempo
-        timer = new Timer(250, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(!gameover)
-                marcador.pasaTiempo();
-            }
-        });
+        // Pasa el tiempo
         timer.start();
 
     }
@@ -167,10 +159,10 @@ public class CharlieNivel2 extends CharlieNivel {
                 ganaste = true;
                 charlie.ganar(10050, 270);
 
-                //Sumar tiempo
+                // Sumar tiempo
                 jugador.sumarPuntos(marcador.getTiempo());
                 marcador.getPuntajeTotal(jugador);
-                
+
                 for (int i = 0; i < CantidadMonos; i++) {
                     monos.get(i).MovimientoMono(0);
                     if (i < CantidadMonosAz) {

@@ -33,9 +33,9 @@ public class Pong extends JGame {
 
     Pelota pelota;
 
-    Jugador jugadorIzq = new JugadorPong();
+    Jugador jugadorIzq = new Jugador();
 
-    Jugador jugador2Der = new JugadorPong();
+    Jugador jugador2Der = new Jugador();
 
     public static void main(String[] args) {
 

@@ -7,7 +7,6 @@ import com.entropyinteractive.Keyboard;
 import java.awt.*;
 import java.awt.event.*; //eventos
 import java.util.*;
-import javax.swing.Timer;
 
 public class CharlieNivel3 extends CharlieNivel {
 
@@ -19,7 +18,6 @@ public class CharlieNivel3 extends CharlieNivel {
     private boolean colicion_pelota = false;
     private Timer bonusTimer;
     private int sobrePelota = 1;
-    private Timer timer;
     private boolean noSumar = true;
 
     // private long lastSpawnTime; // Guarda el tiempo del último spawn
@@ -77,13 +75,12 @@ public class CharlieNivel3 extends CharlieNivel {
         });
         bonusTimer.setRepeats(false);
 
-        //Pasa el tiempo
-        timer = new Timer(250, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(!gameover && !ganaste)
-                marcador.pasaTiempo();
-            }
-        });
+        // Pasa el tiempo
+        // timer = new Timer(250, new ActionListener() {
+        // public void actionPerformed(ActionEvent e) {
+        // marcador.pasaTiempo();
+        // }
+        // });
         timer.start();
 
     }
@@ -91,6 +88,10 @@ public class CharlieNivel3 extends CharlieNivel {
     public void Update(double delta, Keyboard keyboard, Jugador jugador) {
 
         cam.seguirPersonaje(Charlie);
+
+        if (gameover) {
+            timer.stop();
+        }
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -224,8 +225,8 @@ public class CharlieNivel3 extends CharlieNivel {
                     // si se intersecta la pelota i y i+1 mientras charlie esta en la pelota i
                     if (pelotas.get(i).getHitbox().intersects(pelotas.get(i + 1).getHitbox())) {
                         // charlie dara un salto y caera al piso, pierde
-                       Charlie.setY(460);
-                       Charlie.setPiso(piso);
+                        Charlie.setY(460);
+                        Charlie.setPiso(piso);
                         pelotas.get(i).DisparadaIzq(delta);
                         pelotas.get(i + 1).Disparadader(delta);
                         colicion_pelota = true;
@@ -247,9 +248,10 @@ public class CharlieNivel3 extends CharlieNivel {
             if (Charlie.getHitbox().intersects(tarima)) {
                 ganaste = true;
                 Charlie.ganar(10040, 480);
+                timer.stop();
 
-                //Sumar tiempo
-                if(noSumar){
+                // Sumar tiempo
+                if (noSumar) {
                     jugador.sumarPuntos(marcador.getTiempo());
                     marcador.getPuntajeTotal(jugador);
                     noSumar = false;

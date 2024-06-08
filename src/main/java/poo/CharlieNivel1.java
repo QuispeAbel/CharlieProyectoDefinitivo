@@ -18,7 +18,6 @@ public class CharlieNivel1 extends CharlieNivel {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    private Timer timer;
 
     private int CantidadArosGrandes = 10;
     private int DistanciaEntreAros = 1000;
@@ -84,13 +83,7 @@ public class CharlieNivel1 extends CharlieNivel {
         });
         bonusTimer.setRepeats(false);
 
-        //Pasa el tiempo
-        timer = new Timer(250, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(!gameover)
-                marcador.pasaTiempo();
-            }
-        });
+        // Pasa el tiempo
         timer.start();
 
     }
@@ -104,6 +97,7 @@ public class CharlieNivel1 extends CharlieNivel {
             charlie.setX(350);
             jugador.setVidas(jugador.getVidas() - 1);
             gameover = false;
+            // timer.stop();
         }
 
         if (!gameover && !ganaste) {
@@ -197,11 +191,11 @@ public class CharlieNivel1 extends CharlieNivel {
                 setEstado(1);
                 charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
-                
-                //Sumar tiempo
+
+                // Sumar tiempo
                 jugador.sumarPuntos(marcador.getTiempo());
                 marcador.getPuntajeTotal(jugador);
-                
+
                 for (int i = 0; i < CantidadArosGrandes; i++) {
                     arosgrandes.get(i).MovimientoAro(0);
                     if (i < CantidadArosChicos) {
