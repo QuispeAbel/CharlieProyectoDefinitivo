@@ -3,9 +3,9 @@ package poo;
 import java.awt.Rectangle;
 
 public class Pelota_Charlie extends Personaje {
-    private int posXhitbox = 28;
+    private int posXhitbox = 10;
     private int posYhitbox = 0;
-    private int widthHitbox = 28;
+    private int widthHitbox = 47;
     private int heigthHitbox = 60;
 
     protected double gravity = 10.0;
@@ -45,12 +45,10 @@ public class Pelota_Charlie extends Personaje {
 
     void DisparadaIzq(double delta) {
         setX(getX() - 200 * (delta*2), posXhitbox);
-        setY(getY() - 200 * (delta*2), posYhitbox);
     }
 
     void Disparadader(double delta) {
-        setX(getX() + 200 * (delta*2), posXhitbox);
-        setY(getY() - 200 * (delta*2), posYhitbox);
+        setX(getX() + 200 * (delta*2), posXhitbox);  
     }
 
     public void setPiso(int PosNueva) {
