@@ -157,10 +157,11 @@ public class CharlieNivel2 extends CharlieNivel {
                 if (charlie.getY() == piso){
                 	 gameover = true;
                     jugador.setVidas(jugador.getVidas() - 1);
-                    if(jugador.getVidas() < 1)
+                    if(jugador.getVidas() < 0){
                     gameover = false;
                     charlie.setPiso(322);
                     charlie.setX(350);
+                    }
                 }
 
             }

@@ -194,8 +194,16 @@ public class CharlieNivel3 extends CharlieNivel {
 
                 }
 
-                if (Charlie.getY() == piso)
+                if (Charlie.getY() == piso){
                     gameover = true;
+                    jugador.setVidas(jugador.getVidas() - 1);
+                    if(jugador.getVidas() < 0){
+                    Charlie.setPiso(altura_pelota);
+                    Charlie.setX(Charlie.getX());
+                    pelotas.get(i).setX(Charlie.getX());
+                    gameover = false;
+                    }
+                }
 
                 // respawn al final del mapa
                 if (pelotas.get(i).getX() <= -600)
