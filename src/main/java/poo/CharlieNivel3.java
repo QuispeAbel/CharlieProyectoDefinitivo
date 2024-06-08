@@ -258,7 +258,7 @@ public class CharlieNivel3 extends CharlieNivel {
                      // si se intersecta la pelota i y i+1 mientras charlie esta en la pelota i
                       if (pelotas.get(i).getHitbox().intersects(pelotas.get(i + 1).getHitbox()) ) {
                         // charlie dara un salto y caera al piso, pierde
-                       Charlie.setY(450);
+                       Charlie.setY(460);
                        Charlie.setPiso(piso);
                         pelotas.get(i).DisparadaIzq(delta);
                         pelotas.get(i + 1).Disparadader(delta);
