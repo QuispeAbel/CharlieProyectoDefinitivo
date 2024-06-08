@@ -16,12 +16,11 @@ public class CircusCharlie extends JGame {
     public CircusCharlie() {
         super("CircusCharlie", 1024, 768);
         jugador1 = new Jugador();
-        nivelActual = new CharlieNivel1();
+        nivelActual = new CharlieNivel0();
     }
 
     @Override
     public void gameDraw(Graphics2D arg0) {
-        arg0.drawString("Presione enter!", getWidth() / 2, getHeight() / 2);
 
         arg0.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         nivelActual.Draw(arg0);
