@@ -16,7 +16,7 @@ public class CircusCharlie extends JGame {
     public CircusCharlie() {
         super("CircusCharlie", 1024, 768);
         jugador1 = new Jugador();
-        nivelActual = new CharlieNivel2();
+        nivelActual = new CharlieNivel3();
     }
 
     @Override
