@@ -25,6 +25,7 @@ public class CharlieNivel3 extends CharlieNivel {
     ArrayList<Integer> cont = new ArrayList<Integer>();
     private int piso = 575;
     private int altura_pelota = 515;
+    private int contador=0;
 
     final double HEROE_DESPLAZAMIENTO = 350.0;
 
@@ -69,8 +70,11 @@ public class CharlieNivel3 extends CharlieNivel {
         cam.seguirPersonaje(Charlie);
 
         if (gameover) {
-            timer.stop();
+            gameover=false;
+            contador=0;
+            jugador.setVidas(jugador.getVidas() - 1);
         }
+
 
         // Procesar teclas de direccion
         if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -156,7 +160,7 @@ public class CharlieNivel3 extends CharlieNivel {
 
                     pelotas.get(i).MovimientoPelota(delta);
 
-                    if (Charlie.getX() > pelotas.get(i).getX() + 50 && !colicion_pelota)
+                    if (Charlie.getX() > pelotas.get(i).getX() + 50)
                         pelotas.get(i).DisparadaIzq(delta);
 
                     // si charlie esta adelante de la pelota i y detras de la pelota i+1
@@ -165,9 +169,9 @@ public class CharlieNivel3 extends CharlieNivel {
                     if (Charlie.getX() > pelotas.get(i).getX() && Charlie.getX() < pelotas.get(i + 1).getX()
                             && !ganaste) {
                         Charlie.setPiso(piso);
-                        if (colicion_pelota) {
-                            pelotas.get(i).DisparadaIzq(delta);
-                            pelotas.get(i + 1).Disparadader(delta * 2);
+                        if (colicion_pelota && contador==1) {
+                            pelotas.get(i).DisparadaIzq(delta*3);
+                            pelotas.get(i + 1).Disparadader(delta * 5);
                         }
                     }
 
@@ -186,24 +190,30 @@ public class CharlieNivel3 extends CharlieNivel {
                         // charlie dara un salto y caera al piso, pierde
                         Charlie.setY(470);
                         Charlie.setPiso(piso);
-                        pelotas.get(i).DisparadaIzq(delta);
-                        pelotas.get(i + 1).Disparadader(delta);
+                        pelotas.get(i).DisparadaIzq(delta*3);
+                        pelotas.get(i + 1).Disparadader(delta*3);
                         colicion_pelota = true;
+                        contador=1;
 
                     }
 
                 }
 
                 if (Charlie.getY() == piso){
-                    gameover = true;
-                    jugador.setVidas(jugador.getVidas() - 1);
-                    if(jugador.getVidas() < 0){
                     Charlie.setPiso(altura_pelota);
-                    Charlie.setX(Charlie.getX());
-                    pelotas.get(i).setX(Charlie.getX());
-                    gameover = false;
-                    }
-                }
+                       pelotas.get(i).setX(Charlie.getX());
+                        for (int j = 1; j < CantidadPelotas; j++) {
+                            if (j % 5 == 0) {
+                            pelotas.get(j).setX((pelotas.get(i).getX() + DistanciaEntrePelotas * (j + 1))  - 1400);
+                            }
+                            else{
+                            pelotas.get(j).setX((pelotas.get(i).getX() + DistanciaEntrePelotas * (j + 1)) - 650);
+                            }
+                            pelotas.get(j).MovimientoPelota(delta);
+                        }
+                        gameover = true;
+                }   
+
 
                 // respawn al final del mapa
                 if (pelotas.get(i).getX() <= -600)
