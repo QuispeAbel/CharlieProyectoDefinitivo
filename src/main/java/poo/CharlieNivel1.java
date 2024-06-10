@@ -96,6 +96,7 @@ public class CharlieNivel1 extends CharlieNivel {
             leoncito.setX(320);
             charlie.setX(350);
             jugador.setVidas(jugador.getVidas() - 1);
+            marcador.setVidas(jugador);
             gameover = false;
             // timer.stop();
         }
