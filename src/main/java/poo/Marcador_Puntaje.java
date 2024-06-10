@@ -9,6 +9,7 @@ public class Marcador_Puntaje extends ObjetoGrafico {
     int record = 17800;
     int stage = 1;
     int tiempo = 5000;
+    int vidas = 3;
 
     public Marcador_Puntaje(String filename) {
         super(filename);
@@ -42,6 +43,10 @@ public class Marcador_Puntaje extends ObjetoGrafico {
         return tiempo;
     }
 
+    public void setVidas(Jugador j){
+        vidas = j.getVidas();
+    }
+
     public void draw(Graphics2D g) {
         super.draw(g);
         g.setColor(Color.white);
@@ -50,6 +55,7 @@ public class Marcador_Puntaje extends ObjetoGrafico {
         g.drawString("HI-" + Integer.toString(record), 450, 78);
         g.drawString("STAGE-0" + Integer.toString(stage), 820, 78);
         g.drawString("-" + Integer.toString(tiempo), 555, 98);
+        g.drawString("Vidas:"+Integer.toString(vidas) , 820, 98);
         g.setColor(Color.decode("#C3013B"));
         g.drawString("BONUS" , 450, 98);
     }
