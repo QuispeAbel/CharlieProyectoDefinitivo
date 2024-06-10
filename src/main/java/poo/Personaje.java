@@ -90,10 +90,10 @@ public class Personaje extends ObjetoGrafico implements Hiteable {
 	}
 
 	// NUEVO PARA DIBUJAR LAS HITBOX
-	public void display(Graphics2D g2) {
-		super.display(g2);
-		g2.draw(hitbox);
-	}
+	// public void display(Graphics2D g2) {
+	// super.display(g2);
+	// g2.draw(hitbox);
+	// }
 
 	public Rectangle getColiton() {
 		return this;

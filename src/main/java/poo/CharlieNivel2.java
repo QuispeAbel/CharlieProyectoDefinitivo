@@ -119,11 +119,15 @@ public class CharlieNivel2 extends CharlieNivel {
                 if (charlie.getHitbox().intersects(monos.get(i).getHitbox())) {
                     charlie.setPiso(piso);
                 }
-
+                for (int j = 0; j < CantidadMonosAz; j++) {
+                    if (monos.get(i).getHitbox().intersects(monosaz.get(j).getHitbox())
+                            && monos.get(i).getY() == monosaz.get(j).getY())
+                        monosaz.get(j).jump();
+                }
                 if (i < CantidadMonosAz) {
 
-                    if (charlie.getX() >= monosaz.get(i).getX() - 10
-                            && charlie.getX() <= monosaz.get(i).getX() + 10) {
+                    if (charlie.getX() >= monosaz.get(i).getX() - 5
+                            && charlie.getX() <= monosaz.get(i).getX() + 5) {
                         // if(j1_jugando)
                         jugador.sumarPuntos(500);
                         marcador.getPuntajeTotal(jugador);
@@ -136,11 +140,7 @@ public class CharlieNivel2 extends CharlieNivel {
                     if (monosaz.get(i).getX() <= 400) {
                         monosaz.get(i).spawn(8500);
                     }
-                    for (int j = 0; j < CantidadMonosAz; j++) {
-                        if (monos.get(i).getHitbox().intersects(monosaz.get(j).getHitbox())
-                                && monos.get(i).getY() == monosaz.get(j).getY())
-                            monosaz.get(j).jump();
-                    }
+
                     if (charlie.getX() >= monosaz.get(i).getX() - 5 && charlie.getX() <= monosaz.get(i).getX() + 5)
                         monosaz.get(i).jump();
 

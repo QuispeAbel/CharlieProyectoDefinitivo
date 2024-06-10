@@ -1,7 +1,5 @@
 package poo;
 
-import javax.swing.Timer;
-
 import com.entropyinteractive.Keyboard;
 
 import java.awt.*;
