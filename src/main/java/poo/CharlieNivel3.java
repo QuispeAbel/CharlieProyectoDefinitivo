@@ -190,8 +190,6 @@ public class CharlieNivel3 extends CharlieNivel {
                         // charlie dara un salto y caera al piso, pierde
                         Charlie.setY(470);
                         Charlie.setPiso(piso);
-                        pelotas.get(i).DisparadaIzq(delta*3);
-                        pelotas.get(i + 1).Disparadader(delta*3);
                         colicion_pelota = true;
                         contador=1;
 
