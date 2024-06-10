@@ -2,13 +2,18 @@ package poo;
 
 import com.entropyinteractive.Keyboard;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 
 public abstract class CharlieNivel {
 
     protected Camara cam;
     protected Fondo fondo;
     protected Marcador_Puntaje marcador;
-    protected static int Estado = -1;
+    protected static int Estado;
+    protected Timer timer;
 
     CharlieNivel() {
         marcador = new Marcador_Puntaje("imagenes/marcadorCopia.jpg");
@@ -17,7 +22,13 @@ public abstract class CharlieNivel {
 
         cam = new Camara(0, 0);
 
-        cam.setRegionVisible(1024, 720);
+        cam.setRegionVisible(1024, 768);
+
+        timer = new Timer(250, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                marcador.pasaTiempo();
+            }
+        });
     }
 
     public static int getEstado() {

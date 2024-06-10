@@ -16,12 +16,11 @@ public class CircusCharlie extends JGame {
     public CircusCharlie() {
         super("CircusCharlie", 1024, 768);
         jugador1 = new Jugador();
-        nivelActual = new CharlieNivel2();
+        nivelActual = new CharlieNivel3();
     }
 
     @Override
     public void gameDraw(Graphics2D arg0) {
-        arg0.drawString("Presione enter!", getWidth() / 2, getHeight() / 2);
 
         arg0.setFont(new Font("Press Start 2P", Font.BOLD, 20));
         nivelActual.Draw(arg0);
@@ -41,10 +40,6 @@ public class CircusCharlie extends JGame {
     public void gameUpdate(double arg0) {
         Keyboard keyboard = getKeyboard();
 
-        if ((keyboard.isKeyPressed(KeyEvent.VK_B))) {
-            nivelActual.setEstado(0);
-        }
-
         switch (CharlieNivel.getEstado()) {
             case -1:
                 nivelActual = new CharlieNivel1();
@@ -56,8 +51,6 @@ public class CircusCharlie extends JGame {
                 nivelActual = new CharlieNivel3();
                 break;
 
-            default:
-                break;
         }
         if (!pausa)
             nivelActual.Update(arg0, keyboard, jugador1);

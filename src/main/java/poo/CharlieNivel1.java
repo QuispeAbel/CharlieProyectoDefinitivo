@@ -18,7 +18,6 @@ public class CharlieNivel1 extends CharlieNivel {
     boolean ganaste = false;
     boolean bonus = false;
     Timer bonusTimer;
-    private Timer timer;
 
     private int CantidadArosGrandes = 10;
     private int DistanciaEntreAros = 1000;
@@ -84,13 +83,7 @@ public class CharlieNivel1 extends CharlieNivel {
         });
         bonusTimer.setRepeats(false);
 
-        //Pasa el tiempo
-        timer = new Timer(250, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if(!gameover)
-                marcador.pasaTiempo();
-            }
-        });
+        // Pasa el tiempo
         timer.start();
 
     }
@@ -105,6 +98,7 @@ public class CharlieNivel1 extends CharlieNivel {
             jugador.setVidas(jugador.getVidas() - 1);
             marcador.setVidas(jugador);
             gameover = false;
+            // timer.stop();
         }
 
         if (!gameover && !ganaste) {
@@ -160,6 +154,7 @@ public class CharlieNivel1 extends CharlieNivel {
                     if (aroschicos.get(i).getX() <= 350) {
                         aroschicos.get(i).spawn(10000);
                         bolsa.get(i).spawn(10010);
+                        cont.set(i, 0);
                     }
                     // choque con personajes
                     if (leoncito.getHitbox().intersects(aroschicos.get(i).getHitbox())
@@ -198,11 +193,11 @@ public class CharlieNivel1 extends CharlieNivel {
                 setEstado(1);
                 charlie.ganar(10050, 440);
                 leoncito.ganar(10020, 490);
-                
-                //Sumar tiempo
+
+                // Sumar tiempo
                 jugador.sumarPuntos(marcador.getTiempo());
                 marcador.getPuntajeTotal(jugador);
-                
+
                 for (int i = 0; i < CantidadArosGrandes; i++) {
                     arosgrandes.get(i).MovimientoAro(0);
                     if (i < CantidadArosChicos) {
@@ -258,8 +253,6 @@ public class CharlieNivel1 extends CharlieNivel {
         if (bonus) {
 
             g.drawString("500", (1024 / 2) - 200, 315);
-
-            g.drawString("bonus!", 100, 250);
 
             if (gameover) {
                 g.drawString("GAME OVER!", 100, 250);
