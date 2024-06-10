@@ -73,6 +73,7 @@ public class CharlieNivel3 extends CharlieNivel {
             gameover=false;
             contador=0;
             jugador.setVidas(jugador.getVidas() - 1);
+            marcador.setVidas(jugador);
         }
 
 
