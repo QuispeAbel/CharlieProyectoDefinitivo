@@ -138,7 +138,7 @@ public class CharlieNivel2 extends CharlieNivel {
                     }
                     for (int j = 0; j < CantidadMonosAz; j++) {
                         if (monos.get(i).getHitbox().intersects(monosaz.get(j).getHitbox())
-                                && monos.get(i).getY() == monosaz.get(i).getY())
+                                && monos.get(i).getY() == monosaz.get(j).getY())
                             monosaz.get(j).jump();
                     }
                     if (charlie.getX() >= monosaz.get(i).getX() - 5 && charlie.getX() <= monosaz.get(i).getX() + 5)
